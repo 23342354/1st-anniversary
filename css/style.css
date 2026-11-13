@@ -3,9 +3,13 @@
    ========================================================= */
 
 :root{
-  --paper:#F2F1EC;
-  --ink:#111111;
-  --yellow:#FFE500;
+  /* ---- 색 : 여기 다섯 줄만 바꾸면 전체 색이 바뀝니다 ---- */
+  --paper:#F2F1EB;        /* 배경 (살짝 따뜻한 오프화이트) */
+  --ink:#1E282C;          /* 선과 글자 (차가운 먹색) */
+  --blue:#9ABADB;         /* 포인트 1 — 연한 블루 */
+  --sage:#8FA98C;         /* 포인트 2 — 세이지 그린 */
+  --blue-deep:#5F86B2;    /* 블루 진한 톤 */
+  --sage-deep:#637F60;    /* 세이지 진한 톤 */
 
   --mono:'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
   --jp:'Noto Sans JP', 'Noto Sans KR', system-ui, sans-serif;
@@ -63,14 +67,14 @@ body{
 /* ---------- 노란 띠 ---------- */
 .band{
   position:absolute;left:0;right:0;height:30px;z-index:30;
-  background:var(--yellow);
+  background:var(--blue);
   display:flex;align-items:center;gap:18px;
   padding:0 18px;
   font-family:var(--mono);font-size:11px;letter-spacing:.22em;
   text-transform:uppercase;
 }
 .band--top{top:0;justify-content:space-between;transform:translateY(-100%)}
-.band--bottom{bottom:0;transform:translateY(100%)}
+.band--bottom{bottom:0;transform:translateY(100%);background:var(--sage)}
 .band__credit{flex:none}
 .marquee{flex:1;overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 93%,transparent)}
 .marquee__inner{display:inline-block;animation:slide 26s linear infinite;will-change:transform}
@@ -80,31 +84,31 @@ body{
   font-family:var(--mono);font-size:10px;letter-spacing:.2em;padding:3px 10px;
   cursor:pointer;transition:background .18s,color .18s;
 }
-.replay:hover{background:var(--ink);color:var(--yellow)}
+.replay:hover{background:var(--ink);color:var(--paper)}
 
 /* ---------- 그림 ---------- */
-.fig{position:absolute;z-index:2;pointer-events:none;opacity:0}
-.fig__art,.fig__img{display:block;height:100%;width:auto;color:var(--ink)}
+.fig{position:absolute;z-index:2;pointer-events:none;opacity:0;color:var(--ink)}
+.fig__art,.fig__img{display:block;height:100%;width:auto;color:inherit}
 .fig__img{display:none}
 .fig.has-img .fig__img{display:block}
 .fig.has-img .fig__art{display:none}
 .fig::after{                 /* 등장할 때 쓸고 지나가는 노란 바 */
   content:'';position:absolute;left:-6%;right:-6%;height:12px;top:0;
-  background:var(--yellow);mix-blend-mode:multiply;opacity:0;
+  background:var(--blue);mix-blend-mode:multiply;opacity:0;
 }
 .fig__tag{
   position:absolute;left:0;bottom:6%;
-  font-family:var(--mono);font-size:11px;letter-spacing:.24em;
-  background:var(--yellow);padding:3px 8px;white-space:nowrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.24em;color:var(--ink);
+  background:var(--sage);padding:3px 8px;white-space:nowrap;
 }
 
-.fig--head  {left:58%;   top:-4%;  height:108%; --din:var(--headIn);   --dout:var(--headOut)}
-.fig--left  {left:-1.5%; top:3%;   height:58%;  rotate:-19deg; --din:var(--leftIn); --dout:var(--leftOut)}
+.fig--head  {color:var(--blue-deep); left:58%;   top:-4%;  height:108%; --din:var(--headIn);   --dout:var(--headOut)}
+.fig--left  {color:var(--sage-deep); left:-1.5%; top:3%;   height:58%;  rotate:-19deg; --din:var(--leftIn); --dout:var(--leftOut)}
 .fig--center{left:35%;   top:2%;   height:100%; --din:var(--centerIn)}
 
 .fig--head .fig__tag  {left:auto;right:14%;bottom:14%}
 .fig--left .fig__tag  {left:30%;bottom:3%}
-.fig--center .fig__tag{left:4%;bottom:9%}
+.fig--center .fig__tag{left:11%;bottom:9%}
 
 /* ---------- 타이포 ---------- */
 .anim{opacity:0}
@@ -127,7 +131,7 @@ body{
 }
 .bigchar__block{
   position:absolute;left:-9%;top:13%;width:112%;height:66%;
-  background:var(--yellow);display:block;
+  background:var(--sage);display:block;
 }
 .bigchar--1{left:19.5%;top:16%}
 .bigchar--1 .bigchar__glyph{font-size:208px}
@@ -137,8 +141,9 @@ body{
 .bigchar--3 .bigchar__glyph{font-size:190px}
 
 .cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em}
-.cap span{background:var(--yellow);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
+.cap span{background:var(--blue);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
 .cap--1{left:19.8%;top:40%;width:16%}
+.cap--2 span{background:var(--sage)}
 .cap--2{left:20%;top:74%;width:15%}
 .cap--3{left:63%;top:44%;width:21%}
 
@@ -158,7 +163,7 @@ body{
 
 .lead{position:absolute;left:63%;top:57%;z-index:7;width:28%}
 .lead__main{font-size:19px;font-weight:700;letter-spacing:-.01em}
-.lead__main span{background:var(--yellow);padding:4px 9px;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:1.85}
+.lead__main span{background:var(--sage);padding:4px 9px;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:1.85}
 .lead__sub{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.22em}
 
 .stripes{
@@ -174,13 +179,13 @@ body{
 .dots--b{left:57%;top:78%;width:44px;height:44px;opacity:.9}
 
 .cstage{
-  position:absolute;left:38.6%;top:9%;width:5.4%;height:82%;
-  background:var(--yellow);z-index:1;display:block;opacity:0;
+  position:absolute;left:39.2%;top:3.3%;width:4.4%;height:93.4%;
+  background:var(--blue);z-index:1;display:block;opacity:0;
 }
 .is-playing .cstage{animation:rise .8s var(--easeOut) var(--centerIn) both}
 @media (prefers-reduced-motion: reduce){.is-playing .cstage{animation:none}.cstage{opacity:1}}
 
-.ybox{position:absolute;left:35.6%;top:7.5%;width:92px;height:36px;background:var(--yellow);z-index:5;display:block}
+.ybox{position:absolute;left:35.6%;top:7.5%;width:92px;height:36px;background:var(--sage);z-index:5;display:block}
 .cornermark{position:absolute;left:95%;top:4.5%;z-index:7;font-family:var(--mono);font-size:11px;letter-spacing:.2em}
 
 /* =========================================================
