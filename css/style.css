@@ -97,6 +97,64 @@ body{
 .replay{text-decoration:none;display:inline-block}
 .replay:hover{background:var(--ink);color:var(--paper)}
 
+/* ---------- 배경 음악 조작부 ----------
+   아래 띠 안의 한 칸으로 들어갑니다. 띠가 원래 flex 라서,
+   자리를 비집고 들어가는 게 아니라 흐르는 글자 영역이 그만큼 줄어듭니다.
+   그래서 다른 요소를 가리거나 밀어내지 않습니다. */
+.bgm{
+  flex:none;display:flex;align-items:center;gap:8px;
+  color:var(--ink);
+}
+.bgm__btn{
+  flex:none;width:17px;height:17px;padding:0;cursor:pointer;
+  border:1.5px solid var(--ink);border-radius:50%;background:transparent;
+  position:relative;transition:background .18s;
+}
+.bgm__btn:hover{background:rgba(30,40,44,.14)}
+/* ▶ / ‖ 를 글자 대신 도형으로 그립니다 (서체에 기호가 없어도 똑같이 보이게) */
+.bgm__play::before{
+  content:"";position:absolute;left:50%;top:50%;
+  translate:-40% -50%;
+  border-left:6px solid var(--ink);
+  border-top:4px solid transparent;border-bottom:4px solid transparent;
+}
+.bgm.is-playing .bgm__play::before{
+  translate:-50% -50%;
+  border:0;width:5px;height:8px;
+  border-left:2px solid var(--ink);border-right:2px solid var(--ink);
+}
+.bgm__mute::before{                       /* 소리 켜짐: 작은 원 */
+  content:"";position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:5px;height:5px;border-radius:50%;background:var(--ink);
+}
+.bgm.is-muted .bgm__mute::before{         /* 음소거: 가로줄 */
+  width:8px;height:0;border-radius:0;
+  border-top:2px solid var(--ink);background:transparent;
+}
+.bgm__time{
+  flex:none;font-size:9px;letter-spacing:.12em;opacity:.72;
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+/* 두 막대 모두 '채워진 만큼' 을 --p 로 받아 배경 그라데이션으로 그립니다 */
+.bgm__bar,.bgm__vol{
+  -webkit-appearance:none;appearance:none;
+  flex:none;height:3px;border-radius:2px;cursor:pointer;
+  background:linear-gradient(to right,
+             var(--ink) var(--p,0%), rgba(30,40,44,.28) var(--p,0%));
+}
+.bgm__bar{width:104px}
+.bgm__vol{width:48px}
+.bgm__bar::-webkit-slider-thumb,.bgm__vol::-webkit-slider-thumb{
+  -webkit-appearance:none;width:9px;height:9px;border-radius:50%;
+  background:var(--ink);border:0;cursor:pointer;
+}
+.bgm__bar::-moz-range-thumb,.bgm__vol::-moz-range-thumb{
+  width:9px;height:9px;border-radius:50%;background:var(--ink);border:0;cursor:pointer;
+}
+.bgm__bar:focus-visible,.bgm__vol:focus-visible,.bgm__btn:focus-visible{
+  outline:2px solid var(--ink);outline-offset:2px;
+}
+
 /* ---------- 그림 ---------- */
 .fig{position:absolute;z-index:2;pointer-events:none;opacity:0;color:var(--ink)}
 .fig__art,.fig__img{display:block;height:100%;width:auto;color:inherit}

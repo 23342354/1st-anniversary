@@ -236,6 +236,17 @@
       <span class="band__credit" data-txt="credit"></span>
       <span class="band__credit" data-txt="illustCredit"></span>
       <span class="marquee"><span class="marquee__inner" id="marquee"></span></span>
+      <div class="bgm" id="bgm">
+        <button class="bgm__btn bgm__play" id="bgmPlay" type="button"
+                aria-label="재생 / 정지"></button>
+        <input class="bgm__bar" id="bgmBar" type="range" min="0" max="1000" value="0"
+               aria-label="재생 위치">
+        <span class="bgm__time" id="bgmTime">0:00 / 0:00</span>
+        <button class="bgm__btn bgm__mute" id="bgmMute" type="button"
+                aria-label="음소거"></button>
+        <input class="bgm__vol" id="bgmVol" type="range" min="0" max="100" value="55"
+               aria-label="볼륨">
+      </div>
       <button class="replay" id="replay" type="button">REPLAY &#9654;</button>
     </div>
 
@@ -245,7 +256,10 @@
   <i class="curtain curtain--bottom"></i>
 </div>
 
+  <!-- 배경 음악. loop 는 끊김 없이 반복, preload 로 미리 받아 둡니다. -->
+  <audio id="bgmAudio" src="audio/after-the-wuthering.mp3" loop preload="auto"></audio>
 <script src="content.js"></script>
 <script src="js/main.js"></script>
+<script src="js/bgm.js"></script>
 </body>
 </html>
