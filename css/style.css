@@ -526,13 +526,14 @@ body{
   -webkit-mask-size:100% 235%;    mask-size:100% 235%;
   -webkit-mask-repeat:no-repeat;  mask-repeat:no-repeat;
   -webkit-mask-position:0 100%;   mask-position:0 100%;
+  --rise:6.5s;                    /* ★ 등장이 끝나기까지 걸리는 시간. 이 숫자 하나만 바꾸면 됩니다 */
 }
 /* 세 가지를 따로 겁니다. 차오르는 속도와 또렷해지는 속도가 서로 달라야
    '천천히 차오르다 마지막에 딱 맺히는' 느낌이 납니다. */
 .p2art.art-in{
-  animation:artRise  2.3s cubic-bezier(.42,.08,.55,.98) both,
-            artFocus 2.3s cubic-bezier(.50,.05,.35,1)   both,
-            artFloat 9s   ease-in-out 2.3s infinite;
+  animation:artRise  var(--rise) cubic-bezier(.42,.08,.55,.98) both,
+            artFocus var(--rise) cubic-bezier(.50,.05,.35,1)   both,
+            artFloat 9s          ease-in-out var(--rise) infinite;
 }
 @keyframes artRise{              /* 발밑에서부터 차오릅니다 */
   from{-webkit-mask-position:0 0;   mask-position:0 0}
