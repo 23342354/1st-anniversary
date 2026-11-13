@@ -141,28 +141,24 @@ body{
 }
 .wordmark__rule{display:block;margin-top:9px;width:72%;height:1.5px;background:var(--ink)}
 
-.bigchar{position:absolute;z-index:6;line-height:.82}
+/* 큰 글자가 있던 세 자리 — 지금은 도형만 들어가 있습니다.
+   content.js 의 bigChar1~3 에 글자를 쓰면 도형 위에 가운데로 올라갑니다. */
+.bigchar{position:absolute;z-index:6;display:grid;place-items:center;line-height:.82}
 .bigchar__glyph{
   position:relative;display:block;
-  font-family:var(--kr);font-weight:900;color:var(--ink);
+  font-family:var(--kr);font-weight:900;font-size:140px;color:var(--ink);
 }
-.bigchar__block{
-  position:absolute;left:-10%;top:-15%;width:114%;height:125%;
-  background:var(--sage);display:block;
-}
-.bigchar--1{left:19.5%;top:20%}
-.bigchar--1 .bigchar__glyph{font-size:208px}
-.bigchar--2{left:19.8%;top:52%}
-.bigchar--2 .bigchar__glyph{font-size:178px}
-.bigchar--3{left:63%;top:21%}
-.bigchar--3 .bigchar__glyph{font-size:190px}
+.bigchar__block{display:none}
+.bigchar--1{left:19.5%;top:19.5%;width:198px;height:198px;border:3px solid var(--ink);border-radius:50%}
+.bigchar--2{left:19.5%;top:51.5%;width:198px;height:198px;background:var(--blue)}
+.bigchar--3{left:63%;top:20.5%;width:214px;height:214px;background:var(--sage)}
 
 .cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em}
 .cap span{background:var(--blue);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
 .cap--1{left:19.8%;top:43%;width:16%}
 .cap--2 span{background:var(--sage)}
 .cap--2{left:20%;top:77%;width:15%}
-.cap--3{left:63%;top:44%;width:21%}
+.cap--3{left:63%;top:47%;width:21%}
 
 .vtext{
   position:absolute;z-index:7;
