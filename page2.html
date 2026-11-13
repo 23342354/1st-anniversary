@@ -15,6 +15,8 @@
      curtains-open : 앞 페이지에서 닫힌 커튼이 열립니다
      page-two : 스크립트가 이 페이지를 알아보게 하는 표시 -->
 <body class="is-playing curtains-open page-two">
+  <audio id="bgmAudio" src="audio/after-the-wuthering.mp3" loop preload="auto"></audio>
+  <script src="js/bgm.js?v=2" async></script>
 
 <div class="viewport">
   <div class="stage" id="stage">
@@ -126,10 +128,7 @@
   <i class="curtain curtain--bottom"></i>
 </div>
 
-  <!-- 배경 음악. loop 는 끊김 없이 반복, preload 로 미리 받아 둡니다. -->
-  <audio id="bgmAudio" src="audio/after-the-wuthering.mp3" loop preload="auto"></audio>
 <script src="content.js"></script>
 <script src="js/main.js"></script>
-<script src="js/bgm.js"></script>
 </body>
 </html>
