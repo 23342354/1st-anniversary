@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>WUTHERING HEIGHTS</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%239ABADB'/%3E%3Crect x='6' y='6' width='20' height='20' fill='%231E282C'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&amp;family=Rock+Salt&amp;family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<!-- is-playing : 위·아래 띠가 미끄러져 들어옵니다
+     curtains-open : 앞 페이지에서 닫힌 커튼이 열립니다
+     page-three : 스크립트가 이 페이지를 알아보게 하는 표시 -->
+<body class="is-playing curtains-open page-three">
+  <audio id="bgmAudio" src="audio/after-the-wuthering.mp3" loop preload="auto"></audio>
+  <script src="js/bgm.js?v=2" async></script>
+
+<div class="viewport">
+  <div class="stage" id="stage">
+
+    <!-- ============ 가운데 맺음말 ============
+         글자는 전부 content.js 의 p3... 에서 고칩니다 -->
+    <div class="p3">
+      <span class="p3__label"   data-txt="p3Label"></span>
+      <h1   class="p3__title"   data-txt="p3Title"></h1>
+      <span class="p3__rule"></span>
+      <p    class="p3__text"    data-txt="p3Text"></p>
+      <span class="p3__date"    data-txt="p3Date"></span>
+    </div>
+
+    <!-- ============ 위·아래 띠 ============ -->
+    <div class="band band--top">
+      <span data-txt="topLeft"></span>
+      <span data-txt="topRight"></span>
+    </div>
+
+    <div class="band band--bottom">
+      <span class="band__credit" data-txt="credit"></span>
+      <span class="band__credit" data-txt="musicCredit"></span>
+      <span class="marquee"><span class="marquee__inner" id="marquee"></span></span>
+      <div class="bgm" id="bgm">
+        <button class="bgm__btn bgm__play" id="bgmPlay" type="button"
+                aria-label="재생 / 정지"></button>
+        <input class="bgm__bar" id="bgmBar" type="range" min="0" max="1000" value="0"
+               aria-label="재생 위치">
+        <span class="bgm__time" id="bgmTime">0:00 / 0:00</span>
+        <button class="bgm__btn bgm__mute" id="bgmMute" type="button"
+                aria-label="음소거"></button>
+        <input class="bgm__vol" id="bgmVol" type="range" min="0" max="100" value="55"
+               aria-label="볼륨">
+      </div>
+      <a class="replay" href="page2.html" data-txt="backLabel"></a>
+    </div>
+
+  </div>
+
+  <i class="curtain curtain--top"></i>
+  <i class="curtain curtain--bottom"></i>
+</div>
+
+<script src="content.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

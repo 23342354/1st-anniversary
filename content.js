@@ -69,5 +69,16 @@ const CONTENT = {
   p2Caption: "폭풍 속에 새긴 첫 번째 영원",            // 제목 아래 한 줄
   p2Credit:  "illust. @PPPOOOTTTEEEE",             // 그림 그려준 분
 
+  nextLabel: "NEXT ▸",                             // 편지가 끝나면 나타나는 버튼
+
+  /* ===== 세 번째 페이지 (page3.html) =====
+     아래 글자만 바꾸면 3페이지가 통째로 바뀝니다 */
+
+  p3Label: "WUTHERING HEIGHTS / III",              // 맨 위 작은 글자
+  p3Title: "그리고,\n우리는 계속된다",                // 가운데 큰 제목 (\n 으로 줄 나눔)
+  p3Text:  "바람은 여전히 언덕을 넘는다.\n우리는 그 아래에서 두 번째 계절을 센다.",
+  p3Date:  "2025.11.15 ~",                         // 아래 날짜
+  p3Credit: "",                                    // 그림 넣으면 여기에 표기
+
   backLabel: "◂ BACK"
 };

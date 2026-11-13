@@ -131,6 +131,59 @@ body{
 .replay{text-decoration:none;display:inline-block}
 .replay:hover{background:var(--ink);color:var(--paper)}
 
+/* ---------- 편지가 끝나면 나타나는 다음 장 버튼 ----------
+   아래 띠(30px) 바로 위 한가운데입니다. 편지가 다 드러나면
+   js 가 body 에 letter-done 을 붙이고, 그때 떠오릅니다. */
+.p2next{
+  position:absolute;left:50%;bottom:38px;translate:-50% 0;z-index:9;
+  font-family:var(--mono);font-size:12px;letter-spacing:.26em;
+  color:var(--ink);text-decoration:none;background:var(--paper);
+  border:1.5px solid var(--ink);padding:7px 16px;
+  opacity:0;pointer-events:none;
+  transition:background .18s,color .18s;
+}
+.letter-done .p2next{
+  pointer-events:auto;
+  animation:p2nextIn .9s var(--easeOut) both, blink 2.8s ease-in-out .9s infinite;
+}
+.p2next:hover{background:var(--ink);color:var(--paper)}
+@keyframes p2nextIn{
+  from{opacity:0;transform:translateY(14px)}
+  to  {opacity:1;transform:translateY(0)}
+}
+
+/* ---------- 세 번째 페이지 ---------- */
+.p3{
+  position:absolute;left:50%;top:50%;translate:-50% -50%;
+  width:62%;z-index:4;text-align:center;color:var(--ink);
+}
+.p3__label{
+  display:block;font-family:var(--mono);font-size:11px;letter-spacing:.3em;
+  color:var(--sage-deep);
+  animation:fadeIn .9s var(--easeOut) .55s both;
+}
+.p3__title{
+  margin:26px 0 0;font-family:var(--kr);font-weight:700;
+  font-size:52px;line-height:1.3;letter-spacing:-.03em;
+  white-space:pre-line;word-break:keep-all;
+  animation:rise 1s var(--easeOut) .75s both;
+}
+.p3__rule{
+  display:block;width:46px;height:2px;margin:30px auto;background:var(--blue-deep);
+  animation:fadeIn .9s var(--easeOut) 1.15s both;
+}
+.p3__text{
+  margin:0;font-family:var(--kr);font-weight:300;
+  font-size:14px;line-height:2.1;letter-spacing:-.01em;
+  white-space:pre-line;word-break:keep-all;
+  animation:rise 1s var(--easeOut) 1.35s both;
+}
+.p3__date{
+  display:block;margin-top:34px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.24em;opacity:.62;
+  animation:fadeIn 1s var(--easeOut) 1.6s both;
+}
+
 /* ---------- 배경 음악 조작부 ----------
    아래 띠 안의 한 칸으로 들어갑니다. 띠가 원래 flex 라서,
    자리를 비집고 들어가는 게 아니라 흐르는 글자 영역이 그만큼 줄어듭니다.
@@ -613,6 +666,7 @@ body{
   .is-playing .fig--center,.is-playing.typing-done .fig--center{animation:none}
   .band{transform:none}
   .anim{opacity:1}
+  .letter-done .p2next{animation:none;opacity:1}   /* 깜빡임 없이 그냥 보이게 */
   .fig--center{opacity:1}
   .fig--head,.fig--left{display:none}
   .marquee__inner{animation:none}

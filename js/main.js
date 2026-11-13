@@ -236,6 +236,9 @@
     });
   }
 
+  /* 편지가 다 드러났다는 표시. 다음 장 버튼이 이걸 보고 떠오릅니다. */
+  function letterDone() { document.body.classList.add('letter-done'); }
+
   /* 일러스트 등장 — 편지의 한 문장이 읽히는 순간에 부릅니다 */
   var artShown = false;
   function revealArt() {
@@ -256,7 +259,7 @@
     if (!box ||
         (window.matchMedia &&
          window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
-      revealArt(); return;
+      revealArt(); letterDone(); return;
     }
 
     var SYM     = '!@#$%^&*<>/\\|=+~?;:'.split('');
@@ -297,7 +300,7 @@
       });
     })(box);
 
-    if (!cells.length) { revealArt(); return; }
+    if (!cells.length) { revealArt(); letterDone(); return; }
 
     setTimeout(function () {
       /* 글자가 실제로 몇 번째 줄에 놓였는지 화면에서 직접 읽어 묶습니다.
@@ -374,6 +377,7 @@
         setTimeout(function () {
           box.innerHTML = original;            /* span 을 걷어내고 원래 글로 */
           revealArt();                         /* 혹시 아직이면 여기서라도 */
+          letterDone();                        /* 다음 장 버튼이 떠오릅니다 */
         }, 1600);
       }
 
@@ -477,10 +481,30 @@
     var nm = document.querySelector('.p2side__names');
     if (nm && window.ResizeObserver) new ResizeObserver(layoutNames).observe(nm);
 
+    /* 다음 장으로: 1페이지와 똑같이 커튼을 닫고 넘어갑니다 */
+    var nextBtn = document.getElementById('p2next');
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.body.classList.add('is-leaving');
+        setTimeout(function () {
+          window.location.href = nextBtn.getAttribute('href');
+        }, CURTAIN + 60);
+      });
+    }
+
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(relayout);
       setTimeout(relayout, 1500);        // 서체가 늦으면 한 번 더
     }
+    return;
+  }
+
+  /* ---------- 세 번째 페이지 ---------- */
+  if (document.body.classList.contains('page-three')) {
+    fitWidth();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWidth);
+    window.addEventListener('resize', fitWidth);
     return;
   }
 
