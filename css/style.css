@@ -177,13 +177,6 @@ body{
   background:repeating-linear-gradient(90deg,var(--ink) 0 9px,transparent 9px 18px);
 }
 
-.cstage{
-  position:absolute;left:39.2%;top:3.3%;width:4.4%;height:93.4%;
-  background:var(--blue);z-index:1;display:block;opacity:0;
-}
-.is-playing .cstage{animation:rise .8s var(--easeOut) var(--centerIn) both}
-@media (prefers-reduced-motion: reduce){.is-playing .cstage{animation:none}.cstage{opacity:1}}
-
 .cornermark{position:absolute;left:95%;top:4.5%;z-index:7;font-family:var(--mono);font-size:11px;letter-spacing:.2em;background:var(--paper);padding:4px 6px}
 
 /* =========================================================
