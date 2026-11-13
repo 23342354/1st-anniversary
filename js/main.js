@@ -309,21 +309,54 @@
         lines[lines.length - 1].push(sp);
       });
 
-      /* 일러스트를 부르는 문장: 그 문장이 벗겨지고, 또 화면에 보일 때 등장 */
+      /* 일러스트는 신호 문장(.p2cue)이 끝나는 순간에 '딱' 맺힙니다.
+         한 줄에 걸리는 시간이 정해져 있어서 그 문장이 벗겨질 시각을
+         미리 계산할 수 있습니다. 거기서 등장에 걸리는 시간(--rise)만큼
+         앞당겨 시작하면, 끝나는 지점이 문장의 끝과 맞아떨어집니다. */
       var cue      = box.querySelector('.p2cue');
       var cueCells = cue ? [].slice.call(cue.querySelectorAll('.sc')) : [];
       var cueLast  = cueCells[cueCells.length - 1];
-      var cueOpen = false, cueSeen = !cue;
-      function maybeArt() { if (cueOpen && cueSeen) revealArt(); }
-      if (cue && window.IntersectionObserver) {
-        new IntersectionObserver(function (es, obs) {
-          es.forEach(function (e) {
-            if (e.isIntersecting) { cueSeen = true; obs.disconnect(); maybeArt(); }
-          });
-        }, { root: box, threshold: 0.55 }).observe(cue);
-      } else {
-        cueSeen = true;
+
+      function lineTimes(line) {           /* 그 줄 안에서 글자마다 벗겨지는 시각 */
+        var step = SWEEP / Math.max(1, line.length), at = 0, offs = [];
+        line.forEach(function (sp, k) {
+          offs.push(at);
+          at += step;
+          if (sp.textContent === '.' && k < line.length - 1) at += DOT;
+        });
+        return { offs: offs, total: at };
       }
+
+      function riseMs() {                  /* 등장에 걸리는 시간은 css 에서 읽어 옵니다 */
+        var art = document.querySelector('.p2art');
+        if (!art) return 6500;
+        var v = getComputedStyle(art).getPropertyValue('--rise').trim();
+        var n = parseFloat(v);
+        if (!isFinite(n)) return 6500;
+        return /ms\s*$/.test(v) ? n : n * 1000;
+      }
+
+      var INK   = 430;                     /* 마지막 글자가 완전히 진해지기까지 (0.09s 지연 + 0.34s) */
+      var GAP   = LINE_MS - SWEEP;
+      var RISE  = riseMs();
+      var info  = lines.map(lineTimes);    /* 줄마다 걸리는 시간 */
+      var cueLine = -1, cueOff = 0;
+      lines.forEach(function (line, idx) {
+        var k = cueLast ? line.indexOf(cueLast) : -1;
+        if (k !== -1) { cueLine = idx; cueOff = info[idx].offs[k]; }
+      });
+
+      /* idx 줄이 시작하는 순간부터 신호 문장이 다 맺히기까지 남은 시간.
+         처음부터 한 번에 계산하면 setTimeout 이 조금씩 밀리는 게 3분 넘게
+         쌓여 몇 초씩 어긋납니다. 그래서 매 줄마다 '지금부터' 다시 셉니다. */
+      function remainFrom(idx) {
+        if (cueLine < idx) return null;
+        var t = 0;
+        for (var k = idx; k < cueLine; k++) t += info[k].total + GAP;
+        return t + cueOff + INK;
+      }
+      var artQueued = (cueLine < 0);
+      if (artQueued) revealArt();          /* 신호 문장을 못 찾으면 그냥 띄웁니다 */
 
       var i = 0;
       /* 아직 안 벗겨진 글자만 계속 지지직거립니다.
@@ -340,13 +373,7 @@
         clearInterval(flick);
         setTimeout(function () {
           box.innerHTML = original;            /* span 을 걷어내고 원래 글로 */
-          if (!artShown) {                     /* 신호 문장을 못 찾았을 때를 대비 */
-            var c = box.querySelector('.p2cue');
-            if (!c || !window.IntersectionObserver) { revealArt(); return; }
-            new IntersectionObserver(function (es, obs) {
-              if (es[0].isIntersecting) { obs.disconnect(); revealArt(); }
-            }, { root: box, threshold: 0.55 }).observe(c);
-          }
+          revealArt();                         /* 혹시 아직이면 여기서라도 */
         }, 1600);
       }
 
@@ -358,18 +385,23 @@
         if (i >= lines.length) { finish(); return; }
 
         var line = lines[i], step = SWEEP / Math.max(1, line.length), at = 0;
+
+        /* 신호 문장이 'RISE' 뒤에 끝나는 줄에 닿으면 지금 일러스트를 띄웁니다.
+           그래야 등장이 끝나는 순간과 문장이 끝나는 순간이 맞아떨어집니다. */
+        if (!artQueued) {
+          var remain = remainFrom(i);
+          if (remain !== null && remain - RISE <= info[i].total + GAP) {
+            artQueued = true;
+            setTimeout(revealArt, Math.max(0, remain - RISE));
+          }
+        }
+
         line.forEach(function (sp, k) {
           setTimeout(function () { sp.className = 'sc sc--in'; }, at);
           at += step;
           if (sp.textContent === '.' && k < line.length - 1) at += DOT;
         });
 
-        if (!cueOpen && cueLast && line.indexOf(cueLast) !== -1) {
-          cueOpen = true;
-          maybeArt();
-          /* 끝까지 안 내려와 보더라도 10초 뒤에는 나타나게 */
-          setTimeout(function () { cueSeen = true; maybeArt(); }, 10000);
-        }
         i++;
         setTimeout(peelLine, at + (LINE_MS - SWEEP));   /* 줄과 줄 사이 간격은 그대로 */
       }
