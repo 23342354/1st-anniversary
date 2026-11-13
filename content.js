@@ -51,6 +51,7 @@ const CONTENT = {
 
   /* --- 1페이지 그림을 그려준 분 (맨 아래 띠에 표시) --- */
   illustCredit: "illust. @N2NULL",
+  musicCredit:  "music. @5minutejamms",       // 노래 만들어준 분
 
   /* --- 가운데 그림을 누르라고 알려주는 버튼 --- */
   enterLabel: "ENTER ▸",
