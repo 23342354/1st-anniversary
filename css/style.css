@@ -153,6 +153,8 @@ body{
   word-break:keep-all;visibility:hidden;
 }
 .typed__line:last-child{margin-bottom:0}
+/* 빈 줄은 글자·배경 없이 사이만 벌립니다 */
+.typed__line--space{height:12px;margin-bottom:8px}
 .typed__line span{
   background:var(--blue);padding:4px 9px;line-height:1.95;
   box-decoration-break:clone;-webkit-box-decoration-break:clone;
@@ -161,7 +163,7 @@ body{
   background:transparent;padding:4px 0;
   font-family:var(--mono);font-size:12px;letter-spacing:.18em;
 }
-.typed--right{left:66%;top:57%}
+.typed--right{left:66%;top:66%}
 .typed--left{right:69%;top:39%;text-align:right}
 .typed--left .typed__line span{background:var(--sage)}
 /* 위 줄보다 뒤에 와야 영문·숫자 줄의 배경이 실제로 빠집니다 */

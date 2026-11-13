@@ -96,11 +96,16 @@
     box.innerHTML = '';
     return src.split('\n').map(function (txt) {
       var p = document.createElement('p');
+      box.appendChild(p);
+      /* 빈 줄은 글자 없이 사이만 벌리는 칸 */
+      if (txt.trim() === '') {
+        p.className = 'typed__line typed__line--space';
+        return { p: p, span: null, full: '' };
+      }
       /* 한글이 없는 줄(영문·숫자만)은 작은 고정폭 글씨로 */
       p.className = 'typed__line' + (/[가-힣]/.test(txt) ? '' : ' typed__line--mono');
       var s = document.createElement('span');
       p.appendChild(s);
-      box.appendChild(p);
       return { p: p, span: s, full: txt };
     });
   }
@@ -113,6 +118,7 @@
       if (i >= lines.length) return;
       var L = lines[i++], k = 0;
       L.p.style.visibility = 'visible';
+      if (!L.span) { typeTimers.push(setTimeout(nextLine, LINE_GAP)); return; }   /* 빈 줄은 건너뜀 */
       var tick = setInterval(function () {
         k++;
         L.span.textContent = L.full.slice(0, k) + (k < L.full.length ? '|' : '');
@@ -130,7 +136,7 @@
     if (!box) return;
     buildLines(box).forEach(function (L) {
       L.p.style.visibility = 'visible';
-      L.span.textContent = L.full;
+      if (L.span) L.span.textContent = L.full;
     });
   }
 
