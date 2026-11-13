@@ -324,13 +324,16 @@ body{
 /* ---- 왼쪽 세로 띠 ---- */
 .p2side{
   position:absolute;left:0;top:0;width:19%;height:74%;background:var(--sage);z-index:3;
-  display:flex;align-items:center;justify-content:center;       /* 내용을 칸 한가운데로 */
+  display:flex;flex-direction:column;align-items:center;
+  padding:44px 0;        /* 위아래 여백을 같게 → 내용 덩어리가 세로 한가운데 */
 }
-/* 1115 · 세로 이름 · One year 를 한 줄기로 쌓습니다.
-   gap 숫자를 키우면 세 가지 사이가 모두 더 벌어집니다. */
+/* 1115 · 세로 이름 · One year — 셋 다 가로 가운데로 놓입니다.
+   padding 숫자를 키우면 위아래 여백이, GAP 숫자를 키우면
+   1115 와 세로 이름 사이가 벌어집니다. */
 .p2side__stack{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:46px;width:100%;
+  --gap:46px;
+  display:flex;flex-direction:column;align-items:center;
+  width:100%;flex:1;
 }
 .p2side__badge{
   width:60%;padding:10px 0;
@@ -340,7 +343,7 @@ body{
 }
 /* 돌린 글줄은 '제자리 폭'이 0 이라 다른 요소와 겹칩니다.
    그래서 빈 상자를 하나 두고, 글자 크기에 맞춘 자리를 js 가 잡아줍니다. */
-.p2side__namesbox{position:relative;display:block}
+.p2side__namesbox{position:relative;display:block;margin-top:var(--gap)}
 .p2side__names{
   /* 세로쓰기 모드 대신 '가로로 짠 글줄을 통째로 90도 회전'.
      세로쓰기는 글자를 하나씩 세로축에 배치해서, 화면이 소수점 배율로
@@ -351,14 +354,18 @@ body{
   color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.28em;
 }
 .p2side__note{
-  text-align:center;white-space:pre-line;line-height:1.95;
+  margin-top:auto;      /* 아래쪽에 붙입니다 (원래 자리) */
+  text-align:left;white-space:pre-line;line-height:1.95;
   color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.14em;
 }
 /* 녹색 칸(높이 74%) 아래, 아래 띠(30px) 위 — 그 흰 영역의 한가운데 */
 .p2foot{
   position:absolute;left:0;top:74%;width:19%;bottom:30px;z-index:4;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:14px;text-align:center;
+  display:flex;align-items:center;justify-content:center;    /* 덩어리를 가운데로 */
+}
+.p2foot__in{
+  display:flex;flex-direction:column;align-items:flex-start; /* 글끼리는 왼쪽 맞춤 */
+  gap:14px;
 }
 .p2mark{
   color:var(--sage-deep);
@@ -379,7 +386,7 @@ body{
   letter-spacing:-.015em;color:var(--ink);
 }
 .p2script{
-  position:absolute;left:34%;top:5.5%;width:38%;z-index:6;pointer-events:none;
+  position:absolute;left:29%;top:7.5%;width:40%;z-index:6;pointer-events:none;
   color:var(--blue-deep);rotate:-7deg;display:block;
 }
 .p2script__svg{width:100%;height:auto;display:block;overflow:visible}

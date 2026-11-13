@@ -298,6 +298,11 @@
     var art = document.querySelector('.p2art');
     if (art) art.addEventListener('load', placeArt);   // 그림을 다 받으면 다시
 
+    /* 글꼴이 늦게 도착하면 글자 길이가 바뀝니다.
+       그때마다 세로 이름 자리를 자동으로 다시 잡습니다. */
+    var nm = document.querySelector('.p2side__names');
+    if (nm && window.ResizeObserver) new ResizeObserver(layoutNames).observe(nm);
+
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(relayout);
       setTimeout(relayout, 1500);        // 서체가 늦으면 한 번 더
