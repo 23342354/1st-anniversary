@@ -335,11 +335,7 @@ body{
   background:var(--blue);padding:4px 9px;line-height:1.95;
   box-decoration-break:clone;-webkit-box-decoration-break:clone;
 }
-.p2credit{
-  position:absolute;left:84%;bottom:6%;z-index:5;opacity:.7;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;
-}
-.p2art{position:absolute;left:56%;bottom:30px;height:90%;width:auto;z-index:2;display:block}
+.p2art{position:absolute;left:62%;bottom:30px;height:90%;width:auto;z-index:2;display:block}
 
 /* 움직임을 줄이는 설정을 켠 사용자 → 최종 화면만 */
 @media (prefers-reduced-motion: reduce){

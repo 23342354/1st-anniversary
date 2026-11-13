@@ -39,6 +39,7 @@
 | `enterLabel` | 다음 페이지로 넘어가는 버튼 글자 |
 | `marquee` | 맨 아래에서 흐르는 글자 |
 | `credit` | 맨 아래 왼쪽 작은 글자 |
+| `illustCredit` | 1페이지 그림 그려준 분 (맨 아래 띠) |
 
 ---
 
@@ -141,7 +142,7 @@ var CURTAIN    = 550;            // 커튼이 닫히는 시간(ms)
 | `p2Title` | 오른쪽 큰 제목 |
 | `p2Script` | 제목 위를 가로지르는 손글씨 |
 | `p2Caption` | 제목 아래 한 줄 |
-| `p2Credit` | 그림 그려준 분 |
+| `p2Credit` | 2페이지 그림 그려준 분 (맨 아래 띠) |
 
 그림은 `images/p2-figures.webp` 입니다. 바꾸려면 같은 이름으로 덮어쓰거나,
 `page2.html` 의 `<img class="p2art" src="...">` 한 줄을 고치면 됩니다.

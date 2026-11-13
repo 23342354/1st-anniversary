@@ -49,6 +49,9 @@ const CONTENT = {
   /* --- 맨 아래 왼쪽 작은 글자 --- */
   credit: "WUTHERING HEIGHTS",
 
+  /* --- 1페이지 그림을 그려준 분 (맨 아래 띠에 표시) --- */
+  illustCredit: "illust. @N2NULL",
+
   /* --- 가운데 그림을 누르라고 알려주는 버튼 --- */
   enterLabel: "ENTER ▸",
 
@@ -64,7 +67,7 @@ const CONTENT = {
   p2Title:   "HAPPY\nANNIVERSARY",                // 오른쪽 큰 제목
   p2Script:  "one year",                          // 제목 위를 가로지르는 손글씨
   p2Caption: "폭풍 속에 새긴 첫 번째 영원",            // 제목 아래 한 줄
-  p2Credit:  "illust. ○○○",                       // 그림 그려준 분 (바꿔 적어주세요)
+  p2Credit:  "illust. @PPPOOOTTTEEEE",             // 그림 그려준 분
 
   backLabel: "◂ BACK"
 };
