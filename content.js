@@ -82,7 +82,7 @@ const CONTENT = {
   p3DateValue: "2025.11.15",
   p3DateSuf:   "SAT.",
   p3RowLabel1: "Place",
-  p3RowValue1: "바람이 울부짖는 언덕",
+  p3RowValue1: "WUTHERING HEIGHTS",
   p3RowLabel2: "Time",
   p3RowValue2: "365 DAYS",
   p3Foot:      "폭풍 속에 새긴 첫 번째 영원",   // 티켓 맨 아래 한 줄
