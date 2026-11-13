@@ -74,12 +74,8 @@ const CONTENT = {
   /* ===== 세 번째 페이지 (page3.html) =====
      \n 을 넣으면 그 자리에서 줄이 바뀝니다 */
 
-  p3Tag1: "ONE YEAR",                 // 맨 위 가로로 흩어진 네 단어
-  p3Tag2: "TOGETHER",
-  p3Tag3: "STILL HERE",
-  p3Tag4: "FOREVER",
-
   p3Display: "WUTHERING\nHEIGHTS",     // 가운데 큰 이탤릭 제목
+  p3Sub:     "AFTER THE WUTHERING",   // 제목 바로 아래 대문자 한 줄
 
   p3Side:      "ANNIVERSARY",         // 티켓 왼쪽에 세로로 선 글자
   p3DateLabel: "Date",
@@ -91,9 +87,10 @@ const CONTENT = {
   p3RowValue2: "365 DAYS",
   p3Foot:      "폭풍 속에 새긴 첫 번째 영원",   // 티켓 맨 아래 한 줄
 
-  p3NoteTitle: "ONE YEAR, AND ON",    // 오른쪽 클립 꽂힌 쪽지
-  p3NoteBody:  "1   Year 함께\n365  Days 매일\n∞   Forever 앞으로",
-  p3NoteFoot:  "WUTHERING HEIGHTS",
+  p3NoteLabel: "B.G.M.",              // 오른쪽 클립 꽂힌 쪽지
+  p3NoteEn:    "What the Wind\nWished For",
+  p3NoteKo:    "바람이 바란 것",          // 영문 바로 아래, 같은 왼쪽 선에 맞춰 섭니다
+  p3NoteFoot:  "@5minutejamms",
 
   p3StampRing: "WUTHERING HEIGHTS · FIRST ANNIVERSARY · ",  // 도장 둘레 글자
   p3StampTop:  "20",                  // 도장 안 위아래 숫자
