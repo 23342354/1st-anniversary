@@ -87,9 +87,10 @@ const CONTENT = {
   p3RowValue2: "365 DAYS",
   p3Foot:      "폭풍 속에 새긴 첫 번째 영원",   // 티켓 맨 아래 한 줄
 
-  p3NoteLabel: "B.G.M.",              // 오른쪽 클립 꽂힌 쪽지
-  p3NoteEn:    "What the Wind\nWished For",
-  p3NoteKo:    "바람이 바란 것",          // 영문 바로 아래, 같은 왼쪽 선에 맞춰 섭니다
+  p3NoteLabel: "B.G.M.",              // 오른쪽 클립 꽂힌 쪽지 (클립이 가립니다)
+  p3NoteEn1:   "AFTER THE WUTHERING",
+  p3NoteEn2:   "(What the Wind Wished For)",
+  p3NoteKo:    "바람이 잦아든 뒤,  바람이 바란 것",   // 영문과 같은 왼쪽 선에 맞춰 섭니다
   p3NoteFoot:  "@5minutejamms",
 
   p3StampRing: "WUTHERING HEIGHTS · FIRST ANNIVERSARY · ",  // 도장 둘레 글자
