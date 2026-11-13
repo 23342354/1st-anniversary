@@ -502,9 +502,19 @@
 
   /* ---------- 세 번째 페이지 ---------- */
   if (document.body.classList.contains('page-three')) {
-    fitWidth();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWidth);
-    window.addEventListener('resize', fitWidth);
+    /* 종이 콜라주는 600px 높이를 전제로 짜여 있습니다.
+       창이 낮아 자리가 모자라면 덩어리째 줄여서 아래 체크무늬를
+       물지 않게 합니다. (아래 띠 30 + 체크무늬 28 + 여유 = 116) */
+    function fitPoster() {
+      var el = document.querySelector('.p3');
+      if (!el || !stage) return;
+      var h = parseFloat(stage.style.height) || 900;
+      el.style.scale = Math.min(1, (h - 140) / 600);
+    }
+    function relayout3() { fitWidth(); fitPoster(); }
+    relayout3();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout3);
+    window.addEventListener('resize', relayout3);
     return;
   }
 

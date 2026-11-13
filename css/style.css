@@ -168,20 +168,20 @@ body{
 
 .p3{
   position:absolute;left:50%;top:50%;translate:-50% -50%;
-  width:1400px;height:540px;z-index:4;color:var(--ink);
+  width:1400px;height:600px;z-index:4;color:var(--ink);
 }
 
 /* --- 가운데 큰 제목 --- */
 .p3display{
-  position:absolute;left:340px;top:8px;width:720px;margin:0;
+  position:absolute;left:286px;top:4px;width:700px;margin:0;
   text-align:center;white-space:pre-line;
   font-family:var(--serif);font-style:italic;font-weight:700;
-  font-size:92px;line-height:.98;letter-spacing:.01em;
+  font-size:84px;line-height:.98;letter-spacing:.01em;
   animation:rise 1.1s var(--easeOut) .55s both;
 }
 /* --- 제목 바로 아래 대문자 한 줄 --- */
 .p3sub{
-  position:absolute;left:340px;top:196px;width:720px;
+  position:absolute;left:286px;top:172px;width:700px;
   text-align:center;text-transform:uppercase;
   font-family:var(--mono);font-size:15px;letter-spacing:.42em;
   color:var(--sage-deep);
@@ -190,7 +190,7 @@ body{
 
 /* --- 왼쪽 도장 --- */
 .p3stamp{
-  position:absolute;left:46px;top:44px;width:196px;height:196px;
+  position:absolute;left:18px;top:18px;width:168px;height:168px;
   rotate:-9deg;color:var(--blue-deep);
   animation:p3pop 1s var(--easeOut) 1.05s both;
 }
@@ -206,7 +206,7 @@ body{
 
 /* --- 도장 아래 리본 --- */
 .p3ribbon{
-  position:absolute;left:8px;top:258px;width:300px;height:46px;
+  position:absolute;left:0;top:208px;width:286px;height:44px;
   rotate:-7deg;
   background:var(--sage);color:var(--paper);
   display:flex;align-items:center;justify-content:center;
@@ -219,7 +219,7 @@ body{
 
 /* --- 가운데 찢어진 티켓 --- */
 .p3ticket{
-  position:absolute;left:330px;top:256px;width:760px;height:250px;
+  position:absolute;left:322px;top:264px;width:648px;height:240px;
   rotate:-1.2deg;
   /* 가까운 그림자가 찢긴 결을, 먼 그림자가 떠 있는 느낌을 만듭니다 */
   filter:drop-shadow(0 2px 2px rgba(30,40,44,.14)) drop-shadow(0 12px 22px rgba(30,40,44,.14));
@@ -228,7 +228,7 @@ body{
 /* 위아래가 손으로 뜯긴 결. 숫자를 바꾸려면 폭(760)·높이(330)도 같이 맞춰야 합니다 */
 .p3ticket__paper{
   position:absolute;inset:0;background:var(--card);color:var(--ink);
-  clip-path:polygon(0px 2.7px,21.57108133117748px 2.2px,54.04331272878166px 7.2px,86.94725808247775px 2.8px,108.31462383219565px 6.8px,139.7358450132591px 5.7px,170.24380642308947px 6.0px,207.0840840609121px 10.0px,233.24418436515222px 0.8px,263.3352222633756px 4.3px,302.1330499126275px 4.9px,328.8717046568766px 3.7px,352.03375476042345px 4.5px,385.81450179094753px 0.2px,407.41437288365114px 5.8px,438.94717393027554px 3.4px,474.42091798980726px 2.4px,511.9385976078302px 9.5px,547.4818122929271px 8.6px,570.7067145589954px 6.6px,600.0762843048766px 1.0px,629.6998694900268px 3.4px,664.4235004701962px 2.5px,700.2393177125837px 5.0px,737.7415019486281px 4.1px,758.9050054857494px 4.2px,760px 4.3px,760px 245.2px,726.9109923886467px 243.2px,701.0459334439071px 242.3px,671.3109913447365px 250.0px,634.6945180812139px 241.1px,600.0291845987601px 249.5px,572.2593518894523px 240.8px,541.385016910295px 246.0px,513.5022479606646px 243.0px,484.6567442298255px 240.4px,461.93303805408374px 241.7px,428.44227124897674px 248.3px,405.93351831292995px 245.2px,367.6591464328676px 247.9px,345.00400913018734px 247.1px,322.91013254410336px 240.4px,286.2740703198374px 248.1px,250.5787277691481px 241.2px,212.92975043887668px 240.7px,178.9951014129232px 245.1px,140.3956420645212px 241.2px,108.2050782717105px 248.6px,85.87210809124761px 241.2px,64.65829005839528px 248.1px,32.535117450444325px 249.4px,0px 244.6px);
+  clip-path:polygon(0px 2.7px,21.57108133117748px 2.2px,54.04331272878166px 7.2px,86.94725808247775px 2.8px,108.31462383219565px 6.8px,139.7358450132591px 5.7px,170.24380642308947px 6.0px,207.0840840609121px 10.0px,233.24418436515222px 0.8px,263.3352222633756px 4.3px,302.1330499126275px 4.9px,328.8717046568766px 3.7px,352.03375476042345px 4.5px,385.81450179094753px 0.2px,407.41437288365114px 5.8px,438.94717393027554px 3.4px,474.42091798980726px 2.4px,511.9385976078302px 9.5px,547.4818122929271px 8.6px,570.7067145589954px 6.6px,600.0762843048766px 1.0px,629.6998694900268px 3.4px,648px 2.5px,648px 231.8px,617.9740602007143px 230.8px,589.5278070385149px 239.9px,560.9597868148442px 237.8px,532.2914918629575px 235.2px,499.2024842516042px 233.2px,473.33742530686453px 232.3px,443.602483207694px 240.0px,406.98600994417137px 231.1px,372.3206764617176px 239.5px,344.5508437524098px 230.8px,313.6765087732524px 236.0px,285.793739823622px 233.0px,256.9482360927829px 230.4px,234.22452991704114px 231.7px,200.73376311193414px 238.3px,178.22501017588738px 235.2px,139.950638295825px 237.9px,117.29550099314474px 237.1px,95.20162440706075px 230.4px,58.565562182794764px 238.1px,22.870219632105474px 231.2px,0px 230.7px);
 }
 .p3ticket__holes{                       /* 왼쪽 스프링 구멍 */
   position:absolute;left:16px;top:28px;bottom:28px;width:18px;
@@ -266,13 +266,13 @@ body{
 
 /* --- 오른쪽 클립 꽂힌 쪽지 --- */
 .p3note{
-  position:absolute;left:1108px;top:132px;width:250px;height:300px;
-  rotate:6deg;
+  position:absolute;left:984px;top:362px;width:232px;height:228px;
+  rotate:-5deg;
   filter:drop-shadow(0 2px 2px rgba(30,40,44,.14)) drop-shadow(0 10px 18px rgba(30,40,44,.14));
   animation:rise 1s var(--easeOut) 1.65s both;
 }
 .p3note__paper{
-  position:absolute;inset:0;padding:38px 24px 24px;
+  position:absolute;inset:0;padding:26px 22px 16px;
   background:var(--blue);color:var(--ink);
   clip-path:polygon(0px 5.5px,23.753288206305044px 5.6px,44.071460986494046px 6.9px,63.84165412297551px 1.1px,83.26186247747796px 0.1px,110.89756960548922px 4.5px,139.21235849100816px 3.5px,158.6130693596732px 6.3px,176.16734693408398px 6.5px,201.07019933813194px 3.5px,223.46459243217993px 6.1px,246.18624443594155px 7.3px,250px 5.1px,250px 300px,0px 300px);
   display:flex;flex-direction:column;
@@ -281,22 +281,39 @@ body{
   font-family:var(--mono);font-size:11px;letter-spacing:.24em;
 }
 .p3note__en{                       /* 영문과 한글이 같은 왼쪽 선에 섭니다 */
-  margin:26px 0 0;white-space:pre-line;
-  font-family:var(--serif);font-style:italic;font-size:26px;line-height:1.3;
+  margin:20px 0 0;white-space:pre-line;
+  font-family:var(--serif);font-style:italic;font-size:23px;line-height:1.3;
 }
 .p3note__ko{
-  margin:14px 0 0;
-  font-family:var(--kr);font-weight:500;font-size:15px;letter-spacing:-.01em;
+  margin:11px 0 0;
+  font-family:var(--kr);font-weight:500;font-size:14px;letter-spacing:-.01em;
 }
 .p3note__foot{
   margin-top:auto;font-family:var(--mono);font-size:9.5px;letter-spacing:.2em;opacity:.75;
 }
 
+/* --- 그림 세 장 ---
+   전신 그림이 맨 뒤(z-index 2), 쪽지와 하트가 그 위에 얹힙니다.
+   하트 두 장은 티켓 아래 모서리를 살짝 물고 서로 겹칩니다. */
+.p3art{
+  position:absolute;left:1086px;top:18px;width:280px;height:auto;z-index:2;
+  filter:drop-shadow(0 10px 20px rgba(30,40,44,.13));
+  animation:rise 1.1s var(--easeOut) 1.3s both;
+}
+.p3heart{
+  position:absolute;width:184px;height:auto;z-index:5;
+  filter:drop-shadow(0 3px 3px rgba(30,40,44,.12)) drop-shadow(0 10px 18px rgba(30,40,44,.14));
+}
+.p3heart--1{left:22px;top:286px;rotate:-8deg;
+  animation:p3pop .9s var(--easeOut) 1.75s both}
+.p3heart--2{left:138px;top:398px;rotate:6deg;
+  animation:p3pop .9s var(--easeOut) 1.9s both}
+
 /* --- 클립 두 개 --- */
 .p3clip{position:absolute;width:40px;height:92px;color:var(--clip);z-index:6}
-.p3clip--ticket{left:688px;top:224px;rotate:8deg;
+.p3clip--ticket{left:640px;top:234px;rotate:8deg;
   animation:fadeIn .7s var(--easeOut) 1.9s both}
-.p3clip--note{left:1298px;top:100px;rotate:-4deg;
+.p3clip--note{left:1158px;top:332px;rotate:-8deg;
   animation:fadeIn .7s var(--easeOut) 2.05s both}
 
 /* --- 아래 띠 위 체크무늬 --- */
