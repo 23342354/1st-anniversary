@@ -27,6 +27,7 @@
   --outDur:  .50s;   /* 사라지는 데 걸리는 시간 */
   --hold:   2.40s;   /* 다 보인 채로 머무는 시간 (그림마다 동일) */
   --gap:     .35s;   /* 하나가 사라지고 다음이 나올 때까지의 빈 틈 (동일) */
+  --afterTyping: .6s; /* 왼쪽 글이 다 찍힌 뒤 가운데 그림이 뜨기까지의 쉼 */
 
   /* ↓ 여기부터는 자동 계산 — 손대지 않아도 됩니다 ↓
      두상 등장 → 머무름 → 퇴장 → 빈 틈 → 왼쪽 전신 → … → 가운데 전신 */
@@ -233,10 +234,20 @@ body{
     figIn  var(--inDur)  var(--easeOut) var(--din)  both,
     figOut var(--outDur) var(--easeIn)  var(--dout) forwards;
 }
-.is-playing .fig--center{
+/* 가운데 그림은 공통 등장 규칙(.is-playing .fig)에서 빼둡니다.
+   안 빼면 옛 시각(--centerIn)에 먼저 떠버립니다. */
+.is-playing .fig--center{animation:none}
+
+/* 가운데 그림은 시각을 미리 정해두지 않고, 왼쪽 글이 실제로 다 찍히면
+   붙는 typing-done 신호를 받아서 등장합니다. 글이 길어져도 순서가 안 뒤집힙니다. */
+.is-playing.typing-done .fig--center{
   animation:
-    figIn var(--inDur) var(--easeOut) var(--centerIn) both,
-    drift 7s ease-in-out calc(var(--centerIn) + var(--inDur)) infinite;
+    figIn var(--inDur) var(--easeOut) var(--afterTyping) both,
+    drift 7s ease-in-out calc(var(--afterTyping) + var(--inDur)) infinite;
+}
+.is-playing .fig--center::after{animation:none}
+.is-playing.typing-done .fig--center::after{
+  animation:sweep var(--inDur) linear var(--afterTyping) both;
 }
 
 /* =========================================================
@@ -364,7 +375,7 @@ body{
 @media (prefers-reduced-motion: reduce){
   .is-playing .band--top,
   .is-playing .band--bottom,.is-playing .anim,.is-playing .fig,
-  .is-playing .fig--center{animation:none}
+  .is-playing .fig--center,.is-playing.typing-done .fig--center{animation:none}
   .band{transform:none}
   .anim{opacity:1}
   .fig--center{opacity:1}

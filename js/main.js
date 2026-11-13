@@ -112,6 +112,11 @@
     return steps;
   }
 
+  /* css 에 적힌 시간값 읽기 (".6s" → 0.6) */
+  function cssTime(name) {
+    return parseFloat(getComputedStyle(document.documentElement).getPropertyValue(name)) || 0;
+  }
+
   /* 한 줄 전체를 "화면에 보일 문자열" 단계 목록으로 */
   function lineSteps(txt) {
     var out = [], done = '';
@@ -149,12 +154,12 @@
     });
   }
 
-  function typeBlock(box, startSec) {
+  function typeBlock(box, startSec, onDone) {
     if (!box) return;
     var lines = buildLines(box);
     var i = 0;
     function nextLine() {
-      if (i >= lines.length) return;
+      if (i >= lines.length) { if (onDone) onDone(); return; }
       var L = lines[i++];
       L.p.style.visibility = 'visible';
       if (!L.span) { typeTimers.push(setTimeout(nextLine, LINE_GAP)); return; }   /* 빈 줄은 건너뜀 */
@@ -181,23 +186,28 @@
     });
   }
 
+  /* 왼쪽 글이 다 찍힌 순간 — 여기서부터 가운데 그림이 등장합니다 */
+  function typingDone() {
+    document.body.classList.add('typing-done');
+    armEnter();
+  }
+
   function startTyping() {
     typeTimers.forEach(function (id) { clearTimeout(id); clearInterval(id); });
     typeTimers = [];
     var right = document.getElementById('typeRight');
     var left  = document.getElementById('typeLeft');
-    if (reduced) { showAtOnce(right); showAtOnce(left); return; }
+    if (reduced) { showAtOnce(right); showAtOnce(left); typingDone(); return; }
     typeBlock(right, delayOf('.fig--head'));
-    typeBlock(left,  delayOf('.fig--left'));
+    typeBlock(left,  delayOf('.fig--left'), typingDone);   /* 다 찍히면 가운데 그림 차례 */
   }
 
   /* ---------- 5. 애니메이션 재생 ---------- */
   function play() {
-    document.body.classList.remove('is-playing', 'is-outro', 'is-leaving', 'can-enter');
+    document.body.classList.remove('is-playing', 'is-outro', 'is-leaving', 'can-enter', 'typing-done');
     void stage.offsetWidth;                        // 강제 리플로우 → 처음부터 다시
     document.body.classList.add('is-playing');
-    armEnter();
-    startTyping();
+    startTyping();                                 // 다 찍히면 typingDone() 이 이어받습니다
   }
 
   /* ---------- 실행 ---------- */
@@ -258,15 +268,12 @@
 
   /* 가운데 그림이 완전히 나타난 뒤에야 누를 수 있게 합니다.
      등장 시각은 css 에서 계산되므로 실제 값을 읽어옵니다. */
+  /* 가운데 그림이 다 나타난 뒤에야 누를 수 있게 합니다.
+     타이핑이 끝난 시점부터 재므로 글 길이와 무관하게 정확합니다. */
   function armEnter() {
-    var el = document.getElementById('figCenter');
-    if (!el) return;
-    var cs    = getComputedStyle(el);
-    var delay = parseFloat(cs.animationDelay)    || 0;
-    var dur   = parseFloat(cs.animationDuration) || 0;
     setTimeout(function () {
       document.body.classList.add('can-enter');
-    }, (delay + dur) * 1000);
+    }, (cssTime('--afterTyping') + cssTime('--inDur')) * 1000);
   }
 
   var figCenter = document.getElementById('figCenter');
