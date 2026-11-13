@@ -152,10 +152,10 @@ body{
 
 .vtext{
   position:absolute;z-index:7;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.5em;text-transform:uppercase;
-  writing-mode:vertical-rl;white-space:nowrap;
+  font-family:var(--mono);font-size:11px;letter-spacing:.4em;text-transform:uppercase;
+  white-space:nowrap;transform-origin:0 0;rotate:90deg;
 }
-.vtext--left{left:33.1%;top:24%}
+.vtext--left{left:33.9%;top:24%}
 
 .bignum{
   position:absolute;left:1.2%;top:3.4%;z-index:6;
@@ -299,9 +299,13 @@ body{
   font-family:var(--mono);font-size:15px;letter-spacing:.08em;
 }
 .p2side__names{
-  position:absolute;left:14%;top:18%;
-  writing-mode:vertical-rl;white-space:pre-line;line-height:2.3;
-  color:var(--paper);font-family:var(--mono);font-size:11.5px;letter-spacing:.34em;
+  /* 세로쓰기 모드 대신 '가로로 짠 글줄을 통째로 90도 회전'.
+     세로쓰기는 글자를 하나씩 세로축에 배치해서, 화면이 소수점 배율로
+     축소될 때 글자마다 반올림이 달라져 좌우로 흔들립니다. */
+  position:absolute;left:33%;top:18%;
+  transform-origin:0 0;rotate:90deg;
+  white-space:pre-line;line-height:2.1;
+  color:var(--paper);font-family:var(--mono);font-size:12px;letter-spacing:.28em;
 }
 .p2side__note{
   position:absolute;left:14%;bottom:7%;white-space:pre-line;line-height:1.95;
