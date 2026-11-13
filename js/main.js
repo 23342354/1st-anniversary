@@ -43,10 +43,11 @@
 
   /* ---------- 3. 화면 크기에 맞춰 캔버스 축소 ---------- */
   function fit() {
-    var w = window.innerWidth;
-    var h = window.innerHeight;
+    var w = window.innerWidth  || document.documentElement.clientWidth  || STAGE_W;
+    var h = window.innerHeight || document.documentElement.clientHeight || STAGE_H;
     var scale = Math.min(w / STAGE_W, h / STAGE_H);
     if (h > w) scale = w / STAGE_W;               // 세로 화면이면 가로 기준
+    if (!isFinite(scale) || scale <= 0) scale = 1;
     stage.style.setProperty('--scale', scale);
   }
 
