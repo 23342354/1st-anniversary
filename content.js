@@ -59,7 +59,7 @@ const CONTENT = {
      \n 을 넣으면 그 자리에서 줄이 바뀝니다 */
 
   p2Badge:   "1115",                              // 왼쪽 띠 맨 위 타원 안 숫자
-  p2Names:   "MAG\nWUTHERING HEIGHTS",            // 왼쪽 띠에 세로로 서는 이름들
+  p2Names:   "MAG BO & Oz Nouvel\nWUTHERING HEIGHTS",   // 왼쪽 띠에 세로로 서는 이름들
   p2Note:    "One year\nwith …",                  // 왼쪽 띠 아래쪽 작은 글자
   p2Label:   "WUTHERING HEIGHTS",                 // 왼쪽 아래 작은 제목
   p2Number:  "2",                                 // 왼쪽 아래 큰 숫자
