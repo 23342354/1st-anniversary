@@ -322,8 +322,10 @@ body{
 }
 
 /* ---- 오른쪽 ---- */
+/* 제목 + 아래 한 줄 묶음 : 간격은 .p2cap 의 margin-top 하나로 정해집니다 */
+.p2head{position:absolute;left:22%;top:7%;z-index:5}
 .p2title{
-  position:absolute;left:22%;top:7%;z-index:5;white-space:pre-line;
+  white-space:pre-line;
   font-family:'Holtwood One SC',var(--jp);font-weight:400;font-size:104px;line-height:1.02;
   letter-spacing:-.015em;color:var(--ink);
 }
@@ -333,7 +335,7 @@ body{
   color:var(--blue-deep);rotate:-7deg;
 }
 .p2cap{
-  position:absolute;left:22.3%;top:39%;z-index:5;
+  margin-top:30px;
   font-size:16px;font-weight:500;word-break:keep-all;white-space:pre-line;
 }
 .p2cap span{

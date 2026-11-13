@@ -29,9 +29,13 @@
     <span class="p2num"  data-txt="p2Number"></span>
 
     <!-- ============ 오른쪽 ============ -->
-    <h1   class="p2title"  data-txt="p2Title"  data-fit="820"></h1>
+    <!-- 제목과 그 아래 한 줄을 한 묶음으로 둬서, 글자 크기가 바뀌어도
+         둘 사이 간격이 항상 같게 유지됩니다 -->
+    <div class="p2head">
+      <h1 class="p2title" data-txt="p2Title" data-fit="820"></h1>
+      <p  class="p2cap"><span data-txt="p2Caption"></span></p>
+    </div>
     <span class="p2script" data-txt="p2Script" data-fit="560"></span>
-    <p    class="p2cap"><span data-txt="p2Caption"></span></p>
 
     <img class="p2art" src="images/p2-figures.webp" alt="">
 
