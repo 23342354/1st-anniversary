@@ -35,7 +35,27 @@
       <h1 class="p2title" data-txt="p2Title" data-fit="820"></h1>
       <p  class="p2cap"><span data-txt="p2Caption"></span></p>
     </div>
-    <span class="p2script" data-txt="p2Script" data-fit="560"></span>
+    <!-- 손글씨 : 글자를 선으로 그려 획 순서대로 그어지게 합니다.
+         문구를 바꾸려면 선을 다시 그려야 합니다. -->
+    <span class="p2script" id="p2script">
+      <svg class="p2script__svg" viewBox="0 0 700 250" fill="none" aria-hidden="true"
+           xmlns="http://www.w3.org/2000/svg">
+        <!-- 획 순서대로 그어집니다. 순서를 바꾸려면 path 순서를 바꾸세요. -->
+        <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" fill="none">
+          <path d="M92 104 C70 87 39 97 33 123 C27 152 48 174 72 171 C97 168 107 142 98 120" stroke-width="14"/>
+          <path d="M123 99 C118 123 119 150 121 173" stroke-width="13"/>
+          <path d="M122 120 C135 99 163 93 175 112 C183 125 180 148 178 172" stroke-width="14"/>
+          <path d="M199 138 C217 134 241 132 253 130 C259 115 246 99 228 102 C207 105 196 127 200 147 C205 166 227 175 250 164" stroke-width="13.5"/>
+          <path d="M323 100 C329 123 339 148 350 166" stroke-width="14"/>
+          <path d="M386 97 C377 126 365 159 353 188 C342 212 327 222 310 217" stroke-width="14"/>
+          <path d="M414 142 C432 138 456 136 468 134 C474 119 461 103 443 106 C422 109 411 131 415 151 C420 170 442 179 465 168" stroke-width="13.5"/>
+          <path d="M557 110 C541 95 512 100 502 123 C492 147 505 171 527 170 C546 169 558 154 560 136" stroke-width="14"/>
+          <path d="M561 101 C563 127 560 150 563 172" stroke-width="13"/>
+          <path d="M593 172 C591 149 591 127 594 105" stroke-width="13"/>
+          <path d="M593 121 C604 104 625 97 639 106" stroke-width="13.5"/>
+        </g>
+      </svg>
+    </span>
 
     <!-- ============ 글 ============
          문단을 고치려면 아래 <p> … </p> 안쪽만 손보세요.

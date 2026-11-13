@@ -362,10 +362,13 @@ body{
   letter-spacing:-.015em;color:var(--ink);
 }
 .p2script{
-  position:absolute;left:31%;top:7%;z-index:6;pointer-events:none;
-  font-family:'Rock Salt',cursive;font-size:138px;line-height:1;white-space:nowrap;
-  color:var(--blue-deep);rotate:-7deg;
+  position:absolute;left:30.5%;top:6.5%;width:34%;z-index:6;pointer-events:none;
+  color:var(--blue-deep);rotate:-7deg;display:block;
 }
+.p2script__svg{width:100%;height:auto;display:block;overflow:visible}
+/* 그려지기 전에는 선이 숨어 있도록 (js 가 실제 길이로 다시 잡습니다) */
+.p2script__svg path{stroke-dasharray:4000;stroke-dashoffset:4000}
+@keyframes drawStroke{to{stroke-dashoffset:0}}
 .p2cap{
   margin-top:30px;
   font-size:16px;font-weight:500;word-break:keep-all;white-space:pre-line;
@@ -410,7 +413,6 @@ body{
 .is-playing .p2side__note  {animation:rise          .70s var(--easeOut) 1.30s both}
 .is-playing .p2art         {animation:returnFromRight .90s var(--easeOut) 1.30s both}
 /* 손글씨는 왼쪽부터 천천히 그어지듯 */
-.is-playing .p2script      {animation:wipeFromLeft 1.10s var(--easeOut) 1.60s both}
 .is-playing .p2cap         {animation:rise          .70s var(--easeOut) 2.00s both}
 .is-playing .p2letter      {animation:rise          .80s var(--easeOut) 2.25s both}
 .is-playing .p2mark        {animation:rise          .70s var(--easeOut) 2.35s both}
@@ -426,9 +428,10 @@ body{
   .fig--center{opacity:1}
   .fig--head,.fig--left{display:none}
   .marquee__inner{animation:none}
+  .p2script__svg path{stroke-dashoffset:0}
   .is-playing .p2side,.is-playing .p2title,.is-playing .p2side__badge,
   .is-playing .p2side__names,.is-playing .p2side__note,.is-playing .p2art,
-  .is-playing .p2script,.is-playing .p2cap,.is-playing .p2letter,
+  .is-playing .p2cap,.is-playing .p2letter,
   .is-playing .p2mark,.is-playing .p2heading{animation:none}
   .can-enter .enter-hint{animation:none;opacity:1;pointer-events:auto}
   .is-outro .fig--head,.is-outro .fig--left{animation:none;opacity:1;display:block}

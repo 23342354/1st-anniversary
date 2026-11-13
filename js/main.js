@@ -236,8 +236,31 @@
     });
   }
 
-  /* 두 번째 페이지는 캔버스 크기 맞추고 글자 크기만 손보면 끝 */
+  /* ---------- 손글씨를 획 순서대로 그리기 ----------
+     각 선의 실제 길이를 재서, 긴 획은 오래 짧은 획은 짧게 그립니다.
+     그래야 속도가 일정해 보여 사람이 쓰는 것처럼 읽힙니다. */
+  function drawScript() {
+    var svg = document.querySelector('.p2script__svg');
+    if (!svg) return;
+    var SPEED = 1100;   /* 초당 그려지는 길이(px) — 키우면 빨라짐 */
+    var LIFT  = 0.06;   /* 획과 획 사이 펜을 떼는 시간(초) */
+    var START = 1.55;   /* 쓰기 시작하는 시각(초) */
+    var at = START;
+    [].forEach.call(svg.querySelectorAll('path'), function (p) {
+      var len = p.getTotalLength();
+      var dur = len / SPEED;
+      p.style.strokeDasharray  = len + ' ' + len;
+      p.style.strokeDashoffset = len;
+      if (reduced) { p.style.strokeDashoffset = 0; return; }
+      p.style.animation = 'drawStroke ' + dur.toFixed(2) + 's linear ' + at.toFixed(2) + 's forwards';
+      at += dur + LIFT;
+    });
+    return at;
+  }
+
+  /* 두 번째 페이지는 캔버스 크기 맞추고 글자 크기·손글씨만 손보면 끝 */
   if (document.body.classList.contains('page-two')) {
+    drawScript();
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(fitWidth);
       setTimeout(fitWidth, 1500);        // 서체가 늦으면 한 번 더

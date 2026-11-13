@@ -65,7 +65,6 @@ const CONTENT = {
   p2Heading: "이토록\n가까운 곳에서",               // 왼쪽 아래 제목 (\n 으로 줄 나눔)
 
   p2Title:   "HAPPY\nANNIVERSARY",                // 오른쪽 큰 제목
-  p2Script:  "one year",                          // 제목 위를 가로지르는 손글씨
   p2Caption: "폭풍 속에 새긴 첫 번째 영원",            // 제목 아래 한 줄
   p2Credit:  "illust. @PPPOOOTTTEEEE",             // 그림 그려준 분
 
