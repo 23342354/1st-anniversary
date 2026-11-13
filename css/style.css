@@ -340,7 +340,8 @@ body{
   background:var(--blue);padding:4px 9px;line-height:1.95;
   box-decoration-break:clone;-webkit-box-decoration-break:clone;
 }
-.p2art{position:absolute;left:71%;bottom:30px;height:90%;width:auto;z-index:2;display:block}
+/* 위·아래 띠 높이가 같으므로 캔버스 한가운데가 곧 두 띠 사이의 한가운데 */
+.p2art{position:absolute;left:71%;top:50%;translate:0 -50%;height:90%;width:auto;z-index:2;display:block}
 
 /* 움직임을 줄이는 설정을 켠 사용자 → 최종 화면만 */
 @media (prefers-reduced-motion: reduce){
