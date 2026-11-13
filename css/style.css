@@ -241,6 +241,61 @@ body{
     drift 7s ease-in-out calc(var(--centerIn) + var(--inDur)) infinite;
 }
 
+/* =========================================================
+   가운데 그림 클릭 → 1·2번 그림이 다시 나왔다가 다음 페이지로
+   ========================================================= */
+
+/* 가운데 그림이 다 나타난 뒤에만 눌리게 됩니다 */
+.can-enter .fig--center{pointer-events:auto;cursor:pointer}
+
+.enter-hint{
+  position:absolute;left:58.5%;top:67%;z-index:9;
+  font-family:var(--mono);font-size:12px;letter-spacing:.26em;
+  color:var(--ink);background:var(--blue);border:0;
+  padding:7px 14px;cursor:pointer;opacity:0;pointer-events:none;
+}
+.can-enter .enter-hint{
+  pointer-events:auto;
+  animation:rise .7s var(--easeOut) both, blink 2.6s ease-in-out .7s infinite;
+}
+.enter-hint:hover{background:var(--ink);color:var(--paper)}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* 되돌아온 1·2번 그림 */
+.is-outro .fig--head{animation:figIn .55s var(--easeOut) 0s   both}
+.is-outro .fig--left{animation:figIn .55s var(--easeOut) .15s both}
+.is-outro .fig--center{animation:none;opacity:1}
+.is-outro .enter-hint{animation:none;opacity:0;transition:opacity .25s}
+
+/* 위·아래 띠가 커튼처럼 닫히며 다음 페이지로 */
+.curtain{position:fixed;left:0;right:0;height:0;z-index:80;pointer-events:none}
+.curtain--top{top:0;background:var(--blue)}
+.curtain--bottom{bottom:0;background:var(--sage)}
+.is-leaving .curtain{animation:curtainIn .55s var(--easeIn) both}
+@keyframes curtainIn{from{height:0}to{height:51vh}}
+
+/* 다음 페이지에서 커튼이 열립니다 */
+.curtains-open .curtain{animation:curtainOut .6s var(--easeOut) .05s both}
+@keyframes curtainOut{from{height:51vh}to{height:0}}
+
+/* =========================================================
+   두 번째 페이지 (page2.html) — 지금은 틀만 있는 상태
+   ========================================================= */
+.p2{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:22px;
+  padding:90px 24px;text-align:center;
+}
+.p2__title{font-family:var(--jp);font-weight:200;font-size:clamp(34px,6vw,76px);letter-spacing:.16em}
+.p2__text{font-size:15px;letter-spacing:.01em}
+.p2__text span{background:var(--sage);padding:5px 10px}
+.p2__back{
+  margin-top:14px;font-family:var(--mono);font-size:11px;letter-spacing:.24em;
+  color:var(--ink);text-decoration:none;border:1.5px solid var(--ink);padding:8px 16px;
+}
+.p2__back:hover{background:var(--ink);color:var(--paper)}
+.p2 .band{position:fixed}
+
 /* 움직임을 줄이는 설정을 켠 사용자 → 최종 화면만 */
 @media (prefers-reduced-motion: reduce){
   .is-playing .rule--v,.is-playing .rule--h,.is-playing .band--top,
@@ -252,4 +307,7 @@ body{
   .fig--center{opacity:1}
   .fig--head,.fig--left{display:none}
   .marquee__inner{animation:none}
+  .can-enter .enter-hint{animation:none;opacity:1;pointer-events:auto}
+  .is-outro .fig--head,.is-outro .fig--left{animation:none;opacity:1;display:block}
+  .is-leaving .curtain{animation:none;height:51vh}
 }

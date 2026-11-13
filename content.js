@@ -45,5 +45,13 @@ const CONTENT = {
   marquee: "WUTHERING HEIGHTS ✦ 1ST ANNIVERSARY ✦ ",
 
   /* --- 맨 아래 왼쪽 작은 글자 --- */
-  credit: "WUTHERING HEIGHTS"
+  credit: "WUTHERING HEIGHTS",
+
+  /* --- 가운데 그림을 누르라고 알려주는 버튼 --- */
+  enterLabel: "ENTER ▸",
+
+  /* --- 두 번째 페이지 (page2.html) --- */
+  page2Title: "COMING SOON",
+  page2Text:  "두 번째 페이지는 준비 중입니다",
+  backLabel:  "◂ BACK"
 };

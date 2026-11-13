@@ -10,6 +10,13 @@
 
   var stage = document.getElementById('stage');
 
+  /* 다음 페이지로 넘어갈 때 열 파일 이름 (page2.html 을 바꾸고 싶으면 여기) */
+  var NEXT_PAGE = 'page2.html';
+  /* 1·2번 그림이 다시 보이는 시간(ms). 2000~3000 사이가 적당합니다. */
+  var OUTRO_HOLD = 2200;
+  /* 커튼이 닫히는 시간(ms) — css 의 curtainIn 과 맞춰 두세요 */
+  var CURTAIN = 550;
+
   /* ---------- 1. content.js 의 글자를 화면에 꽂기 ---------- */
   function fillText() {
     if (typeof CONTENT === 'undefined') return;
@@ -72,13 +79,18 @@
 
   /* ---------- 4. 애니메이션 재생 ---------- */
   function play() {
-    document.body.classList.remove('is-playing');
+    document.body.classList.remove('is-playing', 'is-outro', 'is-leaving', 'can-enter');
     void stage.offsetWidth;                        // 강제 리플로우 → 처음부터 다시
     document.body.classList.add('is-playing');
+    armEnter();
   }
 
   /* ---------- 실행 ---------- */
   fillText();
+
+  /* 캔버스가 없는 페이지(page2.html)는 글자만 채우고 끝 */
+  if (!stage) return;
+
   swapImages();
   fit();
   window.addEventListener('resize', fit);
@@ -86,6 +98,42 @@
 
   var replay = document.getElementById('replay');
   if (replay) replay.addEventListener('click', play);
+
+  /* ---------- 5. 가운데 그림 클릭 → 1·2번 복귀 → 다음 페이지 ---------- */
+  var reduced = window.matchMedia &&
+                window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function enter() {
+    if (document.body.classList.contains('is-outro')) return;   // 두 번 눌러도 한 번만
+    document.body.classList.remove('can-enter');
+    document.body.classList.add('is-outro');
+
+    var hold = reduced ? 500 : OUTRO_HOLD;
+    setTimeout(function () { document.body.classList.add('is-leaving'); }, hold);
+    setTimeout(function () { window.location.href = NEXT_PAGE; }, hold + CURTAIN + 60);
+  }
+
+  /* 가운데 그림이 완전히 나타난 뒤에야 누를 수 있게 합니다.
+     등장 시각은 css 에서 계산되므로 실제 값을 읽어옵니다. */
+  function armEnter() {
+    var el = document.getElementById('figCenter');
+    if (!el) return;
+    var cs    = getComputedStyle(el);
+    var delay = parseFloat(cs.animationDelay)    || 0;
+    var dur   = parseFloat(cs.animationDuration) || 0;
+    setTimeout(function () {
+      document.body.classList.add('can-enter');
+    }, (delay + dur) * 1000);
+  }
+
+  var figCenter = document.getElementById('figCenter');
+  var enterBtn  = document.getElementById('enter');
+  if (figCenter) figCenter.addEventListener('click', enter);
+  if (enterBtn)  enterBtn.addEventListener('click', enter);
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') &&
+        document.body.classList.contains('can-enter')) { e.preventDefault(); enter(); }
+  });
 
   if (document.fonts && document.fonts.ready) {
     document.fonts.ready.then(function () { requestAnimationFrame(play); });
