@@ -116,7 +116,7 @@ body{
   background:var(--sage);padding:3px 8px;white-space:nowrap;
 }
 
-.fig--head  {left:66%;   top:3%;   height:92%; --din:var(--headIn);   --dout:var(--headOut)}
+.fig--head  {left:66%;   top:3%;   height:94.5%; --din:var(--headIn);   --dout:var(--headOut)}
 .fig--left  {color:var(--sage-deep); left:-1.5%; top:3%;   height:58%;  rotate:-19deg; --din:var(--leftIn); --dout:var(--leftOut)}
 .fig--center{left:35%;   top:2%;   height:100%; --din:var(--centerIn)}
 
