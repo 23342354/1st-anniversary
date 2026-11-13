@@ -12,9 +12,9 @@
   --kr:'Noto Sans KR', 'Noto Sans JP', system-ui, sans-serif;
 
   /* ---- 애니메이션 타이밍 (초) : 여기 숫자만 바꾸면 속도가 바뀝니다 ---- */
-  --headIn:    .85s;   --headOut:  2.40s;
-  --leftIn:   2.95s;   --leftOut:  4.35s;
-  --centerIn: 4.90s;
+  --headIn:    .85s;   --headOut:  4s;
+  --leftIn:   4.5s;   --leftOut:  7.35s;
+  --centerIn: 8.90s;
 
   --inDur:.65s; --outDur:.50s;
   --easeOut:cubic-bezier(.16,.84,.26,1);
