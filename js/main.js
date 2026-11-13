@@ -81,9 +81,48 @@
      각 글 덩어리는 짝이 되는 그림이 나타나는 순간 찍히기 시작하고,
      다 찍힌 뒤에는 그대로 남습니다. (그림이 사라져도 글은 유지)
      시작 시각은 css 가 계산한 그림의 등장 시각을 그대로 읽어옵니다. */
-  var CPS = 38;            /* 초당 글자 수 — 키우면 빨라집니다 */
-  var LINE_GAP = 200;      /* 줄과 줄 사이 쉬는 시간(ms) */
+  var JAMO_MS  = 20;       /* 자음·모음 한 조각이 찍히는 간격(ms) — 작을수록 빠름 */
+  var CHAR_MS  = 38;       /* 글자 하나가 완성되고 다음 글자로 넘어가는 간격(ms) */
+  var LINE_GAP = 150;      /* 줄과 줄 사이 쉬는 시간(ms) */
   var typeTimers = [];
+
+  /* ----- 한글을 실제 입력기처럼 조립하기 -----
+     "우" → ㅇ → 우 / "한" → ㅎ → 하 → 한 / "값" → ㄱ → 가 → 갑 → 값 */
+  var CHO = ['ㄱ','ㄲ','ㄴ','ㄷ','ㄸ','ㄹ','ㅁ','ㅂ','ㅃ','ㅅ',
+             'ㅆ','ㅇ','ㅈ','ㅉ','ㅊ','ㅋ','ㅌ','ㅍ','ㅎ'];
+  var JUNG_PARTS = {9:8,10:8,11:8,14:13,15:13,16:13,19:18};          /* 겹모음 → 먼저 찍히는 쪽 */
+  var JONG_PARTS = {3:1,5:4,6:4,9:8,10:8,11:8,12:8,13:8,14:8,15:8,18:17}; /* 겹받침 → 먼저 찍히는 쪽 */
+
+  function syllableSteps(ch) {
+    var code = ch.charCodeAt(0) - 0xAC00;
+    if (code < 0 || code > 11171) return [ch];                       /* 한글이 아니면 한 번에 */
+    var cho  = Math.floor(code / 588),
+        jung = Math.floor((code % 588) / 28),
+        jong = code % 28,
+        base = 0xAC00 + cho * 588,
+        steps = [CHO[cho]];                                          /* 첫 자음만 */
+    if (JUNG_PARTS[jung] !== undefined)
+      steps.push(String.fromCharCode(base + JUNG_PARTS[jung] * 28));
+    steps.push(String.fromCharCode(base + jung * 28));                /* 모음까지 */
+    if (jong) {
+      if (JONG_PARTS[jong] !== undefined)
+        steps.push(String.fromCharCode(base + jung * 28 + JONG_PARTS[jong]));
+      steps.push(ch);                                                 /* 받침까지 */
+    }
+    return steps;
+  }
+
+  /* 한 줄 전체를 "화면에 보일 문자열" 단계 목록으로 */
+  function lineSteps(txt) {
+    var out = [], done = '';
+    for (var i = 0; i < txt.length; i++) {
+      var st = syllableSteps(txt[i]);
+      for (var k = 0; k < st.length; k++)
+        out.push({ text: done + st[k], last: k === st.length - 1 });
+      done += txt[i];
+    }
+    return out;
+  }
 
   function delayOf(sel) {
     var el = document.querySelector(sel);
@@ -116,18 +155,20 @@
     var i = 0;
     function nextLine() {
       if (i >= lines.length) return;
-      var L = lines[i++], k = 0;
+      var L = lines[i++];
       L.p.style.visibility = 'visible';
       if (!L.span) { typeTimers.push(setTimeout(nextLine, LINE_GAP)); return; }   /* 빈 줄은 건너뜀 */
-      var tick = setInterval(function () {
-        k++;
-        L.span.textContent = L.full.slice(0, k) + (k < L.full.length ? '|' : '');
-        if (k >= L.full.length) {
-          clearInterval(tick);
+      var steps = lineSteps(L.full), k = 0;
+      (function step() {
+        if (k >= steps.length) {                       /* 줄 끝 → 커서 떼고 다음 줄 */
+          L.span.textContent = L.full;
           typeTimers.push(setTimeout(nextLine, LINE_GAP));
+          return;
         }
-      }, 1000 / CPS);
-      typeTimers.push(tick);
+        var s = steps[k++];
+        L.span.textContent = s.text + '|';
+        typeTimers.push(setTimeout(step, s.last ? CHAR_MS : JAMO_MS));
+      })();
     }
     typeTimers.push(setTimeout(nextLine, startSec * 1000));
   }
