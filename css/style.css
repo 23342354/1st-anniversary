@@ -373,6 +373,22 @@ body{
   background:var(--blue);padding:4px 9px;line-height:1.95;
   box-decoration-break:clone;-webkit-box-decoration-break:clone;
 }
+/* ---- 본문 글 (칸보다 길면 스크롤) ---- */
+.p2letter{
+  position:absolute;left:22%;top:44%;width:48%;bottom:8.5%;z-index:5;
+  overflow-y:auto;padding-right:20px;
+  font-size:13.5px;line-height:2;word-break:keep-all;color:var(--ink);
+  /* 아래쪽을 살짝 흐리게 해서 "더 있다"는 걸 알립니다 */
+  -webkit-mask-image:linear-gradient(180deg,#000 0,#000 88%,transparent 100%);
+          mask-image:linear-gradient(180deg,#000 0,#000 88%,transparent 100%);
+  scrollbar-width:thin;scrollbar-color:var(--sage) transparent;
+}
+.p2letter p{margin-bottom:1.15em}
+.p2letter p:last-child{margin-bottom:0}
+.p2letter::-webkit-scrollbar{width:4px}
+.p2letter::-webkit-scrollbar-track{background:transparent}
+.p2letter::-webkit-scrollbar-thumb{background:var(--sage)}
+
 /* 위·아래 띠 높이가 같으므로 캔버스 한가운데가 곧 두 띠 사이의 한가운데 */
 .p2art{position:absolute;left:71%;top:50%;translate:0 -50%;height:90%;width:auto;z-index:2;display:block}
 
