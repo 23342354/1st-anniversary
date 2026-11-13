@@ -94,8 +94,8 @@ const CONTENT = {
   p3NoteFoot:  "@5minutejamms",
 
   p3StampRing: "WUTHERING HEIGHTS · FIRST ANNIVERSARY · ",  // 도장 둘레 글자
-  p3StampTop:  "20",                  // 도장 안 위아래 숫자
-  p3StampBot:  "25",
+  p3StampTop:  "11",                  // 도장 안 위아래 숫자
+  p3StampBot:  "15",
   p3Ribbon:    "느리게, 그러나 오래",      // 도장 아래 리본
 
   backLabel: "◂ BACK"
