@@ -142,7 +142,7 @@ body{
 }
 .wordmark__rule{display:block;margin-top:9px;width:72%;height:1.5px;background:var(--ink)}
 
-.cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em;word-break:keep-all}
+.cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em;word-break:keep-all;white-space:pre-line}
 .cap span{background:var(--blue);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
 .cap--1{left:19.8%;top:43%;width:16%}
 .cap--2 span{background:var(--sage)}
@@ -163,7 +163,7 @@ body{
 }
 
 .lead{position:absolute;left:66%;top:71%;z-index:7;width:24%}
-.lead__main{font-size:19px;font-weight:700;letter-spacing:-.01em;word-break:keep-all}
+.lead__main{font-size:19px;font-weight:700;letter-spacing:-.01em;word-break:keep-all;white-space:pre-line}
 .lead__main span{background:var(--sage);padding:4px 9px;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:1.85}
 .lead__sub{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.22em}
 
@@ -230,7 +230,7 @@ body{
 /* 영화 자막처럼 화면 아래 가운데에 뜨는 대사 */
 .subtitle{
   position:absolute;left:0;right:0;top:91.3%;z-index:9;
-  text-align:center;font-size:21px;font-weight:500;letter-spacing:.005em;word-break:keep-all;
+  text-align:center;font-size:21px;font-weight:500;letter-spacing:.005em;word-break:keep-all;white-space:pre-line;
   color:var(--ink);opacity:0;pointer-events:none;
   text-shadow:0 0 8px var(--paper), 0 0 5px var(--paper),
               0 0 3px var(--paper), 0 0 2px var(--paper);
