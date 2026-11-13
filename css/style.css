@@ -393,6 +393,29 @@ body{
 /* 위·아래 띠 높이가 같으므로 캔버스 한가운데가 곧 두 띠 사이의 한가운데 */
 .p2art{position:absolute;left:71%;top:50%;translate:0 -50%;height:90%;width:auto;z-index:2;display:block}
 
+/* =========================================================
+   2페이지 등장 애니메이션
+   커튼이 열리는 0.65초 뒤부터 요소들이 차례로 들어옵니다.
+   순서를 바꾸려면 각 줄 끝의 시작 시각(초)만 고치면 됩니다.
+   ========================================================= */
+@keyframes slideFromLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+@keyframes wipeFromLeft{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.is-playing .p2side        {animation:slideFromLeft .75s var(--easeOut) .50s both}
+.is-playing .p2title       {animation:wipeFromLeft  .85s var(--easeOut) .85s both}
+.is-playing .p2side__badge {animation:rise          .70s var(--easeOut) 1.10s both}
+/* 세로 글자는 회전해 둔 상태라 자리를 건드리지 않는 흐려짐으로만 */
+.is-playing .p2side__names {animation:fadeIn        .70s var(--easeOut) 1.20s both}
+.is-playing .p2side__note  {animation:rise          .70s var(--easeOut) 1.30s both}
+.is-playing .p2art         {animation:returnFromRight .90s var(--easeOut) 1.30s both}
+/* 손글씨는 왼쪽부터 천천히 그어지듯 */
+.is-playing .p2script      {animation:wipeFromLeft 1.10s var(--easeOut) 1.60s both}
+.is-playing .p2cap         {animation:rise          .70s var(--easeOut) 2.00s both}
+.is-playing .p2letter      {animation:rise          .80s var(--easeOut) 2.25s both}
+.is-playing .p2mark        {animation:rise          .70s var(--easeOut) 2.35s both}
+.is-playing .p2heading     {animation:rise          .70s var(--easeOut) 2.45s both}
+
 /* 움직임을 줄이는 설정을 켠 사용자 → 최종 화면만 */
 @media (prefers-reduced-motion: reduce){
   .is-playing .band--top,
@@ -403,6 +426,10 @@ body{
   .fig--center{opacity:1}
   .fig--head,.fig--left{display:none}
   .marquee__inner{animation:none}
+  .is-playing .p2side,.is-playing .p2title,.is-playing .p2side__badge,
+  .is-playing .p2side__names,.is-playing .p2side__note,.is-playing .p2art,
+  .is-playing .p2script,.is-playing .p2cap,.is-playing .p2letter,
+  .is-playing .p2mark,.is-playing .p2heading{animation:none}
   .can-enter .enter-hint{animation:none;opacity:1;pointer-events:auto}
   .is-outro .fig--head,.is-outro .fig--left{animation:none;opacity:1;display:block}
   .is-leaving .curtain{animation:none;height:51vh}
