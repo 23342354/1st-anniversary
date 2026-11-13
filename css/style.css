@@ -76,7 +76,6 @@ body{
 /* ---------- 괘선 ---------- */
 .rule{position:absolute;background:var(--ink);display:block;z-index:4}
 .rule--v{left:var(--x);top:0;width:1.5px;height:100%;transform:scaleY(0);transform-origin:top}
-.rule--v.rule--short{height:46%}
 .rule--h{top:var(--y);left:var(--x1);width:calc(var(--x2) - var(--x1));height:1.5px;transform:scaleX(0);transform-origin:left}
 
 /* ---------- 노란 띠 ---------- */
@@ -141,18 +140,6 @@ body{
 }
 .wordmark__rule{display:block;margin-top:9px;width:72%;height:1.5px;background:var(--ink)}
 
-/* 큰 글자가 있던 세 자리 — 지금은 도형만 들어가 있습니다.
-   content.js 의 bigChar1~3 에 글자를 쓰면 도형 위에 가운데로 올라갑니다. */
-.bigchar{position:absolute;z-index:6;display:grid;place-items:center;line-height:.82}
-.bigchar__glyph{
-  position:relative;display:block;
-  font-family:var(--kr);font-weight:900;font-size:140px;color:var(--ink);
-}
-.bigchar__block{display:none}
-.bigchar--1{left:19.5%;top:19.5%;width:198px;height:198px;border:3px solid var(--ink);border-radius:50%}
-.bigchar--2{left:19.5%;top:51.5%;width:198px;height:198px;background:var(--blue)}
-.bigchar--3{left:58.5%;top:20.5%;width:214px;height:214px;background:var(--sage)}
-
 .cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em}
 .cap span{background:var(--blue);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
 .cap--1{left:19.8%;top:43%;width:16%}
@@ -183,13 +170,6 @@ body{
   position:absolute;left:89.5%;top:52%;width:52px;height:92px;z-index:6;display:block;
   background:repeating-linear-gradient(90deg,var(--ink) 0 9px,transparent 9px 18px);
 }
-.dots{
-  position:absolute;z-index:6;display:block;
-  background:
-    repeating-conic-gradient(var(--ink) 0% 25%, transparent 0% 50%) 0 0/22px 22px;
-}
-.dots--a{left:20%;top:85%;width:66px;height:44px}
-.dots--b{left:57%;top:78%;width:44px;height:44px;opacity:.9}
 
 .cstage{
   position:absolute;left:39.2%;top:3.3%;width:4.4%;height:93.4%;
@@ -198,7 +178,6 @@ body{
 .is-playing .cstage{animation:rise .8s var(--easeOut) var(--centerIn) both}
 @media (prefers-reduced-motion: reduce){.is-playing .cstage{animation:none}.cstage{opacity:1}}
 
-.ybox{position:absolute;left:35.6%;top:7.5%;width:92px;height:36px;background:var(--sage);z-index:5;display:block}
 .cornermark{position:absolute;left:95%;top:4.5%;z-index:7;font-family:var(--mono);font-size:11px;letter-spacing:.2em;background:var(--paper);padding:4px 6px}
 
 /* =========================================================

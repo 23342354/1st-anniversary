@@ -18,18 +18,13 @@
 **`content.js`** 파일 하나만 열면 됩니다. 따옴표 `" "` 안쪽 글자만 고치세요.
 따옴표와 쉼표는 지우면 안 됩니다.
 
-```js
-bigChar1: "",                // ← 비워두면 도형만, 글자를 쓰면 도형 위에 올라감
-cap1:     "바람이 울부짖는",    // ← 그 아래 색 줄 설명
-```
-
 | 항목 | 화면에서 보이는 곳 |
 |---|---|
 | `pageTitle` | 브라우저 탭 제목 |
 | `topLeft` / `topRight` | 맨 위 노란 띠 좌 / 우 |
 | `wordmarkLine1` / `wordmarkLine2` | 가운데 위 큰 로고 (두 줄) |
 | `wordmarkSub` | 로고 아래 작은 글자 |
-| `bigChar1~3` / `cap1~3` | 큰 도형 세 개 안에 들어갈 글자와, 그 아래 설명 |
+| `cap1~3` | 짧은 설명 줄 세 개 (왼쪽 위 · 왼쪽 아래 · 오른쪽) |
 | `verticalLeft` / `verticalRight` | 세로로 누운 작은 글자 |
 | `cornermark` | 오른쪽 위 구석 표식 |
 | `bigNumber` | 왼쪽 아래 큰 숫자 |
@@ -98,24 +93,7 @@ figures/         선화 원본 SVG (참고용, 지워도 페이지는 돌아감)
 
 ---
 
-## 5. 도형 바꾸기 / 없애기
-
-큰 도형 세 개는 `css/style.css` 의 `.bigchar--1~3` 줄에 있습니다.
-
-```css
-.bigchar--1{ … border:3px solid var(--ink);border-radius:50%}  /* 원 테두리 */
-.bigchar--2{ … background:var(--blue)}                          /* 파란 네모 */
-.bigchar--3{ … background:var(--sage)}                          /* 세이지 네모 */
-```
-
-- 네모를 원으로 → `border-radius:50%` 추가
-- 칠한 도형을 테두리만 → `background:…` 를 `border:3px solid var(--ink)` 로
-- 크기 → `width` / `height` 숫자
-- **아예 없애기** → 그 줄의 `width`, `height`, `background`, `border` 를 지우면 사라집니다
-
----
-
-## 6. 색 바꾸기
+## 5. 색 바꾸기
 
 `css/style.css` 맨 위 `:root` 안에서 한 번에 바뀝니다.
 
