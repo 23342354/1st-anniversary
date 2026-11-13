@@ -143,12 +143,29 @@ body{
 }
 .wordmark__rule{display:block;margin-top:9px;width:72%;height:1.5px;background:var(--ink)}
 
-.cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em;word-break:keep-all;white-space:pre-line}
-.cap span{background:var(--blue);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
-.cap--1{left:19.8%;top:43%;width:16%}
-.cap--2 span{background:var(--sage)}
-.cap--2{left:20%;top:77%;width:15%}
-.cap--3{left:66%;top:62%;width:23%}
+/* =========================================================
+   타자기처럼 찍히는 글 덩어리
+   한글이 없는 줄은 자동으로 작은 고정폭 글씨 + 배경 없음 (js 가 판별)
+   ========================================================= */
+.typed{position:absolute;z-index:7;max-width:30%}
+.typed__line{
+  font-size:16px;font-weight:500;line-height:1.5;margin-bottom:8px;
+  word-break:keep-all;visibility:hidden;
+}
+.typed__line:last-child{margin-bottom:0}
+.typed__line span{
+  background:var(--blue);padding:4px 9px;line-height:1.95;
+  box-decoration-break:clone;-webkit-box-decoration-break:clone;
+}
+.typed__line--mono span{
+  background:transparent;padding:4px 0;
+  font-family:var(--mono);font-size:12px;letter-spacing:.18em;
+}
+.typed--right{left:66%;top:57%}
+.typed--left{right:69%;top:39%;text-align:right}
+.typed--left .typed__line span{background:var(--sage)}
+/* 위 줄보다 뒤에 와야 영문·숫자 줄의 배경이 실제로 빠집니다 */
+.typed .typed__line--mono span{background:transparent}
 
 .vtext{
   position:absolute;z-index:7;
@@ -163,10 +180,6 @@ body{
   letter-spacing:-.04em;
 }
 
-.lead{position:absolute;left:66%;top:71%;z-index:7;width:24%}
-.lead__main{font-size:19px;font-weight:700;letter-spacing:-.01em;word-break:keep-all;white-space:pre-line}
-.lead__main span{background:var(--sage);padding:4px 9px;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:1.85}
-.lead__sub{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.22em}
 
 .stripes{
   position:absolute;left:89.5%;top:52%;width:52px;height:92px;z-index:6;display:block;

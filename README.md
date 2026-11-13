@@ -29,12 +29,12 @@
 | `topLeft` / `topRight` | 맨 위 노란 띠 좌 / 우 |
 | `wordmarkLine1` / `wordmarkLine2` | 가운데 위 큰 로고 (두 줄) |
 | `wordmarkSub` | 로고 아래 작은 글자 |
-| `cap1~3` | 짧은 설명 줄 세 개 (왼쪽 위 · 왼쪽 아래 · 오른쪽) |
 | `verticalLeft` | 세로로 누운 작은 글자 |
 | `subtitle` | 마지막 그림과 함께 화면 아래 가운데에 뜨는 자막 대사 |
 | `cornermark` | 오른쪽 위 구석 표식 |
-| `bigNumber` | 왼쪽 아래 큰 숫자 |
-| `lead` / `sub` | 오른쪽 아래 문장과 날짜 |
+| `bigNumber` | 왼쪽 위 큰 숫자 |
+| `typeRight` | 두상이 나올 때 오른쪽에 타자기처럼 찍히는 글 |
+| `typeLeft` | 왼쪽 전신이 나올 때 왼쪽에 찍히는 글 (오른쪽 맞춤) |
 | `tagHead` / `tagLeft` | 1·2번 그림에 붙는 작은 꼬리표 |
 | `enterLabel` | 다음 페이지로 넘어가는 버튼 글자 |
 | `marquee` | 맨 아래에서 흐르는 글자 |

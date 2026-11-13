@@ -77,12 +77,80 @@
     stage.style.setProperty('--oy', ((h - designH * scale) / 2) + 'px');
   }
 
-  /* ---------- 4. 애니메이션 재생 ---------- */
+  /* ---------- 4. 타자기 효과 ----------
+     각 글 덩어리는 짝이 되는 그림이 나타나는 순간 찍히기 시작하고,
+     다 찍힌 뒤에는 그대로 남습니다. (그림이 사라져도 글은 유지)
+     시작 시각은 css 가 계산한 그림의 등장 시각을 그대로 읽어옵니다. */
+  var CPS = 38;            /* 초당 글자 수 — 키우면 빨라집니다 */
+  var LINE_GAP = 200;      /* 줄과 줄 사이 쉬는 시간(ms) */
+  var typeTimers = [];
+
+  function delayOf(sel) {
+    var el = document.querySelector(sel);
+    return el ? (parseFloat(getComputedStyle(el).animationDelay) || 0) : 0;
+  }
+
+  function buildLines(box) {
+    var src = box.getAttribute('data-src');
+    if (src === null) { src = box.textContent; box.setAttribute('data-src', src); }
+    box.innerHTML = '';
+    return src.split('\n').map(function (txt) {
+      var p = document.createElement('p');
+      /* 한글이 없는 줄(영문·숫자만)은 작은 고정폭 글씨로 */
+      p.className = 'typed__line' + (/[가-힣]/.test(txt) ? '' : ' typed__line--mono');
+      var s = document.createElement('span');
+      p.appendChild(s);
+      box.appendChild(p);
+      return { p: p, span: s, full: txt };
+    });
+  }
+
+  function typeBlock(box, startSec) {
+    if (!box) return;
+    var lines = buildLines(box);
+    var i = 0;
+    function nextLine() {
+      if (i >= lines.length) return;
+      var L = lines[i++], k = 0;
+      L.p.style.visibility = 'visible';
+      var tick = setInterval(function () {
+        k++;
+        L.span.textContent = L.full.slice(0, k) + (k < L.full.length ? '|' : '');
+        if (k >= L.full.length) {
+          clearInterval(tick);
+          typeTimers.push(setTimeout(nextLine, LINE_GAP));
+        }
+      }, 1000 / CPS);
+      typeTimers.push(tick);
+    }
+    typeTimers.push(setTimeout(nextLine, startSec * 1000));
+  }
+
+  function showAtOnce(box) {
+    if (!box) return;
+    buildLines(box).forEach(function (L) {
+      L.p.style.visibility = 'visible';
+      L.span.textContent = L.full;
+    });
+  }
+
+  function startTyping() {
+    typeTimers.forEach(function (id) { clearTimeout(id); clearInterval(id); });
+    typeTimers = [];
+    var right = document.getElementById('typeRight');
+    var left  = document.getElementById('typeLeft');
+    if (reduced) { showAtOnce(right); showAtOnce(left); return; }
+    typeBlock(right, delayOf('.fig--head'));
+    typeBlock(left,  delayOf('.fig--left'));
+  }
+
+  /* ---------- 5. 애니메이션 재생 ---------- */
   function play() {
     document.body.classList.remove('is-playing', 'is-outro', 'is-leaving', 'can-enter');
     void stage.offsetWidth;                        // 강제 리플로우 → 처음부터 다시
     document.body.classList.add('is-playing');
     armEnter();
+    startTyping();
   }
 
   /* ---------- 실행 ---------- */
@@ -127,7 +195,7 @@
   var replay = document.getElementById('replay');
   if (replay) replay.addEventListener('click', play);
 
-  /* ---------- 5. 가운데 그림 클릭 → 1·2번 복귀 → 다음 페이지 ---------- */
+  /* ---------- 6. 가운데 그림 클릭 → 1·2번 복귀 → 다음 페이지 ---------- */
   var reduced = window.matchMedia &&
                 window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
