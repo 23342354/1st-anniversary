@@ -250,7 +250,8 @@
 
     var SYM     = '!@#$%^&*<>/\\|=+~?;:'.split('');
     var START   = 2600;   /* 시작하는 시각(ms) */
-    var LINE_MS = 300;    /* 한 줄이 드러나는 간격(ms) — 키우면 느려집니다 */
+    var LINE_MS = 400;    /* 한 줄에서 다음 줄로 넘어가는 간격(ms) — 키우면 느려집니다 */
+    var SWEEP   = 280;    /* 한 줄이 왼쪽에서 오른쪽으로 벗겨지는 데 걸리는 시간(ms) */
     var AHEAD   = 3;      /* 아직 안 드러난 줄 중 지지직거릴 줄 수 */
     var FLICKER = 130;    /* 기호가 바뀌는 간격(ms) */
 
@@ -304,10 +305,14 @@
       var peel = setInterval(function () {         /* 한 줄씩 벗겨냅니다 */
         if (i >= lines.length) {
           clearInterval(peel); clearInterval(flick);
-          setTimeout(function () { box.innerHTML = original; }, 700);
+          setTimeout(function () { box.innerHTML = original; }, SWEEP + 900);
           return;
         }
-        lines[i].forEach(function (sp) { sp.className = 'sc sc--in'; });
+        var line = lines[i], step = SWEEP / Math.max(1, line.length);
+        line.forEach(function (sp, k) {              /* 왼쪽부터 차례로 */
+          sp.style.setProperty('--d', Math.round(k * step) + 'ms');
+          sp.className = 'sc sc--in';
+        });
         i++;
       }, LINE_MS);
     }, START);
