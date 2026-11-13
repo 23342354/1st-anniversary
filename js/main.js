@@ -492,12 +492,35 @@
         document.body.classList.contains('can-enter')) { e.preventDefault(); enter(); }
   });
 
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () { requestAnimationFrame(play); });
-    setTimeout(function () {                      // 폰트가 늦으면 그냥 시작
-      if (!document.body.classList.contains('is-playing')) play();
-    }, 1200);
-  } else {
-    requestAnimationFrame(play);
-  }
+  var musicReady = new Promise(function (resolve) {
+    var opening = document.getElementById('musicOpening');
+    if (!opening) {
+      resolve();
+      return;
+    }
+
+    // 음악 스크립트를 읽지 못해도 첫 장면은 열 수 있습니다.
+    var timeout = setTimeout(function () {
+      if (!opening.hasAttribute('data-initialized')) {
+        opening.remove();
+        resolve();
+      }
+    }, 5000);
+    document.addEventListener('musicopeningready', function () {
+      clearTimeout(timeout);
+      resolve();
+    }, { once: true });
+  });
+  var fontsReady = new Promise(function (resolve) {
+    if (document.fonts && document.fonts.ready) {
+      var timeout = setTimeout(resolve, 1200);
+      document.fonts.ready.then(function () {
+        clearTimeout(timeout);
+        resolve();
+      });
+    } else {
+      resolve();
+    }
+  });
+  Promise.all([musicReady, fontsReady]).then(function () { requestAnimationFrame(play); });
 })();

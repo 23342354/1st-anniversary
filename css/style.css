@@ -62,6 +62,40 @@ body{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
 }
 
+/* 음악이 재생될 때 첫 장면을 엽니다. */
+.music-opening ~ .viewport{visibility:hidden}
+.music-opening{
+  position:fixed;inset:0;margin:auto;
+  width:min(26rem,calc(100% - 2rem));max-width:none;
+  padding:clamp(1.75rem,7vw,3rem);
+  border:1px solid var(--ink);border-top:6px solid var(--blue);
+  background:var(--paper);color:var(--ink);text-align:center;
+}
+.music-opening::backdrop{background:var(--paper)}
+.music-opening__title{
+  margin-bottom:1.4rem;
+  font:600 clamp(.85rem,4vw,1.05rem)/1.5 var(--mono);
+  letter-spacing:.17em;
+}
+.music-opening__start,.music-opening__skip{
+  display:block;margin-inline:auto;
+  font-family:var(--kr);cursor:pointer;
+}
+.music-opening__start{
+  width:100%;min-height:48px;padding:.65rem .85rem;
+  border:1px solid var(--ink);
+  background:var(--blue);color:var(--ink);
+  font-size:1rem;font-weight:700;
+}
+.music-opening__start:hover{background:var(--ink);color:var(--paper)}
+.music-opening__start[aria-busy="true"]{cursor:wait}
+.music-opening__skip{
+  min-height:44px;margin-top:.4rem;padding:.35rem .65rem;
+  border:0;background:transparent;color:var(--ink);
+  font-size:.85rem;text-decoration:underline;text-underline-offset:.2em;
+}
+.music-opening button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+
 /* ---------- 스테이지 (1600 x 900 고정 캔버스를 화면에 맞춰 축소) ---------- */
 .stage{
   position:relative;

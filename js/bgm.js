@@ -2,7 +2,7 @@
    배경 음악
    ------------------------------------------------------------
    · 문서 앞부분에서 음원을 읽고 화면 연출을 기다리지 않고 재생합니다.
-   · 자동 재생이 차단되면 클릭·터치·키 입력 때 다시 시도합니다.
+   · 첫 페이지에서는 소리가 준비되면 오프닝을 열고, 차단되면 시작 버튼을 표시합니다.
    · 두 페이지 사이에 재생 위치와 볼륨, 음소거, 일시정지 상태를 이어갑니다.
    ============================================================ */
 (function () {
@@ -47,10 +47,66 @@
     a.play().catch(function () {});
   }
 
+  var opening = document.getElementById('musicOpening');
+  var openingTimer;
+
+  function finishOpening() {
+    if (!opening) return;
+    clearTimeout(openingTimer);
+    if (opening.open) opening.close();
+    opening.remove();
+    opening = null;
+    document.dispatchEvent(new Event('musicopeningready'));
+  }
+
+  function showOpening() {
+    if (opening && opening.isConnected && !opening.open) opening.showModal();
+  }
+
+  function skipMusic() {
+    pausedByUser = true;
+    a.autoplay = false;
+    a.pause();
+    stash();
+    finishOpening();
+  }
+
+  if (opening) {
+    if (pausedByUser || a.muted || a.volume === 0 || a.error ||
+        typeof opening.showModal !== 'function') {
+      finishOpening();
+    } else {
+      opening.setAttribute('data-initialized', '');
+      var start = document.getElementById('musicOpeningStart');
+      var skip = document.getElementById('musicOpeningSkip');
+
+      start.addEventListener('click', function () {
+        if (start.getAttribute('aria-busy') === 'true') return;
+        start.setAttribute('aria-busy', 'true');
+        start.textContent = '음악 불러오는 중…';
+        a.play().catch(function () {
+          if (!opening) return;
+          start.removeAttribute('aria-busy');
+          start.textContent = '음악 재생 다시 시도';
+        });
+      });
+
+      skip.addEventListener('click', skipMusic);
+      opening.addEventListener('cancel', function (event) {
+        event.preventDefault();
+        skipMusic();
+      });
+      a.addEventListener('playing', finishOpening, { once: true });
+      a.addEventListener('error', finishOpening, { once: true });
+      openingTimer = setTimeout(showOpening, 4000);
+    }
+  }
+
   if (!pausedByUser) {
     var events = ['click', 'pointerup', 'touchend', 'keydown'];
     var retry = function (event) {
-      if (pausedByUser || !a.paused || (playBtn && playBtn.contains(event.target))) return;
+      if (pausedByUser || !a.paused || (opening && opening.open) ||
+          (playBtn && playBtn.contains(event.target))) return;
       play();
     };
     events.forEach(function (event) { document.addEventListener(event, retry, true); });
@@ -58,7 +114,9 @@
       events.forEach(function (event) { document.removeEventListener(event, retry, true); });
     }, { once: true });
     a.autoplay = true;
-    play();
+    a.play().catch(function (error) {
+      if (error && error.name === 'NotAllowedError') showOpening();
+    });
   }
 
   setInterval(stash, 1000);

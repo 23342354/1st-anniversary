@@ -8,11 +8,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
   <audio id="bgmAudio" src="audio/after-the-wuthering.mp3" loop preload="auto"></audio>
-  <script src="js/bgm.js?v=2" async></script>
+  <dialog class="music-opening" id="musicOpening" aria-labelledby="musicOpeningTitle">
+    <h1 class="music-opening__title" id="musicOpeningTitle">WUTHERING HEIGHTS</h1>
+    <button class="music-opening__start" id="musicOpeningStart" type="button" autofocus>
+      음악과 함께 시작
+    </button>
+    <button class="music-opening__skip" id="musicOpeningSkip" type="button">소리 없이 보기</button>
+  </dialog>
+  <noscript><style>.music-opening ~ .viewport{visibility:visible}</style></noscript>
+  <script src="js/bgm.js?v=3" async></script>
 
 <div class="viewport">
   <div class="stage" id="stage">
@@ -260,6 +268,6 @@
 </div>
 
 <script src="content.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js?v=2"></script>
 </body>
 </html>
