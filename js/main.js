@@ -242,11 +242,12 @@
   function drawScript() {
     var svg = document.querySelector('.p2script__svg');
     if (!svg) return;
-    var SPEED = 1100;   /* 초당 그려지는 길이(px) — 키우면 빨라짐 */
-    var LIFT  = 0.06;   /* 획과 획 사이 펜을 떼는 시간(초) */
+    var SPEED = 6200;   /* 초당 그려지는 길이 — 키우면 빨라집니다 */
+    var LIFT  = 0.045;  /* 획과 획 사이 펜을 떼는 시간(초) */
     var START = 1.55;   /* 쓰기 시작하는 시각(초) */
     var at = START;
-    [].forEach.call(svg.querySelectorAll('path'), function (p) {
+    /* .p2script__pen 안의 선만 그립니다 (clipPath 의 글자 윤곽선은 제외) */
+    [].forEach.call(svg.querySelectorAll('.p2script__pen path'), function (p) {
       var len = p.getTotalLength();
       var dur = len / SPEED;
       p.style.strokeDasharray  = len + ' ' + len;
