@@ -383,7 +383,7 @@ body{
           mask-image:linear-gradient(180deg,#000 0,#000 88%,transparent 100%);
   scrollbar-width:thin;scrollbar-color:var(--sage) transparent;
 }
-.p2letter p{margin-bottom:1.15em}
+.p2letter p{margin-bottom:1.15em;text-indent:1em}   /* 문단마다 첫 줄 들여쓰기 */
 .p2letter p:last-child{margin-bottom:0}
 .p2letter::-webkit-scrollbar{width:4px}
 .p2letter::-webkit-scrollbar-track{background:transparent}
