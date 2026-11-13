@@ -263,6 +263,7 @@
     var START   = 2600;   /* 시작하는 시각(ms) */
     var LINE_MS = 5200;    /* 한 줄에서 다음 줄로 넘어가는 간격(ms) — 키우면 느려집니다 */
     var SWEEP   = 4500;    /* 한 줄이 왼쪽에서 오른쪽으로 벗겨지는 데 걸리는 시간(ms) */
+    var DOT     = 800;    /* 마침표를 지난 뒤 쉬어 가는 시간(ms) */
     var AHEAD   = 3;      /* 아직 안 드러난 줄 중 지지직거릴 줄 수 */
     var FLICKER = 130;    /* 기호가 바뀌는 간격(ms) */
 
@@ -325,34 +326,44 @@
       }
 
       var i = 0;
-      var flick = setInterval(function () {        /* 앞줄 몇 개는 계속 지지직 */
-        for (var k = i; k < Math.min(lines.length, i + AHEAD); k++) {
+      /* 아직 안 벗겨진 글자만 계속 지지직거립니다.
+         (마침표에서 쉬는 동안에도 남은 글자들은 계속 떨립니다) */
+      var flick = setInterval(function () {
+        for (var k = Math.max(0, i - 1); k < Math.min(lines.length, i + AHEAD); k++) {
           lines[k].forEach(function (sp) {
-            sp.setAttribute('data-s', pick());
+            if (sp.className === 'sc') sp.setAttribute('data-s', pick());
           });
         }
       }, FLICKER);
 
-      var peel = setInterval(function () {         /* 한 줄씩 벗겨냅니다 */
-        if (i >= lines.length) {
-          clearInterval(peel); clearInterval(flick);
-          setTimeout(function () {
-            box.innerHTML = original;          /* span 을 걷어내고 원래 글로 */
-            if (!artShown) {                   /* 신호 문장을 못 찾았을 때를 대비 */
-              var c = box.querySelector('.p2cue');
-              if (!c || !window.IntersectionObserver) { revealArt(); return; }
-              new IntersectionObserver(function (es, obs) {
-                if (es[0].isIntersecting) { obs.disconnect(); revealArt(); }
-              }, { root: box, threshold: 0.55 }).observe(c);
-            }
-          }, SWEEP + 900);
-          return;
-        }
-        var line = lines[i], step = SWEEP / Math.max(1, line.length);
-        line.forEach(function (sp, k) {              /* 왼쪽부터 차례로 */
-          sp.style.setProperty('--d', Math.round(k * step) + 'ms');
-          sp.className = 'sc sc--in';
+      function finish() {
+        clearInterval(flick);
+        setTimeout(function () {
+          box.innerHTML = original;            /* span 을 걷어내고 원래 글로 */
+          if (!artShown) {                     /* 신호 문장을 못 찾았을 때를 대비 */
+            var c = box.querySelector('.p2cue');
+            if (!c || !window.IntersectionObserver) { revealArt(); return; }
+            new IntersectionObserver(function (es, obs) {
+              if (es[0].isIntersecting) { obs.disconnect(); revealArt(); }
+            }, { root: box, threshold: 0.55 }).observe(c);
+          }
+        }, 1600);
+      }
+
+      /* 한 줄씩, 그 줄 안에서는 왼쪽부터 한 글자씩 벗겨냅니다.
+         마침표를 지나면 한 박자 쉬었다가 이어서 흩날립니다.
+         쉬는 만큼 줄이 길어지므로 다음 줄은 고정 간격이 아니라
+         '이 줄이 끝난 뒤'에 시작합니다. */
+      function peelLine() {
+        if (i >= lines.length) { finish(); return; }
+
+        var line = lines[i], step = SWEEP / Math.max(1, line.length), at = 0;
+        line.forEach(function (sp, k) {
+          setTimeout(function () { sp.className = 'sc sc--in'; }, at);
+          at += step;
+          if (sp.textContent === '.' && k < line.length - 1) at += DOT;
         });
+
         if (!cueOpen && cueLast && line.indexOf(cueLast) !== -1) {
           cueOpen = true;
           maybeArt();
@@ -360,7 +371,9 @@
           setTimeout(function () { cueSeen = true; maybeArt(); }, 10000);
         }
         i++;
-      }, LINE_MS);
+        setTimeout(peelLine, at + (LINE_MS - SWEEP));   /* 줄과 줄 사이 간격은 그대로 */
+      }
+      peelLine();
     }, START);
   }
 

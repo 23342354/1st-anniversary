@@ -424,7 +424,7 @@ body{
    처음부터 끝까지 한 번도 흔들리지 않습니다.
    inline 을 유지해야 줄바꿈이 본문과 같으므로 움직임은 top 으로 줍니다. */
 .p2letter .sc{position:relative;color:transparent;
-  --d:0ms;--dx:0px;--dy:42px;--rot:0deg}   /* js 가 글자마다 다른 값을 넣습니다 */
+  --dx:0px;--dy:42px;--rot:0deg}          /* js 가 글자마다 다른 값을 넣습니다 */
 .p2cue{display:inline}                     /* 일러스트를 부르는 문장 (보이는 변화 없음) */
 .p2letter .sc::after{
   content:attr(data-s);
@@ -435,9 +435,9 @@ body{
    그 자리에 진짜 글자가 배어 나옵니다.
    --d 는 js 가 글자마다 넣어 주는 시차입니다. 한 줄 안에서 왼쪽부터
    차례로 벗겨지게 하는 값입니다. */
-.p2letter .sc--in{animation:scInk .34s ease-out calc(var(--d) + 90ms) both}
+.p2letter .sc--in{animation:scInk .34s ease-out 90ms both}
 .p2letter .sc--in::after{
-  animation:scDust 1.15s cubic-bezier(.2,.65,.35,1) var(--d) forwards;
+  animation:scDust 1.15s cubic-bezier(.2,.65,.35,1) forwards;
 }
 @keyframes scInk{from{color:transparent} to{color:var(--ink)}}
 /* 제자리에서 흩어져 멀리 날아가며 작아지고 옅어집니다 — 바닥에 쌓이지 않습니다 */
