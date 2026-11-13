@@ -7,7 +7,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%239ABADB'/%3E%3Crect x='6' y='6' width='20' height='20' fill='%231E282C'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&amp;family=Rock+Salt&amp;family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Holtwood+One+SC&amp;family=Rock+Salt&amp;family=Playfair+Display:ital,wght@1,500;1,700&amp;family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -21,15 +21,80 @@
 <div class="viewport">
   <div class="stage" id="stage">
 
-    <!-- ============ 가운데 맺음말 ============
+    <!-- ============ 종이 콜라주 ============
+         1400x600 상자 안에 px 로 배치합니다. 창 크기와 상관없이
+         구도가 그대로 유지되도록 상자째 가운데에 둡니다.
          글자는 전부 content.js 의 p3... 에서 고칩니다 -->
     <div class="p3">
-      <span class="p3__label"   data-txt="p3Label"></span>
-      <h1   class="p3__title"   data-txt="p3Title"></h1>
-      <span class="p3__rule"></span>
-      <p    class="p3__text"    data-txt="p3Text"></p>
-      <span class="p3__date"    data-txt="p3Date"></span>
+
+      <!-- 맨 위 네 단어 -->
+      <div class="p3tags">
+        <span data-txt="p3Tag1"></span><span data-txt="p3Tag2"></span>
+        <span data-txt="p3Tag3"></span><span data-txt="p3Tag4"></span>
+      </div>
+
+      <!-- 가운데 큰 제목 -->
+      <h1 class="p3display" data-txt="p3Display"></h1>
+
+      <!-- 왼쪽 도장 -->
+      <div class="p3stamp">
+        <svg viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <path id="p3ring" fill="none"
+                  d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/>
+          </defs>
+          <circle cx="100" cy="100" r="92" fill="none" stroke="currentColor" stroke-width="2.4"/>
+          <circle cx="100" cy="100" r="62" fill="none" stroke="currentColor" stroke-width="1.2"/>
+          <text class="p3stamp__ring"><textPath href="#p3ring" startOffset="0"
+                data-txt="p3StampRing"></textPath></text>
+          <text class="p3stamp__num" x="100" y="86"  data-txt="p3StampTop"></text>
+          <line x1="68" y1="100" x2="132" y2="100" stroke="currentColor" stroke-width="1.2"/>
+          <text class="p3stamp__num" x="100" y="134" data-txt="p3StampBot"></text>
+        </svg>
+      </div>
+
+      <!-- 도장 아래 리본 -->
+      <div class="p3ribbon"><span data-txt="p3Ribbon"></span></div>
+
+      <!-- 가운데 찢어진 티켓 -->
+      <div class="p3ticket">
+        <div class="p3ticket__paper">
+          <div class="p3ticket__holes"></div>
+          <div class="p3ticket__side"><span data-txt="p3Side"></span></div>
+          <div class="p3ticket__body">
+            <div class="p3row p3row--date">
+              <span class="p3row__label" data-txt="p3DateLabel"></span>
+              <span class="p3row__date"  data-txt="p3DateValue"></span>
+              <span class="p3row__suf"   data-txt="p3DateSuf"></span>
+            </div>
+            <div class="p3row p3row--split">
+              <span class="p3row__label" data-txt="p3RowLabel1"></span>
+              <span class="p3row__value" data-txt="p3RowValue1"></span>
+              <span class="p3row__label p3row__label--2" data-txt="p3RowLabel2"></span>
+              <span class="p3row__value" data-txt="p3RowValue2"></span>
+            </div>
+            <div class="p3row p3row--foot">
+              <span data-txt="p3Foot"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <svg class="p3clip p3clip--ticket" viewBox="0 0 40 92" aria-hidden="true"><path d="M9 72 L9 24 A11 11 0 0 1 31 24 L31 76 A9 9 0 0 1 13 76 L13 34" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></svg>
+
+      <!-- 오른쪽 클립 꽂힌 쪽지 -->
+      <div class="p3note">
+        <div class="p3note__paper">
+          <span class="p3note__title" data-txt="p3NoteTitle"></span>
+          <p    class="p3note__body"  data-txt="p3NoteBody"></p>
+          <span class="p3note__foot"  data-txt="p3NoteFoot"></span>
+        </div>
+      </div>
+      <svg class="p3clip p3clip--note" viewBox="0 0 40 92" aria-hidden="true"><path d="M9 72 L9 24 A11 11 0 0 1 31 24 L31 76 A9 9 0 0 1 13 76 L13 34" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/></svg>
+
     </div>
+
+    <!-- 아래 띠 위의 체크무늬 -->
+    <div class="p3check"></div>
 
     <!-- ============ 위·아래 띠 ============ -->
     <div class="band band--top">

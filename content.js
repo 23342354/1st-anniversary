@@ -72,13 +72,33 @@ const CONTENT = {
   nextLabel: "NEXT ▸",                             // 편지가 끝나면 나타나는 버튼
 
   /* ===== 세 번째 페이지 (page3.html) =====
-     아래 글자만 바꾸면 3페이지가 통째로 바뀝니다 */
+     \n 을 넣으면 그 자리에서 줄이 바뀝니다 */
 
-  p3Label: "WUTHERING HEIGHTS / III",              // 맨 위 작은 글자
-  p3Title: "그리고,\n우리는 계속된다",                // 가운데 큰 제목 (\n 으로 줄 나눔)
-  p3Text:  "바람은 여전히 언덕을 넘는다.\n우리는 그 아래에서 두 번째 계절을 센다.",
-  p3Date:  "2025.11.15 ~",                         // 아래 날짜
-  p3Credit: "",                                    // 그림 넣으면 여기에 표기
+  p3Tag1: "ONE YEAR",                 // 맨 위 가로로 흩어진 네 단어
+  p3Tag2: "TOGETHER",
+  p3Tag3: "STILL HERE",
+  p3Tag4: "FOREVER",
+
+  p3Display: "WUTHERING\nHEIGHTS",     // 가운데 큰 이탤릭 제목
+
+  p3Side:      "ANNIVERSARY",         // 티켓 왼쪽에 세로로 선 글자
+  p3DateLabel: "Date",
+  p3DateValue: "2025.11.15",
+  p3DateSuf:   "SAT.",
+  p3RowLabel1: "Place",
+  p3RowValue1: "바람이 울부짖는 언덕",
+  p3RowLabel2: "Time",
+  p3RowValue2: "365 DAYS",
+  p3Foot:      "폭풍 속에 새긴 첫 번째 영원",   // 티켓 맨 아래 한 줄
+
+  p3NoteTitle: "ONE YEAR, AND ON",    // 오른쪽 클립 꽂힌 쪽지
+  p3NoteBody:  "1   Year 함께\n365  Days 매일\n∞   Forever 앞으로",
+  p3NoteFoot:  "WUTHERING HEIGHTS",
+
+  p3StampRing: "WUTHERING HEIGHTS · FIRST ANNIVERSARY · ",  // 도장 둘레 글자
+  p3StampTop:  "20",                  // 도장 안 위아래 숫자
+  p3StampBot:  "25",
+  p3Ribbon:    "느리게, 그러나 오래",      // 도장 아래 리본
 
   backLabel: "◂ BACK"
 };
