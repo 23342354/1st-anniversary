@@ -73,11 +73,6 @@ body{
   box-shadow:0 0 0 1px rgba(17,17,17,.08);
 }
 
-/* ---------- 괘선 ---------- */
-.rule{position:absolute;background:var(--ink);display:block;z-index:4}
-.rule--v{left:var(--x);top:0;width:1.5px;height:100%;transform:scaleY(0);transform-origin:top}
-.rule--h{top:var(--y);left:var(--x1);width:calc(var(--x2) - var(--x1));height:1.5px;transform:scaleX(0);transform-origin:left}
-
 /* ---------- 노란 띠 ---------- */
 .band{
   position:absolute;left:0;right:0;height:30px;z-index:30;
@@ -182,8 +177,6 @@ body{
 /* =========================================================
    애니메이션
    ========================================================= */
-@keyframes drawV{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes drawH{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes bandIn{to{transform:translateY(0)}}
 @keyframes rise{
   from{opacity:0;transform:translateY(16px)}
@@ -212,8 +205,6 @@ body{
   50%    {transform:translateY(-9px)}
 }
 
-.is-playing .rule--v{animation:drawV .9s var(--easeOut) .1s both}
-.is-playing .rule--h{animation:drawH .9s var(--easeOut) .35s both}
 .is-playing .band--top{animation:bandIn .7s var(--easeOut) .05s both}
 .is-playing .band--bottom{animation:bandIn .7s var(--easeOut) .15s both}
 .is-playing .anim{animation:rise .75s var(--easeOut) var(--d,0s) both}
@@ -300,10 +291,9 @@ body{
 
 /* 움직임을 줄이는 설정을 켠 사용자 → 최종 화면만 */
 @media (prefers-reduced-motion: reduce){
-  .is-playing .rule--v,.is-playing .rule--h,.is-playing .band--top,
+  .is-playing .band--top,
   .is-playing .band--bottom,.is-playing .anim,.is-playing .fig,
   .is-playing .fig--center{animation:none}
-  .rule--v,.rule--h{transform:none}
   .band{transform:none}
   .anim{opacity:1}
   .fig--center{opacity:1}
