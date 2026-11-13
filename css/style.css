@@ -435,12 +435,12 @@ body{
    차례로 벗겨지게 하는 값입니다. */
 .p2letter .sc--in{animation:scInk .34s ease-out calc(var(--d) + 90ms) both}
 .p2letter .sc--in::after{
-  animation:scFall .70s cubic-bezier(.55,0,.85,.35) var(--d) forwards;
+  animation:scFall .90s cubic-bezier(.55,0,.85,.35) var(--d) forwards;
 }
 @keyframes scInk{from{color:transparent} to{color:var(--ink)}}
 @keyframes scFall{
   from{translate:-50% -50%;  opacity:.85}
-  to  {translate:-50% 240%;  opacity:0}
+  to  {translate:-50% 1000%;  opacity:0}
 }
 
 .p2letter p{margin-bottom:1.15em;text-indent:1em}   /* 문단마다 첫 줄 들여쓰기 */
