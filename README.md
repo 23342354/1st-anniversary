@@ -19,7 +19,7 @@
 따옴표와 쉼표는 지우면 안 됩니다.
 
 ```js
-bigChar1: "嵐",              // ← 큰 글자
+bigChar1: "폭",              // ← 큰 글자
 cap1:     "바람이 울부짖는",    // ← 그 아래 색 줄 설명
 ```
 
@@ -29,7 +29,7 @@ cap1:     "바람이 울부짖는",    // ← 그 아래 색 줄 설명
 | `topLeft` / `topRight` | 맨 위 노란 띠 좌 / 우 |
 | `wordmarkLine1` / `wordmarkLine2` | 가운데 위 큰 로고 (두 줄) |
 | `wordmarkSub` | 로고 아래 작은 글자 |
-| `bigChar1~3` / `cap1~3` | 큰 한 글자 3개와 각각의 설명 |
+| `bigChar1~3` / `cap1~3` | 큰 한 글자 3개와 각각의 설명 (위에서 아래로 폭 → 풍, 오른쪽에 축) |
 | `verticalLeft` / `verticalRight` | 세로로 누운 작은 글자 |
 | `cornermark` | 오른쪽 위 구석 표식 |
 | `bigNumber` | 왼쪽 아래 큰 숫자 |

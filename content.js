@@ -17,14 +17,15 @@ const CONTENT = {
   wordmarkLine2: "HEIGHTS",
   wordmarkSub:   "1ST ANNIVERSARY",
 
-  /* --- 화면을 채우는 큰 한 글자 3개 + 각각의 설명 --- */
-  bigChar1: "嵐",
+  /* --- 화면을 채우는 큰 한 글자 3개 + 각각의 설명 ---
+     위에서 아래로 폭 → 풍 으로 읽히고, 오른쪽에 축 이 놓입니다 --- */
+  bigChar1: "폭",
   cap1:     "바람이 울부짖는",
 
-  bigChar2: "丘",
+  bigChar2: "풍",
   cap2:     "언덕 위에서 보낸 첫 해",
 
-  bigChar3: "祝",
+  bigChar3: "축",
   cap3:     "첫 번째 해를 축하하며",
 
   /* --- 세로로 누워 있는 작은 글자 --- */

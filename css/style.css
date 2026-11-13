@@ -144,10 +144,10 @@ body{
 .bigchar{position:absolute;z-index:6;line-height:.82}
 .bigchar__glyph{
   position:relative;display:block;
-  font-family:var(--jp);font-weight:900;color:var(--ink);
+  font-family:var(--kr);font-weight:900;color:var(--ink);
 }
 .bigchar__block{
-  position:absolute;left:-9%;top:13%;width:112%;height:66%;
+  position:absolute;left:-10%;top:-15%;width:114%;height:125%;
   background:var(--sage);display:block;
 }
 .bigchar--1{left:19.5%;top:20%}
