@@ -377,7 +377,7 @@ body{
 .p2letter{
   position:absolute;left:22%;top:44%;width:48%;bottom:8.5%;z-index:5;
   overflow-y:auto;padding-right:20px;
-  font-size:13.5px;line-height:2;word-break:keep-all;color:var(--ink);
+  font-size:12.5px;line-height:2;word-break:keep-all;color:var(--ink);
   /* 아래쪽을 살짝 흐리게 해서 "더 있다"는 걸 알립니다 */
   -webkit-mask-image:linear-gradient(180deg,#000 0,#000 88%,transparent 100%);
           mask-image:linear-gradient(180deg,#000 0,#000 88%,transparent 100%);
