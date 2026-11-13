@@ -3,8 +3,7 @@
    ------------------------------------------------------------
    · 자동 재생 + 무한 반복
    · 소리가 나는 자동 재생은 대부분의 브라우저가 막습니다.
-     막히면 처음 누르는 순간(클릭·터치·키) 알아서 시작합니다.
-     첫 페이지는 어차피 클릭해야 넘어가므로 늦어도 그때 켜집니다.
+     막히면 클릭·터치·키 입력 때 다시 시도합니다.
    · 페이지를 넘어가도 듣던 자리에서 이어집니다.
      (다음 페이지는 새 문서라 음악이 처음부터 다시 시작되므로,
       재생 위치·볼륨·멈춤 여부를 기억해 두었다가 되살립니다)
@@ -27,6 +26,8 @@
   var saved = {};
   try { saved = JSON.parse(sessionStorage.getItem(KEY) || '{}'); } catch (e) {}
 
+  var pausedByUser = !!saved.paused;
+
   a.loop   = true;
   a.volume = typeof saved.volume === 'number' ? saved.volume : 0.55;
   a.muted  = !!saved.muted;
@@ -36,7 +37,7 @@
   function stash() {
     try {
       sessionStorage.setItem(KEY, JSON.stringify({
-        time: a.currentTime, volume: a.volume, muted: a.muted, paused: a.paused
+        time: a.currentTime, volume: a.volume, muted: a.muted, paused: pausedByUser
       }));
     } catch (e) {}
   }
@@ -75,7 +76,8 @@
 
   /* ---------- 재생 / 정지 ---------- */
   playBtn.addEventListener('click', function () {
-    if (a.paused) { a.play().catch(function () {}); } else { a.pause(); }
+    pausedByUser = !a.paused;
+    if (pausedByUser) { a.pause(); } else { a.play().catch(function () {}); }
     stash();
   });
 
@@ -106,15 +108,17 @@
   });
 
   /* ---------- 자동 재생 ---------- */
-  if (!saved.paused) {                       /* 앞 페이지에서 멈춰 뒀다면 그대로 둡니다 */
-    a.play().catch(function () {
-      var EVENTS = ['pointerdown', 'keydown', 'touchstart'];
-      var go = function () {
-        a.play().catch(function () {});
-        EVENTS.forEach(function (ev) { document.removeEventListener(ev, go, true); });
-      };
-      EVENTS.forEach(function (ev) { document.addEventListener(ev, go, true); });
-    });
+  if (!pausedByUser) {
+    var events = ['click', 'pointerup', 'touchend', 'keydown'];
+    var retry = function (event) {
+      if (pausedByUser || playBtn.contains(event.target)) return;
+      a.play().catch(function () {});
+    };
+    events.forEach(function (event) { document.addEventListener(event, retry, true); });
+    a.addEventListener('playing', function () {
+      events.forEach(function (event) { document.removeEventListener(event, retry, true); });
+    }, { once: true });
+    a.play().catch(function () {});
   }
 
   /* ---------- 다음 페이지로 넘길 상태 ---------- */
