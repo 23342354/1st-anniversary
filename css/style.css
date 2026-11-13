@@ -254,9 +254,22 @@ body{
 .enter-hint:hover{background:var(--ink);color:var(--paper)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
 
-/* 되돌아온 1·2번 그림 */
-.is-outro .fig--head{animation:figIn .55s var(--easeOut) 0s   both}
-.is-outro .fig--left{animation:figIn .55s var(--easeOut) .15s both}
+/* 되돌아온 1·2번 그림 — 각자 화면 바깥쪽에서 안으로 밀려 들어옵니다 */
+@keyframes returnFromRight{
+  0%  {opacity:0; clip-path:inset(0 0 0 100%); transform:translateX(46px)}
+  55% {opacity:1}
+  100%{opacity:1; clip-path:inset(0 0 0 0);    transform:translateX(0)}
+}
+@keyframes returnFromLeft{
+  0%  {opacity:0; clip-path:inset(0 100% 0 0); transform:translateX(-46px)}
+  55% {opacity:1}
+  100%{opacity:1; clip-path:inset(0 0 0 0);    transform:translateX(0)}
+}
+.is-outro .fig--head{animation:returnFromRight .75s var(--easeOut) 0s   both}
+.is-outro .fig--left{animation:returnFromLeft  .75s var(--easeOut) .35s both}
+/* 들어올 때 색 바가 한 번 쓸고 지나갑니다 */
+.is-outro .fig--head::after{animation:sweep .75s linear 0s   both}
+.is-outro .fig--left::after{animation:sweep .75s linear .35s both}
 .is-outro .fig--center{animation:none;opacity:1}
 .is-outro .enter-hint{animation:none;opacity:0;transition:opacity .25s}
 
