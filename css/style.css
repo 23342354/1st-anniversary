@@ -114,7 +114,8 @@ body{
 }
 
 .fig--head  {left:66%;   top:3%;   bottom:0;     --din:var(--headIn);   --dout:var(--headOut)}
-.fig--left  {left:0.6%; top:5%; bottom:30px; width:17.2%; display:flex; align-items:flex-end;
+.fig--left  {left:0.6%; top:calc(3.4% + 132px); bottom:30px; width:17.2%;
+             display:flex; align-items:flex-end;
              --din:var(--leftIn); --dout:var(--leftOut)}
 /* 왼쪽 전신만 세로가 아니라 가로 기준으로 크기를 잡습니다 —
    캔버스가 세로로 늘어나도 첫 칸 밖으로 번지지 않고,
