@@ -117,11 +117,19 @@ body{
 }
 
 .fig--head  {left:66%;   top:3%;   bottom:0;     --din:var(--headIn);   --dout:var(--headOut)}
-.fig--left  {color:var(--sage-deep); left:-1.5%; top:3%;   height:58%;  rotate:-19deg; --din:var(--leftIn); --dout:var(--leftOut)}
+.fig--left  {left:0.6%; top:5%; bottom:30px; width:17.2%; display:flex; align-items:flex-end;
+             --din:var(--leftIn); --dout:var(--leftOut)}
+/* 왼쪽 전신만 세로가 아니라 가로 기준으로 크기를 잡습니다 —
+   캔버스가 세로로 늘어나도 첫 칸 밖으로 번지지 않고,
+   창이 납작해지면 머리가 잘리는 대신 전체가 줄어듭니다. */
+.fig--left .fig__img, .fig--left .fig__art{
+  width:100%; height:auto; max-height:100%;
+  object-fit:contain; object-position:bottom center;
+}
 .fig--center{left:35%;   top:2%;   height:100%; --din:var(--centerIn)}
 
 .fig--head .fig__tag  {left:4%;bottom:11%}
-.fig--left .fig__tag  {left:30%;bottom:3%}
+.fig--left .fig__tag  {left:2%;bottom:1%}
 .fig--center .fig__tag{left:11%;bottom:9%}
 
 /* ---------- 타이포 ---------- */
@@ -156,8 +164,8 @@ body{
 .vtext--right{left:33.1%;top:63%}
 
 .bignum{
-  position:absolute;left:.8%;top:73%;z-index:6;
-  font-family:var(--jp);font-weight:900;font-size:206px;line-height:.8;
+  position:absolute;left:1.2%;top:3.4%;z-index:6;
+  font-family:var(--jp);font-weight:900;font-size:148px;line-height:.8;
   letter-spacing:-.04em;
 }
 

@@ -38,7 +38,7 @@ const CONTENT = {
 
   /* --- 그림이 하나씩 뜰 때 옆에 붙는 작은 꼬리표 --- */
   tagHead:   "01 / PORTRAIT",
-  tagLeft:   "02 / FALLING",
+  tagLeft:   "02 / FIGURE",
   tagCenter: "03 / HERE",
 
   /* --- 맨 아래 띠에서 흐르는 글자 --- */
