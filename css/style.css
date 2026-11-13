@@ -455,15 +455,42 @@ body{
 
 /* 위·아래 띠 높이가 같으므로 캔버스 한가운데가 곧 두 띠 사이의 한가운데 */
 /* left 는 js 가 'ANNIVERSARY' 오른쪽 여백 한가운데로 다시 잡습니다 (아래 값은 예비) */
-.p2art{position:absolute;left:72%;top:50%;translate:0 -50%;height:90%;width:auto;z-index:2;display:block;
-  opacity:0}                      /* 편지의 그 문장이 읽힐 때 나타납니다 */
-.p2art.art-in{animation:artReveal 1.15s cubic-bezier(.16,.84,.24,1) both}
-@keyframes artReveal{
-  0%  {opacity:0;translate:44px -50%;scale:1.10;filter:blur(20px)}
-  55% {opacity:1}
-  100%{opacity:1;translate:0 -50%;  scale:1;   filter:blur(0)}
+.p2art{
+  position:absolute;left:72%;top:50%;translate:0 -50%;height:90%;width:auto;z-index:2;display:block;
+  opacity:0;                      /* 편지의 그 문장이 읽힐 때 나타납니다 */
+  /* 아래에서 위로 '차오르며' 드러나게 하는 가림막.
+     그림 높이의 2.35배짜리 세로 그라데이션을 씌워 두고 위치만 움직입니다.
+     경계(43%~58%)가 그림 높이의 0.35배라, 위치가 0 → 100% 로 가는 동안
+     그 경계선이 그림 아래 끝에서 위 끝까지 꼭 한 번 훑고 지나갑니다.
+     평소 위치(100%)에서는 불투명한 부분만 걸쳐 그림이 그대로 보입니다. */
+  -webkit-mask-image:linear-gradient(to top,#000 0 43%,transparent 58%);
+          mask-image:linear-gradient(to top,#000 0 43%,transparent 58%);
+  -webkit-mask-size:100% 235%;    mask-size:100% 235%;
+  -webkit-mask-repeat:no-repeat;  mask-repeat:no-repeat;
+  -webkit-mask-position:0 100%;   mask-position:0 100%;
 }
-@media (prefers-reduced-motion: reduce){ .p2art{opacity:1} }
+/* 세 가지를 따로 겁니다. 차오르는 속도와 또렷해지는 속도가 서로 달라야
+   '천천히 차오르다 마지막에 딱 맺히는' 느낌이 납니다. */
+.p2art.art-in{
+  animation:artRise  2.3s cubic-bezier(.42,.08,.55,.98) both,
+            artFocus 2.3s cubic-bezier(.50,.05,.35,1)   both,
+            artFloat 9s   ease-in-out 2.3s infinite;
+}
+@keyframes artRise{              /* 발밑에서부터 차오릅니다 */
+  from{-webkit-mask-position:0 0;   mask-position:0 0}
+  to  {-webkit-mask-position:0 100%;mask-position:0 100%}
+}
+@keyframes artFocus{             /* 흐릿하고 조금 큰 상태에서 또렷하게 내려앉습니다 */
+  0%  {opacity:0; translate:0 calc(-50% + 26px); scale:1.055; filter:blur(16px)}
+  14% {opacity:1}
+  55% {filter:blur(9px)}         /* 또렷해지는 건 뒤로 미뤄, 마지막에 맺히게 */
+  100%{opacity:1; translate:0 -50%;              scale:1;     filter:blur(0)}
+}
+@keyframes artFloat{             /* 자리를 잡은 뒤에는 아주 천천히 숨 쉬듯 */
+  0%,100%{translate:0 -50%}
+  50%    {translate:0 calc(-50% - 7px)}
+}
+@media (prefers-reduced-motion: reduce){ .p2art{opacity:1;animation:none} }
 
 /* =========================================================
    2페이지 등장 애니메이션
