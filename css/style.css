@@ -1,0 +1,250 @@
+/* =========================================================
+   1ST ANNIVERSARY — key visual
+   ========================================================= */
+
+:root{
+  --paper:#F2F1EC;
+  --ink:#111111;
+  --yellow:#FFE500;
+
+  --mono:'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --jp:'Noto Sans JP', 'Noto Sans KR', system-ui, sans-serif;
+  --kr:'Noto Sans KR', 'Noto Sans JP', system-ui, sans-serif;
+
+  /* ---- 애니메이션 타이밍 (초) : 여기 숫자만 바꾸면 속도가 바뀝니다 ---- */
+  --headIn:    .85s;   --headOut:  2.40s;
+  --leftIn:   2.95s;   --leftOut:  4.35s;
+  --centerIn: 4.90s;
+
+  --inDur:.65s; --outDur:.50s;
+  --easeOut:cubic-bezier(.16,.84,.26,1);
+  --easeIn:cubic-bezier(.6,0,.9,.3);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--kr);
+  overflow:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+.viewport{
+  position:fixed; inset:0;
+  display:grid; place-items:center;
+  overflow:hidden;
+  background:var(--paper);
+}
+.viewport::after{           /* 종이 질감 */
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:60;
+  opacity:.5; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+}
+
+/* ---------- 스테이지 (1600 x 900 고정 캔버스를 화면에 맞춰 축소) ---------- */
+.stage{
+  position:relative;
+  width:1600px; height:900px;
+  background:var(--paper);
+  transform:scale(var(--scale,1));
+  transform-origin:center center;
+  overflow:hidden;
+  box-shadow:0 0 0 1px rgba(17,17,17,.08);
+}
+
+/* ---------- 괘선 ---------- */
+.rule{position:absolute;background:var(--ink);display:block;z-index:4}
+.rule--v{left:var(--x);top:0;width:1.5px;height:100%;transform:scaleY(0);transform-origin:top}
+.rule--v.rule--short{height:46%}
+.rule--h{top:var(--y);left:var(--x1);width:calc(var(--x2) - var(--x1));height:1.5px;transform:scaleX(0);transform-origin:left}
+
+/* ---------- 노란 띠 ---------- */
+.band{
+  position:absolute;left:0;right:0;height:30px;z-index:30;
+  background:var(--yellow);
+  display:flex;align-items:center;gap:18px;
+  padding:0 18px;
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;
+}
+.band--top{top:0;justify-content:space-between;transform:translateY(-100%)}
+.band--bottom{bottom:0;transform:translateY(100%)}
+.band__credit{flex:none}
+.marquee{flex:1;overflow:hidden;white-space:nowrap;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 93%,transparent)}
+.marquee__inner{display:inline-block;animation:slide 26s linear infinite;will-change:transform}
+@keyframes slide{to{transform:translateX(-50%)}}
+.replay{
+  flex:none;border:1.5px solid var(--ink);background:transparent;color:var(--ink);
+  font-family:var(--mono);font-size:10px;letter-spacing:.2em;padding:3px 10px;
+  cursor:pointer;transition:background .18s,color .18s;
+}
+.replay:hover{background:var(--ink);color:var(--yellow)}
+
+/* ---------- 그림 ---------- */
+.fig{position:absolute;z-index:2;pointer-events:none;opacity:0}
+.fig__art,.fig__img{display:block;height:100%;width:auto;color:var(--ink)}
+.fig__img{display:none}
+.fig.has-img .fig__img{display:block}
+.fig.has-img .fig__art{display:none}
+.fig::after{                 /* 등장할 때 쓸고 지나가는 노란 바 */
+  content:'';position:absolute;left:-6%;right:-6%;height:12px;top:0;
+  background:var(--yellow);mix-blend-mode:multiply;opacity:0;
+}
+.fig__tag{
+  position:absolute;left:0;bottom:6%;
+  font-family:var(--mono);font-size:11px;letter-spacing:.24em;
+  background:var(--yellow);padding:3px 8px;white-space:nowrap;
+}
+
+.fig--head  {left:58%;   top:-4%;  height:108%; --din:var(--headIn);   --dout:var(--headOut)}
+.fig--left  {left:-1.5%; top:3%;   height:58%;  rotate:-19deg; --din:var(--leftIn); --dout:var(--leftOut)}
+.fig--center{left:35%;   top:2%;   height:100%; --din:var(--centerIn)}
+
+.fig--head .fig__tag  {left:auto;right:14%;bottom:14%}
+.fig--left .fig__tag  {left:30%;bottom:3%}
+.fig--center .fig__tag{left:4%;bottom:9%}
+
+/* ---------- 타이포 ---------- */
+.anim{opacity:0}
+
+.wordmark{position:absolute;left:19.3%;top:5%;z-index:6;width:15%}
+.wordmark__main{
+  font-family:var(--jp);font-weight:200;font-size:23px;
+  letter-spacing:.14em;line-height:1;white-space:nowrap;
+}
+.wordmark__sub{
+  margin-top:9px;font-family:var(--mono);font-size:9.5px;
+  letter-spacing:.52em;text-transform:uppercase;white-space:nowrap;
+}
+.wordmark__rule{display:block;margin-top:9px;width:72%;height:1.5px;background:var(--ink)}
+
+.bigchar{position:absolute;z-index:6;line-height:.82}
+.bigchar__glyph{
+  position:relative;display:block;
+  font-family:var(--jp);font-weight:900;color:var(--ink);
+}
+.bigchar__block{
+  position:absolute;left:-9%;top:13%;width:112%;height:66%;
+  background:var(--yellow);display:block;
+}
+.bigchar--1{left:19.5%;top:16%}
+.bigchar--1 .bigchar__glyph{font-size:208px}
+.bigchar--2{left:19.8%;top:49%}
+.bigchar--2 .bigchar__glyph{font-size:178px}
+.bigchar--3{left:63%;top:21%}
+.bigchar--3 .bigchar__glyph{font-size:190px}
+
+.cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em}
+.cap span{background:var(--yellow);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
+.cap--1{left:19.8%;top:40%;width:16%}
+.cap--2{left:20%;top:74%;width:15%}
+.cap--3{left:63%;top:44%;width:21%}
+
+.vtext{
+  position:absolute;z-index:7;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.5em;text-transform:uppercase;
+  writing-mode:vertical-rl;white-space:nowrap;
+}
+.vtext--left{left:33.1%;top:21%;background:var(--paper);padding:8px 3px}
+.vtext--right{left:97.3%;top:27%;background:var(--paper);padding:8px 3px}
+
+.bignum{
+  position:absolute;left:.8%;top:73%;z-index:6;
+  font-family:var(--jp);font-weight:900;font-size:206px;line-height:.8;
+  letter-spacing:-.04em;
+}
+
+.lead{position:absolute;left:63%;top:57%;z-index:7;width:28%}
+.lead__main{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.lead__main span{background:var(--yellow);padding:4px 9px;box-decoration-break:clone;-webkit-box-decoration-break:clone;line-height:1.85}
+.lead__sub{margin-top:12px;font-family:var(--mono);font-size:11px;letter-spacing:.22em}
+
+.stripes{
+  position:absolute;left:89.5%;top:52%;width:52px;height:92px;z-index:6;display:block;
+  background:repeating-linear-gradient(90deg,var(--ink) 0 9px,transparent 9px 18px);
+}
+.dots{
+  position:absolute;z-index:6;display:block;
+  background:
+    repeating-conic-gradient(var(--ink) 0% 25%, transparent 0% 50%) 0 0/22px 22px;
+}
+.dots--a{left:20%;top:85%;width:66px;height:44px}
+.dots--b{left:57%;top:78%;width:44px;height:44px;opacity:.9}
+
+.cstage{
+  position:absolute;left:38.6%;top:9%;width:5.4%;height:82%;
+  background:var(--yellow);z-index:1;display:block;opacity:0;
+}
+.is-playing .cstage{animation:rise .8s var(--easeOut) var(--centerIn) both}
+@media (prefers-reduced-motion: reduce){.is-playing .cstage{animation:none}.cstage{opacity:1}}
+
+.ybox{position:absolute;left:35.6%;top:7.5%;width:92px;height:36px;background:var(--yellow);z-index:5;display:block}
+.cornermark{position:absolute;left:95%;top:4.5%;z-index:7;font-family:var(--mono);font-size:11px;letter-spacing:.2em}
+
+/* =========================================================
+   애니메이션
+   ========================================================= */
+@keyframes drawV{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes drawH{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes bandIn{to{transform:translateY(0)}}
+@keyframes rise{
+  from{opacity:0;transform:translateY(16px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes figIn{
+  0%  {opacity:0;clip-path:inset(0 0 100% 0);transform:translateY(14px)}
+  34% {opacity:1}
+  40% {opacity:.25}
+  46% {opacity:1}
+  100%{opacity:1;clip-path:inset(0 0 0 0);transform:translateY(0)}
+}
+@keyframes figOut{
+  0%  {opacity:1;clip-path:inset(0 0 0 0);transform:translateY(0)}
+  18% {opacity:.3}
+  28% {opacity:1}
+  100%{opacity:0;clip-path:inset(100% 0 0 0);transform:translateY(-12px)}
+}
+@keyframes sweep{
+  0%  {opacity:1;top:0}
+  90% {opacity:1}
+  100%{opacity:0;top:100%}
+}
+@keyframes drift{
+  0%,100%{transform:translateY(0)}
+  50%    {transform:translateY(-9px)}
+}
+
+.is-playing .rule--v{animation:drawV .9s var(--easeOut) .1s both}
+.is-playing .rule--h{animation:drawH .9s var(--easeOut) .35s both}
+.is-playing .band--top{animation:bandIn .7s var(--easeOut) .05s both}
+.is-playing .band--bottom{animation:bandIn .7s var(--easeOut) .15s both}
+.is-playing .anim{animation:rise .75s var(--easeOut) var(--d,0s) both}
+
+.is-playing .fig{animation:figIn var(--inDur) var(--easeOut) var(--din) both}
+.is-playing .fig::after{animation:sweep var(--inDur) linear var(--din) both}
+.is-playing .fig--head,
+.is-playing .fig--left{
+  animation:
+    figIn  var(--inDur)  var(--easeOut) var(--din)  both,
+    figOut var(--outDur) var(--easeIn)  var(--dout) forwards;
+}
+.is-playing .fig--center{
+  animation:
+    figIn var(--inDur) var(--easeOut) var(--centerIn) both,
+    drift 7s ease-in-out calc(var(--centerIn) + var(--inDur)) infinite;
+}
+
+/* 움직임을 줄이는 설정을 켠 사용자 → 최종 화면만 */
+@media (prefers-reduced-motion: reduce){
+  .is-playing .rule--v,.is-playing .rule--h,.is-playing .band--top,
+  .is-playing .band--bottom,.is-playing .anim,.is-playing .fig,
+  .is-playing .fig--center{animation:none}
+  .rule--v,.rule--h{transform:none}
+  .band{transform:none}
+  .anim{opacity:1}
+  .fig--center{opacity:1}
+  .fig--head,.fig--left{display:none}
+  .marquee__inner{animation:none}
+}
