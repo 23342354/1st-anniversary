@@ -52,8 +52,19 @@ const CONTENT = {
   /* --- 가운데 그림을 누르라고 알려주는 버튼 --- */
   enterLabel: "ENTER ▸",
 
-  /* --- 두 번째 페이지 (page2.html) --- */
-  page2Title: "COMING SOON",
-  page2Text:  "두 번째 페이지는 준비 중입니다",
-  backLabel:  "◂ BACK"
+  /* ===== 두 번째 페이지 (page2.html) =====
+     \n 을 넣으면 그 자리에서 줄이 바뀝니다 */
+
+  p2Badge:   "1115",                              // 왼쪽 띠 맨 위 타원 안 숫자
+  p2Names:   "MAG\nWUTHERING HEIGHTS",            // 왼쪽 띠에 세로로 서는 이름들
+  p2Note:    "One year\nwith …",                  // 왼쪽 띠 아래쪽 작은 글자
+  p2Label:   "WUTHERING HEIGHTS",                 // 왼쪽 아래 작은 제목
+  p2Number:  "2",                                 // 왼쪽 아래 큰 숫자
+
+  p2Title:   "HAPPY\nANNIVERSARY",                // 오른쪽 큰 제목
+  p2Script:  "one year",                          // 제목 위를 가로지르는 손글씨
+  p2Caption: "폭풍 속에 새긴 첫 번째 영원",            // 제목 아래 한 줄
+  p2Credit:  "illust. ○○○",                       // 그림 그려준 분 (바꿔 적어주세요)
+
+  backLabel: "◂ BACK"
 };

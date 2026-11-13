@@ -87,14 +87,16 @@
 
   /* ---------- 실행 ---------- */
   fillText();
-
-  /* 캔버스가 없는 페이지(page2.html)는 글자만 채우고 끝 */
   if (!stage) return;
 
-  swapImages();
   fit();
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', fit);
+
+  /* 두 번째 페이지는 캔버스 크기만 맞추면 끝 */
+  if (document.body.classList.contains('page-two')) return;
+
+  swapImages();
 
   var replay = document.getElementById('replay');
   if (replay) replay.addEventListener('click', play);

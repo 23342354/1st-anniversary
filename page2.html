@@ -7,34 +7,47 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%239ABADB'/%3E%3Crect x='6' y='6' width='20' height='20' fill='%231E282C'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&amp;family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 </head>
 
 <!-- is-playing : 위·아래 띠가 미끄러져 들어옵니다
-     curtains-open : 앞 페이지에서 닫힌 커튼이 열립니다 -->
-<body class="is-playing curtains-open">
+     curtains-open : 앞 페이지에서 닫힌 커튼이 열립니다
+     page-two : 스크립트가 이 페이지를 알아보게 하는 표시 -->
+<body class="is-playing curtains-open page-two">
 
 <div class="viewport">
+  <div class="stage" id="stage">
 
-  <div class="band band--top">
-    <span data-txt="topLeft"></span>
-    <span data-txt="topRight"></span>
-  </div>
+    <!-- ============ 왼쪽 세로 색 띠 ============ -->
+    <div class="p2side">
+      <span class="p2side__badge" data-txt="p2Badge"></span>
+      <span class="p2side__names" data-txt="p2Names"></span>
+      <span class="p2side__note"  data-txt="p2Note"></span>
+    </div>
+    <span class="p2mark" data-txt="p2Label"></span>
+    <span class="p2num"  data-txt="p2Number"></span>
 
-  <!-- ================================================
-       여기부터가 두 번째 페이지 내용입니다.
-       원하는 구성이 정해지면 이 안을 바꾸면 됩니다.
-       ================================================ -->
-  <div class="p2">
-    <h1 class="p2__title" data-txt="page2Title"></h1>
-    <p class="p2__text"><span data-txt="page2Text"></span></p>
-    <a class="p2__back" href="index.html" data-txt="backLabel"></a>
-  </div>
+    <!-- ============ 오른쪽 ============ -->
+    <h1   class="p2title"  data-txt="p2Title"></h1>
+    <span class="p2script" data-txt="p2Script"></span>
+    <p    class="p2cap"><span data-txt="p2Caption"></span></p>
 
-  <div class="band band--bottom">
-    <span class="band__credit" data-txt="credit"></span>
-    <span class="marquee"><span class="marquee__inner" id="marquee"></span></span>
+    <img class="p2art" src="images/p2-figures.webp" alt="">
+    <span class="p2credit" data-txt="p2Credit"></span>
+
+    <!-- ============ 위 / 아래 띠 ============ -->
+    <div class="band band--top">
+      <span data-txt="topLeft"></span>
+      <span data-txt="topRight"></span>
+    </div>
+
+    <div class="band band--bottom">
+      <span class="band__credit" data-txt="credit"></span>
+      <span class="marquee"><span class="marquee__inner" id="marquee"></span></span>
+      <a class="replay" href="index.html" data-txt="backLabel"></a>
+    </div>
+
   </div>
 
   <i class="curtain curtain--top"></i>
