@@ -132,10 +132,11 @@ body{
 .replay:hover{background:var(--ink);color:var(--paper)}
 
 /* ---------- 편지가 끝나면 나타나는 다음 장 버튼 ----------
-   아래 띠(30px) 바로 위 한가운데입니다. 편지가 다 드러나면
-   js 가 body 에 letter-done 을 붙이고, 그때 떠오릅니다. */
+   아래 띠(30px) 바로 위 오른쪽 끝. 띠 안의 BACK 버튼과 오른쪽 선을
+   맞췄습니다. 편지가 다 드러나면 js 가 body 에 letter-done 을 붙이고,
+   그때 떠오릅니다. 일러스트 위로 겹쳐 그려집니다(z-index 9). */
 .p2next{
-  position:absolute;left:50%;bottom:38px;translate:-50% 0;z-index:9;
+  position:absolute;right:18px;bottom:38px;z-index:9;
   font-family:var(--mono);font-size:12px;letter-spacing:.26em;
   color:var(--ink);text-decoration:none;background:var(--paper);
   border:1.5px solid var(--ink);padding:7px 16px;
@@ -144,13 +145,16 @@ body{
 }
 .letter-done .p2next{
   pointer-events:auto;
-  animation:p2nextIn .9s var(--easeOut) both, blink 2.8s ease-in-out .9s infinite;
+  animation:p2nextIn .9s var(--easeOut) both,
+            p2nextBlink 2.8s ease-in-out .9s infinite;
 }
 .p2next:hover{background:var(--ink);color:var(--paper)}
 @keyframes p2nextIn{
   from{opacity:0;transform:translateY(14px)}
   to  {opacity:1;transform:translateY(0)}
 }
+/* 그림 위에 겹쳐 있어서, 깜빡임은 글자가 묻히지 않을 만큼만 */
+@keyframes p2nextBlink{0%,100%{opacity:1}50%{opacity:.78}}
 
 /* ---------- 세 번째 페이지 ---------- */
 .p3{
