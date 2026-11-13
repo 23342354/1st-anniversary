@@ -342,14 +342,15 @@ body{
   text-align:center;color:var(--paper);
   font-family:var(--mono);font-size:15px;letter-spacing:.08em;
 }
-/* 돌린 글줄은 '제자리 폭'이 0 이라 다른 요소와 겹칩니다.
-   그래서 빈 상자를 하나 두고, 글자 크기에 맞춘 자리를 js 가 잡아줍니다. */
-/* 세로 이름의 왼쪽 끝을 1115 원형의 왼쪽 끝과 같은 x 에 맞춥니다
+/* 세로 이름과 One year 의 왼쪽 끝을 1115 원형의 왼쪽 끝과 같은 x 에 맞춥니다
    (원형이 가운데 있으므로 양옆 여백은 (100% - 너비) / 2) */
-.p2side__namesbox{
-  position:relative;display:block;margin-top:var(--gap);
+.p2side__namesbox,
+.p2side__note{
   align-self:flex-start;margin-left:calc((100% - var(--badge-w)) / 2);
 }
+/* 돌린 글줄은 '제자리 폭'이 0 이라 다른 요소와 겹칩니다.
+   그래서 빈 상자를 하나 두고, 글자 크기에 맞춘 자리를 js 가 잡아줍니다. */
+.p2side__namesbox{position:relative;display:block;margin-top:var(--gap)}
 .p2side__names{
   /* 세로쓰기 모드 대신 '가로로 짠 글줄을 통째로 90도 회전'.
      세로쓰기는 글자를 하나씩 세로축에 배치해서, 화면이 소수점 배율로
