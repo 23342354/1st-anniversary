@@ -15,12 +15,27 @@
   --jp:'Noto Sans JP', 'Noto Sans KR', system-ui, sans-serif;
   --kr:'Noto Sans KR', 'Noto Sans JP', system-ui, sans-serif;
 
-  /* ---- 애니메이션 타이밍 (초) : 여기 숫자만 바꾸면 속도가 바뀝니다 ---- */
-  --headIn:    .85s;   --headOut:  4s;
-  --leftIn:   4.5s;   --leftOut:  7.35s;
-  --centerIn: 8.90s;
+  /* =========================================================
+     애니메이션 박자
+     아래 네 줄만 바꾸면 전체 리듬이 '일정하게' 유지됩니다.
+     그림이 나오는 시각은 밑에서 자동으로 계산되니 건드리지 마세요.
+     - 전체를 느리게/빠르게  → --hold 를 키우거나 줄이기
+     - 그림 사이 여백 조절    → --gap
+     ========================================================= */
+  --t0:      .85s;   /* 첫 그림(두상)이 나오기 시작하는 시각 */
+  --inDur:   .65s;   /* 나타나는 데 걸리는 시간 */
+  --outDur:  .50s;   /* 사라지는 데 걸리는 시간 */
+  --hold:   2.40s;   /* 다 보인 채로 머무는 시간 (그림마다 동일) */
+  --gap:     .35s;   /* 하나가 사라지고 다음이 나올 때까지의 빈 틈 (동일) */
 
-  --inDur:.65s; --outDur:.50s;
+  /* ↓ 여기부터는 자동 계산 — 손대지 않아도 됩니다 ↓
+     두상 등장 → 머무름 → 퇴장 → 빈 틈 → 왼쪽 전신 → … → 가운데 전신 */
+  --headIn:   var(--t0);
+  --headOut:  calc(var(--headIn)  + var(--inDur)  + var(--hold));
+  --leftIn:   calc(var(--headOut) + var(--outDur) + var(--gap));
+  --leftOut:  calc(var(--leftIn)  + var(--inDur)  + var(--hold));
+  --centerIn: calc(var(--leftOut) + var(--outDur) + var(--gap));
+
   --easeOut:cubic-bezier(.16,.84,.26,1);
   --easeIn:cubic-bezier(.6,0,.9,.3);
 }
