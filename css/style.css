@@ -293,7 +293,8 @@ body{
 /* ---- 왼쪽 세로 띠 ---- */
 .p2side{position:absolute;left:0;top:0;width:19%;height:74%;background:var(--sage);z-index:3}
 .p2side__badge{
-  position:absolute;left:13%;top:5.5%;width:60%;padding:10px 0;
+  /* left/right 0 + margin auto → 띠 너비가 바뀌어도 항상 가운데 */
+  position:absolute;left:0;right:0;margin:0 auto;top:8.5%;width:60%;padding:10px 0;
   border:1.6px solid var(--paper);border-radius:50%;
   text-align:center;color:var(--paper);
   font-family:var(--mono);font-size:15px;letter-spacing:.08em;
