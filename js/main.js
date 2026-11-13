@@ -236,6 +236,34 @@
     });
   }
 
+  /* ---------- 2페이지 자리 잡기 ----------
+     돌린 세로 이름은 '제자리 폭'이 0 이라, 글자 크기를 재서 빈 상자에 넣어 줍니다.
+     (글을 바꾸면 길이가 달라지므로 숫자로 못 박지 않고 그때그때 잽니다) */
+  function layoutNames() {
+    var box = document.querySelector('.p2side__namesbox');
+    var nm  = document.querySelector('.p2side__names');
+    if (!box || !nm) return;
+    box.style.width  = nm.offsetHeight + 'px';   // 90도 돌리면 높이가 가로폭이 됩니다
+    box.style.height = nm.offsetWidth  + 'px';   // 그리고 폭이 세로 길이가 됩니다
+  }
+
+  /* 일러스트를 'ANNIVERSARY' 오른쪽에 남은 여백의 한가운데에 둡니다.
+     제목 길이도 창 크기도 변하므로 매번 다시 잽니다. */
+  function placeArt() {
+    var art   = document.querySelector('.p2art');
+    var title = document.querySelector('.p2title');
+    if (!art || !title || !stage) return;
+    var artW = art.offsetWidth;
+    if (!artW) return;                            // 그림이 아직 안 불러와졌으면 나중에
+    var sr    = stage.getBoundingClientRect();
+    var scale = sr.width / STAGE_W || 1;
+    var titleRight = (title.getBoundingClientRect().right - sr.left) / scale;
+    var EDGE = 16;                                // 오른쪽 끝에 남길 최소 여백
+    var left = titleRight + (STAGE_W - titleRight - artW) / 2;
+    if (left + artW > STAGE_W - EDGE) left = STAGE_W - EDGE - artW;   // 화면 밖으로 안 나가게
+    art.style.left = left + 'px';
+  }
+
   /* ---------- 손글씨를 획 순서대로 그리기 ----------
      각 선의 실제 길이를 재서, 긴 획은 오래 짧은 획은 짧게 그립니다.
      그래야 속도가 일정해 보여 사람이 쓰는 것처럼 읽힙니다. */
@@ -262,11 +290,17 @@
   /* 두 번째 페이지는 캔버스 크기 맞추고 글자 크기·손글씨만 손보면 끝 */
   if (document.body.classList.contains('page-two')) {
     drawScript();
+
+    function relayout() { fitWidth(); layoutNames(); placeArt(); }
+    relayout();
+    window.addEventListener('resize', relayout);
+
+    var art = document.querySelector('.p2art');
+    if (art) art.addEventListener('load', placeArt);   // 그림을 다 받으면 다시
+
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(fitWidth);
-      setTimeout(fitWidth, 1500);        // 서체가 늦으면 한 번 더
-    } else {
-      fitWidth();
+      document.fonts.ready.then(relayout);
+      setTimeout(relayout, 1500);        // 서체가 늦으면 한 번 더
     }
     return;
   }
