@@ -62,7 +62,7 @@ const CONTENT = {
   p2Names:   "MAG BO & Oz Nouvel\nWUTHERING HEIGHTS",   // 왼쪽 띠에 세로로 서는 이름들
   p2Note:    "One year\nwith Rau",                  // 왼쪽 띠 아래쪽 작은 글자
   p2Label:   "WUTHERING HEIGHTS",                 // 왼쪽 아래 작은 제목
-  p2Heading: "이토록 가까운\n곳에서",               // 왼쪽 아래 제목 (\n 으로 줄 나눔)
+  p2Heading: "이토록\n가까운 곳에서",               // 왼쪽 아래 제목 (\n 으로 줄 나눔)
 
   p2Title:   "HAPPY\nANNIVERSARY",                // 오른쪽 큰 제목
   p2Script:  "one year",                          // 제목 위를 가로지르는 손글씨
