@@ -128,7 +128,9 @@
 
   var figCenter = document.getElementById('figCenter');
   var enterBtn  = document.getElementById('enter');
+  var subtitle = document.querySelector('.subtitle');
   if (figCenter) figCenter.addEventListener('click', enter);
+  if (subtitle)  subtitle.addEventListener('click', enter);
   if (enterBtn)  enterBtn.addEventListener('click', enter);
   document.addEventListener('keydown', function (e) {
     if ((e.key === 'Enter' || e.key === ' ') &&

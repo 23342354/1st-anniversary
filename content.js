@@ -23,8 +23,7 @@ const CONTENT = {
   cap3: "첫 번째 해를 축하하며",
 
   /* --- 세로로 누워 있는 작은 글자 --- */
-  verticalLeft:  "WUTHERING HEIGHTS",
-  verticalRight: "SINCE 2025",
+  verticalLeft: "WUTHERING HEIGHTS",
 
   /* --- 오른쪽 위 구석 표식 --- */
   cornermark: "[ WH ]",
@@ -39,7 +38,9 @@ const CONTENT = {
   /* --- 그림이 하나씩 뜰 때 옆에 붙는 작은 꼬리표 --- */
   tagHead:   "01 / PORTRAIT",
   tagLeft:   "02 / FIGURE",
-  tagCenter: "03 / HERE",
+
+  /* --- 마지막 그림과 함께 자막처럼 뜨는 대사 --- */
+  subtitle: "매그. 자, 내 손을 잡아.",
 
   /* --- 맨 아래 띠에서 흐르는 글자 --- */
   marquee: "WUTHERING HEIGHTS ✦ 1ST ANNIVERSARY ✦ ",
