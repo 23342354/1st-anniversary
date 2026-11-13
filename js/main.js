@@ -237,8 +237,8 @@
   }
 
   /* ---------- 가운데 글 : 기호 → 본문 ----------
-     처음엔 글자가 모두 기호로 보이다가, 위에서부터 차례로
-     진짜 글자가 툭 떨어지며 제자리를 찾습니다.
+     처음엔 글자가 모두 기호로 보이다가, 맨 윗줄부터 한 줄씩 차례로
+     진짜 글자가 툭 떨어지며 드러납니다. 위에서 아래로 벗겨지듯이.
 
      한글 자리에는 '전각' 기호(！＠＃…)를, 쉼표·마침표 자리에는 좁은
      기호를 넣습니다. 폭이 같은 기호라야 글이 출렁이지 않습니다. */
@@ -248,16 +248,13 @@
     if (window.matchMedia &&
         window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    var WIDE   = '！＠＃＄％＾＆＊（）＜＞？／＼＝＋～｜'.split('');
-    var NARROW = '.,:;\''.split('');
-    var START  = 2600;   /* 시작하는 시각(ms) */
-    var RUN    = 4000;   /* 전부 드러나는 데 걸리는 시간(ms) */
-    var BAND   = 70;     /* 한 번에 지지직거리는 글자 수 */
+    var SYM     = '!@#$%^&*<>/\\|=+~?;:'.split('');
+    var START   = 2600;   /* 시작하는 시각(ms) */
+    var LINE_MS = 300;    /* 한 줄이 드러나는 간격(ms) — 키우면 느려집니다 */
+    var AHEAD   = 3;      /* 아직 안 드러난 줄 중 지지직거릴 줄 수 */
+    var FLICKER = 130;    /* 기호가 바뀌는 간격(ms) */
 
-    function pick(ch) {
-      var set = ch >= '\uAC00' && ch <= '\uD7A3' ? WIDE : NARROW;
-      return set[(Math.random() * set.length) | 0];
-    }
+    function pick() { return SYM[(Math.random() * SYM.length) | 0]; }
 
     var original = box.innerHTML;
     var cells = [];
@@ -271,8 +268,8 @@
             if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
             var sp = document.createElement('span');
             sp.className = 'sc';
-            sp.textContent = pick(ch);
-            sp.setAttribute('data-ch', ch);
+            sp.textContent = ch;               /* 진짜 글자는 처음부터 제자리에 */
+            sp.setAttribute('data-s', pick()); /* 그 위에 덮을 기호 */
             frag.appendChild(sp);
             cells.push(sp);
           });
@@ -286,23 +283,33 @@
     if (!cells.length) return;
 
     setTimeout(function () {
-      var t0 = 0, done = 0;
-      function step(now) {
-        if (!t0) t0 = now;
-        var head = Math.min(cells.length,
-                            Math.round((now - t0) / RUN * cells.length));
-        for (; done < head; done++) {                 /* 진짜 글자가 떨어집니다 */
-          cells[done].textContent = cells[done].getAttribute('data-ch');
-          cells[done].className = 'sc sc--in';
+      /* 글자가 실제로 몇 번째 줄에 놓였는지 화면에서 직접 읽어 묶습니다.
+         (기호와 본문의 폭이 같으므로 줄바꿈 자리는 끝까지 그대로입니다) */
+      var lines = [], last = null;
+      cells.forEach(function (sp) {
+        var top = Math.round(sp.getBoundingClientRect().top);
+        if (last === null || Math.abs(top - last) > 3) { lines.push([]); last = top; }
+        lines[lines.length - 1].push(sp);
+      });
+
+      var i = 0;
+      var flick = setInterval(function () {        /* 앞줄 몇 개는 계속 지지직 */
+        for (var k = i; k < Math.min(lines.length, i + AHEAD); k++) {
+          lines[k].forEach(function (sp) {
+            sp.setAttribute('data-s', pick());
+          });
         }
-        var end = Math.min(cells.length, head + BAND); /* 앞쪽 띠는 계속 바뀝니다 */
-        for (var j = head; j < end; j++) {
-          cells[j].textContent = pick(cells[j].getAttribute('data-ch'));
+      }, FLICKER);
+
+      var peel = setInterval(function () {         /* 한 줄씩 벗겨냅니다 */
+        if (i >= lines.length) {
+          clearInterval(peel); clearInterval(flick);
+          setTimeout(function () { box.innerHTML = original; }, 700);
+          return;
         }
-        if (head < cells.length) requestAnimationFrame(step);
-        else setTimeout(function () { box.innerHTML = original; }, 600);
-      }
-      requestAnimationFrame(step);
+        lines[i].forEach(function (sp) { sp.className = 'sc sc--in'; });
+        i++;
+      }, LINE_MS);
     }, START);
   }
 

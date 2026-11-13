@@ -411,11 +411,19 @@ body{
           mask-image:linear-gradient(180deg,#000 0,#000 88%,transparent 100%);
   scrollbar-width:thin;scrollbar-color:var(--sage) transparent;
 }
-/* ---- 가운데 글: 기호였다가 글자가 떨어지며 본문이 드러납니다 ----
-   .sc 는 글자 한 자를 감싼 조각입니다. inline 그대로 두어야 줄바꿈이
-   본문과 똑같이 유지되므로, 움직임은 transform 대신 top 으로 줍니다. */
-.p2letter .sc{position:relative;top:0}
-.p2letter .sc--in{animation:scDrop .28s var(--easeOut) both}
+/* ---- 가운데 글: 기호였다가 한 줄씩 본문이 드러납니다 ----
+   조각(.sc) 안에는 처음부터 '진짜 글자'가 들어 있고, 투명하게 숨겨둡니다.
+   기호는 그 위에 겹쳐 그립니다. 그래서 기호가 무엇이든 글의 줄바꿈이
+   처음부터 끝까지 한 번도 흔들리지 않습니다.
+   inline 을 유지해야 줄바꿈이 본문과 같으므로 움직임은 top 으로 줍니다. */
+.p2letter .sc{position:relative;top:0;color:transparent}
+.p2letter .sc::after{
+  content:attr(data-s);
+  position:absolute;left:50%;top:50%;translate:-50% -50%;
+  line-height:1;white-space:pre;color:var(--ink);
+}
+.p2letter .sc--in{color:inherit;animation:scDrop .38s var(--easeOut) both}
+.p2letter .sc--in::after{content:none}
 @keyframes scDrop{from{top:-.62em;opacity:0} to{top:0;opacity:1}}
 
 .p2letter p{margin-bottom:1.15em;text-indent:1em}   /* 문단마다 첫 줄 들여쓰기 */
