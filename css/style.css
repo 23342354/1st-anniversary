@@ -52,7 +52,6 @@ body{
 
 .viewport{
   position:fixed; inset:0;
-  display:grid; place-items:center;
   overflow:hidden;
   background:var(--paper);
 }
@@ -65,10 +64,11 @@ body{
 /* ---------- 스테이지 (1600 x 900 고정 캔버스를 화면에 맞춰 축소) ---------- */
 .stage{
   position:relative;
-  width:1600px; height:900px;
+  width:1600px; height:900px;   /* height 는 js 가 창에 맞춰 다시 정합니다 */
   background:var(--paper);
-  transform:scale(var(--scale,1));
-  transform-origin:center center;
+  position:absolute; left:0; top:0;
+  transform:translate(var(--ox,0px), var(--oy,0px)) scale(var(--scale,1));
+  transform-origin:0 0;
   overflow:hidden;
   box-shadow:0 0 0 1px rgba(17,17,17,.08);
 }
@@ -116,7 +116,7 @@ body{
   background:var(--sage);padding:3px 8px;white-space:nowrap;
 }
 
-.fig--head  {left:66%;   top:3%;   height:94.5%; --din:var(--headIn);   --dout:var(--headOut)}
+.fig--head  {left:66%;   top:3%;   bottom:0;     --din:var(--headIn);   --dout:var(--headOut)}
 .fig--left  {color:var(--sage-deep); left:-1.5%; top:3%;   height:58%;  rotate:-19deg; --din:var(--leftIn); --dout:var(--leftOut)}
 .fig--center{left:35%;   top:2%;   height:100%; --din:var(--centerIn)}
 

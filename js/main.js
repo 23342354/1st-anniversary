@@ -41,14 +41,33 @@
     });
   }
 
-  /* ---------- 3. 화면 크기에 맞춰 캔버스 축소 ---------- */
+  /* ---------- 3. 창 크기에 맞추기 ----------
+     가로는 항상 꽉 채우고, 세로는 창 높이만큼 캔버스가 늘어납니다.
+     그래야 위/아래 띠가 화면 가장자리에 딱 붙습니다.
+     너무 납작하거나 길쭉한 창에서는 아래 두 값 안으로 제한합니다. */
+  var MIN_H = 680;
+  var MAX_H = 1240;
+
   function fit() {
     var w = window.innerWidth  || document.documentElement.clientWidth  || STAGE_W;
     var h = window.innerHeight || document.documentElement.clientHeight || STAGE_H;
-    var scale = Math.min(w / STAGE_W, h / STAGE_H);
-    if (h > w) scale = w / STAGE_W;               // 세로 화면이면 가로 기준
+
+    var scale   = w / STAGE_W;
+    var designH = h / scale;
+
+    if (designH < MIN_H) {          // 아주 납작한 창 → 높이를 채우고 좌우를 조금 자름
+      designH = MIN_H;
+      scale   = h / MIN_H;
+    } else if (designH > MAX_H) {   // 아주 길쭉한 창(세로 화면) → 가로 기준 유지
+      designH = MAX_H;
+    }
     if (!isFinite(scale) || scale <= 0) scale = 1;
+
+    stage.style.height = designH + 'px';
     stage.style.setProperty('--scale', scale);
+    // 제한에 걸린 경우에만 남는 여백을 좌우·위아래로 똑같이 나눔
+    stage.style.setProperty('--ox', ((w - STAGE_W * scale) / 2) + 'px');
+    stage.style.setProperty('--oy', ((h - designH * scale) / 2) + 'px');
   }
 
   /* ---------- 4. 애니메이션 재생 ---------- */
