@@ -138,7 +138,7 @@ var CURTAIN    = 550;            // 커튼이 닫히는 시간(ms)
 | `p2Badge` | 왼쪽 띠 맨 위 타원 안 숫자 |
 | `p2Names` | 왼쪽 띠에 세로로 서는 이름들 |
 | `p2Note` | 왼쪽 띠 아래쪽 작은 글자 |
-| `p2Label` / `p2Number` | 왼쪽 아래 작은 제목과 큰 숫자 |
+| `p2Label` / `p2Heading` | 왼쪽 아래 작은 제목과 큰 제목 (`\n` 으로 줄 나눔) |
 | `p2Title` | 오른쪽 큰 제목 (Holtwood One SC) |
 | `p2Script` | 제목 위를 가로지르는 손글씨 (Rock Salt) |
 | `p2Caption` | 제목 아래 한 줄 |

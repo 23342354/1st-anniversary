@@ -347,9 +347,10 @@ body{
   position:absolute;left:2.2%;top:77.5%;z-index:4;color:var(--sage-deep);
   font-family:var(--mono);font-size:13px;letter-spacing:.12em;
 }
-.p2num{
-  position:absolute;left:1.5%;top:81%;z-index:4;color:var(--sage-deep);
-  font-family:var(--jp);font-weight:900;font-size:104px;line-height:.9;letter-spacing:-.03em;
+.p2heading{
+  position:absolute;left:1.9%;top:80%;z-index:4;color:var(--sage-deep);
+  font-family:var(--kr);font-weight:700;font-size:34px;line-height:1.32;
+  letter-spacing:-.02em;white-space:pre-line;word-break:keep-all;
 }
 
 /* ---- 오른쪽 ---- */
