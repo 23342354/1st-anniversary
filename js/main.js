@@ -188,7 +188,7 @@
 
   /* 왼쪽 글이 다 찍힌 순간 — 여기서부터 가운데 그림이 등장합니다 */
   function typingDone() {
-    document.body.classList.add('typing-done');
+    document.body.classList.add('typing-done', 'left-out');   /* 글이 끝나야 왼쪽 전신이 나감 */
     armEnter();
   }
 
@@ -204,7 +204,7 @@
 
   /* ---------- 5. 애니메이션 재생 ---------- */
   function play() {
-    document.body.classList.remove('is-playing', 'is-outro', 'is-leaving', 'can-enter', 'typing-done');
+    document.body.classList.remove('is-playing', 'is-outro', 'is-leaving', 'can-enter', 'typing-done', 'left-out');
     void stage.offsetWidth;                        // 강제 리플로우 → 처음부터 다시
     document.body.classList.add('is-playing');
     startTyping();                                 // 다 찍히면 typingDone() 이 이어받습니다

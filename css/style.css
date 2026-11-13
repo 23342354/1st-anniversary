@@ -228,11 +228,15 @@ body{
 
 .is-playing .fig{animation:figIn var(--inDur) var(--easeOut) var(--din) both}
 .is-playing .fig::after{animation:sweep var(--inDur) linear var(--din) both}
-.is-playing .fig--head,
-.is-playing .fig--left{
+.is-playing .fig--head{
   animation:
     figIn  var(--inDur)  var(--easeOut) var(--din)  both,
     figOut var(--outDur) var(--easeIn)  var(--dout) forwards;
+}
+/* 왼쪽 전신은 정해진 시각이 아니라, 왼쪽 글이 다 찍힌 뒤에 사라집니다.
+   퇴장은 figOut 하나만 걸어 두어 등장 애니메이션을 건드리지 않습니다. */
+.is-playing.left-out .fig--left{
+  animation: figOut var(--outDur) var(--easeIn) 0s forwards;
 }
 /* 가운데 그림은 공통 등장 규칙(.is-playing .fig)에서 빼둡니다.
    안 빼면 옛 시각(--centerIn)에 먼저 떠버립니다. */
@@ -292,12 +296,12 @@ body{
   55% {opacity:1}
   100%{opacity:1; clip-path:inset(0 0 0 0);    transform:translateX(0)}
 }
-.is-outro .fig--head{animation:returnFromRight .75s var(--easeOut) 0s   both}
-.is-outro .fig--left{animation:returnFromLeft  .75s var(--easeOut) .35s both}
+.is-playing.is-outro .fig--head{animation:returnFromRight .75s var(--easeOut) 0s   both}
+.is-playing.is-outro .fig--left{animation:returnFromLeft  .75s var(--easeOut) .35s both}
 /* 들어올 때 색 바가 한 번 쓸고 지나갑니다 */
-.is-outro .fig--head::after{animation:sweep .75s linear 0s   both}
-.is-outro .fig--left::after{animation:sweep .75s linear .35s both}
-.is-outro .fig--center{animation:none;opacity:1}
+.is-playing.is-outro .fig--head::after{animation:sweep .75s linear 0s   both}
+.is-playing.is-outro .fig--left::after{animation:sweep .75s linear .35s both}
+.is-playing.is-outro .fig--center{animation:none;opacity:1}
 .is-outro .enter-hint{animation:none;opacity:0;transition:opacity .25s}
 
 /* 위·아래 띠가 커튼처럼 닫히며 다음 페이지로 */
