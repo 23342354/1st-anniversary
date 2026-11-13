@@ -139,10 +139,14 @@ var CURTAIN    = 550;            // 커튼이 닫히는 시간(ms)
 | `p2Names` | 왼쪽 띠에 세로로 서는 이름들 |
 | `p2Note` | 왼쪽 띠 아래쪽 작은 글자 |
 | `p2Label` / `p2Number` | 왼쪽 아래 작은 제목과 큰 숫자 |
-| `p2Title` | 오른쪽 큰 제목 |
-| `p2Script` | 제목 위를 가로지르는 손글씨 |
+| `p2Title` | 오른쪽 큰 제목 (Holtwood One SC) |
+| `p2Script` | 제목 위를 가로지르는 손글씨 (Rock Salt) |
 | `p2Caption` | 제목 아래 한 줄 |
 | `p2Credit` | 2페이지 그림 그려준 분 (맨 아래 띠) |
+
+제목과 손글씨는 `page2.html` 의 `data-fit` 숫자(캔버스 기준 px)보다 넓어지면
+자동으로 글자 크기가 줄어듭니다. 서체를 바꿔도 그림을 밀고 들어가지 않습니다.
+더 크게/작게 쓰고 싶으면 그 숫자를 조절하세요.
 
 그림은 `images/p2-figures.webp` 입니다. 바꾸려면 같은 이름으로 덮어쓰거나,
 `page2.html` 의 `<img class="p2art" src="...">` 한 줄을 고치면 됩니다.

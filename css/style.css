@@ -323,12 +323,12 @@ body{
 /* ---- 오른쪽 ---- */
 .p2title{
   position:absolute;left:22%;top:7%;z-index:5;white-space:pre-line;
-  font-family:var(--jp);font-weight:900;font-size:104px;line-height:1.02;
+  font-family:'Holtwood One SC',var(--jp);font-weight:400;font-size:104px;line-height:1.02;
   letter-spacing:-.015em;color:var(--ink);
 }
 .p2script{
-  position:absolute;left:31%;top:5.6%;z-index:6;pointer-events:none;
-  font-family:'Caveat',cursive;font-size:138px;line-height:1;white-space:nowrap;
+  position:absolute;left:31%;top:7%;z-index:6;pointer-events:none;
+  font-family:'Rock Salt',cursive;font-size:138px;line-height:1;white-space:nowrap;
   color:var(--blue-deep);rotate:-7deg;
 }
 .p2cap{

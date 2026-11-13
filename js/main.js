@@ -93,8 +93,34 @@
   window.addEventListener('resize', fit);
   window.addEventListener('orientationchange', fit);
 
-  /* 두 번째 페이지는 캔버스 크기만 맞추면 끝 */
-  if (document.body.classList.contains('page-two')) return;
+  /* ---------- 글자가 칸을 넘치면 자동으로 줄이기 ----------
+     제목·손글씨처럼 장식 서체를 쓰는 글자는 서체마다 폭이 크게 달라서,
+     크기를 고정해두면 서체를 바꿨을 때 그림까지 밀고 들어갑니다.
+     data-fit 에 적은 폭(캔버스 기준 px)을 넘으면 맞을 때까지 줄입니다. */
+  function fitWidth() {
+    document.querySelectorAll('[data-fit]').forEach(function (el) {
+      var max = parseFloat(el.getAttribute('data-fit'));
+      if (!max) return;
+      el.style.fontSize = '';                                   // css 기본 크기로 되돌리고 시작
+      var size = parseFloat(getComputedStyle(el).fontSize);
+      var guard = 0;
+      while (el.offsetWidth > max && size > 24 && guard++ < 90) {  // offsetWidth 는 화면 배율과 무관
+        size -= 2;
+        el.style.fontSize = size + 'px';
+      }
+    });
+  }
+
+  /* 두 번째 페이지는 캔버스 크기 맞추고 글자 크기만 손보면 끝 */
+  if (document.body.classList.contains('page-two')) {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(fitWidth);
+      setTimeout(fitWidth, 1500);        // 서체가 늦으면 한 번 더
+    } else {
+      fitWidth();
+    }
+    return;
+  }
 
   swapImages();
 
