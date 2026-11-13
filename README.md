@@ -1,4 +1,4 @@
-# 1ST ANNIVERSARY — 키비주얼 페이지
+# WUTHERING HEIGHTS — 1주년 키비주얼 페이지
 
 노랑 / 검정 / 오프화이트 편집 디자인 스타일의 1주년 기념 한 장짜리 웹페이지입니다.
 그림 세 점이 순서대로 나타났다 사라지고, 마지막에 가운데 전신이 남습니다.
@@ -19,17 +19,19 @@
 따옴표와 쉼표는 지우면 안 됩니다.
 
 ```js
-bigChar1: "周",                      // ← 큰 글자
-cap1:     "한 바퀴를 돌아 다시 이 자리에",  // ← 그 아래 노란 줄 설명
+bigChar1: "嵐",              // ← 큰 글자
+cap1:     "바람이 울부짖는",    // ← 그 아래 색 줄 설명
 ```
 
 | 항목 | 화면에서 보이는 곳 |
 |---|---|
 | `pageTitle` | 브라우저 탭 제목 |
 | `topLeft` / `topRight` | 맨 위 노란 띠 좌 / 우 |
-| `wordmark` / `wordmarkSub` | 가운데 위 큰 영문 로고 |
+| `wordmarkLine1` / `wordmarkLine2` | 가운데 위 큰 로고 (두 줄) |
+| `wordmarkSub` | 로고 아래 작은 글자 |
 | `bigChar1~3` / `cap1~3` | 큰 한 글자 3개와 각각의 설명 |
 | `verticalLeft` / `verticalRight` | 세로로 누운 작은 글자 |
+| `cornermark` | 오른쪽 위 구석 표식 |
 | `bigNumber` | 왼쪽 아래 큰 숫자 |
 | `lead` / `sub` | 오른쪽 아래 문장과 날짜 |
 | `tagHead` / `tagLeft` / `tagCenter` | 그림마다 붙는 작은 꼬리표 |

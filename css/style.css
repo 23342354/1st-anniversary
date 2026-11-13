@@ -128,11 +128,13 @@ body{
 /* ---------- 타이포 ---------- */
 .anim{opacity:0}
 
-.wordmark{position:absolute;left:19.3%;top:5%;z-index:6;width:15%}
+.wordmark{position:absolute;left:19.3%;top:4.5%;z-index:6;width:17%}
 .wordmark__main{
-  font-family:var(--jp);font-weight:200;font-size:23px;
-  letter-spacing:.14em;line-height:1;white-space:nowrap;
+  font-family:var(--jp);font-weight:200;font-size:30px;
+  letter-spacing:.15em;line-height:1.14;
 }
+.wordmark__main span{display:block;white-space:nowrap}
+.wordmark__main span:last-child{padding-left:.9em}
 .wordmark__sub{
   margin-top:9px;font-family:var(--mono);font-size:9.5px;
   letter-spacing:.52em;text-transform:uppercase;white-space:nowrap;
@@ -148,18 +150,18 @@ body{
   position:absolute;left:-9%;top:13%;width:112%;height:66%;
   background:var(--sage);display:block;
 }
-.bigchar--1{left:19.5%;top:16%}
+.bigchar--1{left:19.5%;top:20%}
 .bigchar--1 .bigchar__glyph{font-size:208px}
-.bigchar--2{left:19.8%;top:49%}
+.bigchar--2{left:19.8%;top:52%}
 .bigchar--2 .bigchar__glyph{font-size:178px}
 .bigchar--3{left:63%;top:21%}
 .bigchar--3 .bigchar__glyph{font-size:190px}
 
 .cap{position:absolute;z-index:7;font-size:14px;font-weight:500;letter-spacing:.01em}
 .cap span{background:var(--blue);box-decoration-break:clone;-webkit-box-decoration-break:clone;padding:3px 7px;line-height:1.75}
-.cap--1{left:19.8%;top:40%;width:16%}
+.cap--1{left:19.8%;top:43%;width:16%}
 .cap--2 span{background:var(--sage)}
-.cap--2{left:20%;top:74%;width:15%}
+.cap--2{left:20%;top:77%;width:15%}
 .cap--3{left:63%;top:44%;width:21%}
 
 .vtext{
