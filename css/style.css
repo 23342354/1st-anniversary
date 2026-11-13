@@ -133,7 +133,7 @@ body{
   letter-spacing:.15em;line-height:1.14;
 }
 .wordmark__main span{display:block;white-space:nowrap}
-.wordmark__main span:last-child{padding-left:.9em}
+
 .wordmark__sub{
   margin-top:9px;font-family:var(--mono);font-size:9.5px;
   letter-spacing:.52em;text-transform:uppercase;white-space:nowrap;
