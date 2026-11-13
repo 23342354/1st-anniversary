@@ -411,6 +411,13 @@ body{
           mask-image:linear-gradient(180deg,#000 0,#000 88%,transparent 100%);
   scrollbar-width:thin;scrollbar-color:var(--sage) transparent;
 }
+/* ---- 가운데 글: 기호였다가 글자가 떨어지며 본문이 드러납니다 ----
+   .sc 는 글자 한 자를 감싼 조각입니다. inline 그대로 두어야 줄바꿈이
+   본문과 똑같이 유지되므로, 움직임은 transform 대신 top 으로 줍니다. */
+.p2letter .sc{position:relative;top:0}
+.p2letter .sc--in{animation:scDrop .28s var(--easeOut) both}
+@keyframes scDrop{from{top:-.62em;opacity:0} to{top:0;opacity:1}}
+
 .p2letter p{margin-bottom:1.15em;text-indent:1em}   /* 문단마다 첫 줄 들여쓰기 */
 .p2letter p:last-child{margin-bottom:0}
 .p2letter::-webkit-scrollbar{width:4px}

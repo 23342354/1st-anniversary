@@ -236,6 +236,76 @@
     });
   }
 
+  /* ---------- 가운데 글 : 기호 → 본문 ----------
+     처음엔 글자가 모두 기호로 보이다가, 위에서부터 차례로
+     진짜 글자가 툭 떨어지며 제자리를 찾습니다.
+
+     한글 자리에는 '전각' 기호(！＠＃…)를, 쉼표·마침표 자리에는 좁은
+     기호를 넣습니다. 폭이 같은 기호라야 글이 출렁이지 않습니다. */
+  function scrambleLetter() {
+    var box = document.querySelector('.p2letter');
+    if (!box) return;
+    if (window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var WIDE   = '！＠＃＄％＾＆＊（）＜＞？／＼＝＋～｜'.split('');
+    var NARROW = '.,:;\''.split('');
+    var START  = 2600;   /* 시작하는 시각(ms) */
+    var RUN    = 4000;   /* 전부 드러나는 데 걸리는 시간(ms) */
+    var BAND   = 70;     /* 한 번에 지지직거리는 글자 수 */
+
+    function pick(ch) {
+      var set = ch >= '\uAC00' && ch <= '\uD7A3' ? WIDE : NARROW;
+      return set[(Math.random() * set.length) | 0];
+    }
+
+    var original = box.innerHTML;
+    var cells = [];
+
+    /* 글자 하나하나를 span 으로 감쌉니다. 띄어쓰기는 그대로 둡니다. */
+    (function wrap(node) {
+      [].slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var frag = document.createDocumentFragment();
+          n.nodeValue.split('').forEach(function (ch) {
+            if (!ch.trim()) { frag.appendChild(document.createTextNode(ch)); return; }
+            var sp = document.createElement('span');
+            sp.className = 'sc';
+            sp.textContent = pick(ch);
+            sp.setAttribute('data-ch', ch);
+            frag.appendChild(sp);
+            cells.push(sp);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1) {
+          wrap(n);
+        }
+      });
+    })(box);
+
+    if (!cells.length) return;
+
+    setTimeout(function () {
+      var t0 = 0, done = 0;
+      function step(now) {
+        if (!t0) t0 = now;
+        var head = Math.min(cells.length,
+                            Math.round((now - t0) / RUN * cells.length));
+        for (; done < head; done++) {                 /* 진짜 글자가 떨어집니다 */
+          cells[done].textContent = cells[done].getAttribute('data-ch');
+          cells[done].className = 'sc sc--in';
+        }
+        var end = Math.min(cells.length, head + BAND); /* 앞쪽 띠는 계속 바뀝니다 */
+        for (var j = head; j < end; j++) {
+          cells[j].textContent = pick(cells[j].getAttribute('data-ch'));
+        }
+        if (head < cells.length) requestAnimationFrame(step);
+        else setTimeout(function () { box.innerHTML = original; }, 600);
+      }
+      requestAnimationFrame(step);
+    }, START);
+  }
+
   /* ---------- 2페이지 자리 잡기 ----------
      돌린 세로 이름은 '제자리 폭'이 0 이라, 글자 크기를 재서 빈 상자에 넣어 줍니다.
      (글을 바꾸면 길이가 달라지므로 숫자로 못 박지 않고 그때그때 잽니다) */
@@ -293,6 +363,7 @@
 
     function relayout() { fitWidth(); layoutNames(); placeArt(); }
     relayout();
+    scrambleLetter();
     window.addEventListener('resize', relayout);
 
     var art = document.querySelector('.p2art');
