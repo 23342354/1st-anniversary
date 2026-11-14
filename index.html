@@ -7,17 +7,31 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%239ABADB'/%3E%3Crect x='6' y='6' width='20' height='20' fill='%231E282C'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@200;400;900&amp;family=Noto+Sans+KR:wght@300;500;700;900&amp;family=Roboto+Mono:wght@400;500&amp;family=Playfair+Display:ital,wght@1,500;1,700&amp;display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css?v=2">
 </head>
 <body>
   <audio id="bgmAudio" src="audio/after-the-wuthering.mp3" loop preload="auto"></audio>
+  <!-- 여는 화면. 소리 나는 자동 재생이 막히면 이 화면이 뜹니다.
+       글자는 content.js 가 아니라 여기서 직접 고칩니다. -->
   <dialog class="music-opening" id="musicOpening" aria-labelledby="musicOpeningTitle">
-    <h1 class="music-opening__title" id="musicOpeningTitle">WUTHERING HEIGHTS</h1>
-    <button class="music-opening__start" id="musicOpeningStart" type="button" autofocus>
-      음악과 함께 시작
-    </button>
-    <button class="music-opening__skip" id="musicOpeningSkip" type="button">소리 없이 보기</button>
+    <i class="music-opening__band" aria-hidden="true"></i>
+
+    <div class="music-opening__sheet">
+      <span class="music-opening__kicker">WUTHERING HEIGHTS · 1ST ANNIVERSARY</span>
+      <h1 class="music-opening__title" id="musicOpeningTitle">Wuthering<br>Heights</h1>
+      <i class="music-opening__rule" aria-hidden="true"></i>
+      <span class="music-opening__date">2025 . 11 . 15 —</span>
+
+      <!-- 이 버튼의 글자는 js 가 상태에 따라 바꿔 씁니다.
+           안에 태그를 넣으면 지워지므로 글자만 둡니다 (음표는 css 로 붙입니다) -->
+      <button class="music-opening__start" id="musicOpeningStart" type="button" autofocus>음악과 함께 시작</button>
+      <button class="music-opening__skip" id="musicOpeningSkip" type="button">소리 없이 보기</button>
+
+      <span class="music-opening__credit">music. @5minutejamms</span>
+    </div>
+
+    <i class="music-opening__check" aria-hidden="true"></i>
   </dialog>
   <noscript><style>.music-opening ~ .viewport{visibility:visible}</style></noscript>
   <script src="js/bgm.js?v=3" async></script>

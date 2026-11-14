@@ -64,36 +64,79 @@ body{
 }
 
 /* 음악이 재생될 때 첫 장면을 엽니다. */
+/* ---------- 여는 화면 ----------
+   소리 나는 자동 재생이 막히면 뜹니다. 본편과 같은 액자(위 띠·아래 체크무늬)
+   안에 표지 한 장을 둔 모양입니다. 요소마다 조금씩 늦게 떠오릅니다. */
 .music-opening ~ .viewport{visibility:hidden}
 .music-opening{
-  position:fixed;inset:0;margin:auto;
-  width:min(26rem,calc(100% - 2rem));max-width:none;
-  padding:clamp(1.75rem,7vw,3rem);
-  border:1px solid var(--ink);border-top:6px solid var(--blue);
-  background:var(--paper);color:var(--ink);text-align:center;
+  position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;
+  margin:0;padding:0;border:0;overflow:hidden;
+  background:var(--paper);color:var(--ink);
 }
+.music-opening[open]{display:grid;place-items:center}   /* 닫혔을 때의 display:none 을 건드리지 않으려고 [open] 에만 겁니다 */
 .music-opening::backdrop{background:var(--paper)}
-.music-opening__title{
-  margin-bottom:1.4rem;
-  font:600 clamp(.85rem,4vw,1.05rem)/1.5 var(--mono);
-  letter-spacing:.17em;
+
+.music-opening__band{
+  position:absolute;left:0;right:0;top:0;height:30px;background:var(--blue);
+  animation:openBand .75s var(--easeOut) both;
 }
-.music-opening__start,.music-opening__skip{
-  display:block;margin-inline:auto;
-  font-family:var(--kr);cursor:pointer;
+.music-opening__check{
+  position:absolute;left:0;right:0;bottom:0;height:28px;
+  background:repeating-conic-gradient(var(--blue) 0 25%,transparent 0 50%) 0 0/28px 28px;
+  animation:fadeIn .8s var(--easeOut) 1.05s both;
+}
+@keyframes openBand{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+
+.music-opening__sheet{
+  display:flex;flex-direction:column;align-items:center;
+  padding:0 1.5rem;text-align:center;
+}
+.music-opening__kicker{
+  font-family:var(--mono);font-size:clamp(9px,2.4vw,11px);letter-spacing:.34em;
+  color:var(--sage-deep);
+  animation:fadeIn .9s var(--easeOut) .25s both;
+}
+.music-opening__title{
+  margin:clamp(.9rem,3vw,1.5rem) 0 0;
+  font-family:var(--serif);font-style:italic;font-weight:700;
+  /* 낮은 창에서도 넘치지 않도록 세로 길이도 함께 봅니다 */
+  font-size:clamp(2.4rem,min(10vw,13vh),5.4rem);
+  line-height:.96;letter-spacing:.01em;
+  animation:rise 1s var(--easeOut) .45s both;
+}
+.music-opening__rule{
+  width:46px;height:2px;background:var(--blue-deep);
+  margin:clamp(1rem,3.4vw,1.7rem) 0;
+  animation:fadeIn .8s var(--easeOut) .85s both;
+}
+.music-opening__date{
+  font-family:var(--mono);font-size:clamp(10px,2.6vw,12px);letter-spacing:.28em;opacity:.68;
+  animation:fadeIn .9s var(--easeOut) .95s both;
 }
 .music-opening__start{
-  width:100%;min-height:48px;padding:.65rem .85rem;
-  border:1px solid var(--ink);
-  background:var(--blue);color:var(--ink);
-  font-size:1rem;font-weight:700;
+  margin-top:clamp(1.5rem,4.6vw,2.3rem);
+  min-width:min(17rem,80vw);min-height:50px;padding:.78rem 1.4rem;cursor:pointer;
+  border:1.6px solid var(--ink);background:var(--blue);color:var(--ink);
+  font-family:var(--kr);font-weight:700;font-size:clamp(.95rem,3.2vw,1.02rem);
+  letter-spacing:.02em;transition:background .2s,color .2s;
+  animation:rise .9s var(--easeOut) 1.15s both;
 }
+.music-opening__start::before{content:"\266A";margin-right:.6em}  /* 음표. js 가 글자를 바꿔도 남습니다 */
 .music-opening__start:hover{background:var(--ink);color:var(--paper)}
-.music-opening__start[aria-busy="true"]{cursor:wait}
+.music-opening__start[aria-busy="true"]{cursor:wait;background:var(--paper);opacity:.75}
 .music-opening__skip{
-  min-height:44px;margin-top:.4rem;padding:.35rem .65rem;
-  border:0;background:transparent;color:var(--ink);
-  font-size:.85rem;text-decoration:underline;text-underline-offset:.2em;
+  margin-top:.85rem;min-height:40px;padding:.3rem .8rem;cursor:pointer;
+  border:0;background:transparent;color:var(--ink);opacity:.7;
+  font-family:var(--kr);font-size:clamp(.8rem,2.8vw,.86rem);
+  text-decoration:underline;text-underline-offset:.28em;text-decoration-thickness:1px;
+  transition:opacity .18s;
+  animation:fadeIn .9s var(--easeOut) 1.3s both;
+}
+.music-opening__skip:hover{opacity:1}
+.music-opening__credit{
+  margin-top:clamp(1.6rem,5.5vw,2.6rem);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;opacity:.48;
+  animation:fadeIn 1s var(--easeOut) 1.5s both;
 }
 .music-opening button:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
 
@@ -820,6 +863,8 @@ body{
   .band{transform:none}
   .anim{opacity:1}
   .letter-done .p2next{animation:none;opacity:1}   /* 깜빡임 없이 그냥 보이게 */
+  .music-opening *{animation:none}                /* 여는 화면도 바로 보이게 */
+  .music-opening__band{transform:none}
   .fig--center{opacity:1}
   .fig--head,.fig--left{display:none}
   .marquee__inner{animation:none}
