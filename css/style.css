@@ -664,12 +664,11 @@ body{
 /* ---------- 타이포 ---------- */
 .anim{opacity:0}
 
-.wordmark{position:absolute;left:19.3%;top:4.5%;z-index:6;width:17%}
-.wordmark__main{
-  font-family:var(--jp);font-weight:200;font-size:30px;
-  letter-spacing:.15em;line-height:1.14;
-}
-.wordmark__main span{display:block;white-space:nowrap}
+/* 왼쪽 위 손글씨 로고. 크기는 .wordmark 의 width 로 조절합니다
+   (세로는 그림 비율대로 따라옵니다). */
+.wordmark{position:absolute;left:13%;top:4.5%;z-index:6;width:18%}
+.wordmark__main{margin:0}
+.wordmark__main img{display:block;width:100%;height:auto}
 
 .wordmark__sub{
   margin-top:9px;font-family:var(--mono);font-size:9.5px;
