@@ -192,7 +192,7 @@ body{
 /* 제목 아래 띠와 같은 줄 — 7% 는 .p2head 의 top, 210px 은 그 안의 띠까지.
    오른쪽으로 더 밀거나 당기려면 left 의 % 만 고치면 됩니다. */
 .p2next{
-  left:57.5%;top:calc(7% + 210px);translate:none;
+  left:61%;top:calc(7% + 210px);translate:none;
   font-size:11px;letter-spacing:.22em;padding:7px 17px;
   box-shadow:0 5px 13px rgba(95,134,178,.28);
   opacity:0;pointer-events:none;
