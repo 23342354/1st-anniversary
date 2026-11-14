@@ -458,8 +458,18 @@ body{
   filter:drop-shadow(0 20px 30px rgba(30,40,44,.14));
 }
 
-/* 오른쪽 — 사진 두 장을 겹쳐 붙인 자리 */
-.p4wall{position:absolute;right:52px;top:50%;translate:0 -50%;width:350px;height:440px}
+/* 오른쪽 — 사진 두 장 + 그 아래 전신.
+   한 덩어리(350x770)로 묶어 두고, 창이 낮으면 js 가 통째로 줄입니다. */
+.p4right{
+  position:absolute;right:52px;top:50%;translate:0 -50%;
+  width:350px;height:770px;transform-origin:100% 50%;
+}
+.p4wall{position:absolute;left:0;top:0;width:350px;height:440px}
+.p4front{
+  position:absolute;left:48%;translate:-50% 0;bottom:0;
+  height:300px;width:auto;
+  filter:drop-shadow(0 16px 24px rgba(30,40,44,.13));
+}
 .p4photo{
   position:absolute;background:#fff;
   border:1px solid rgba(30,40,44,.13);
