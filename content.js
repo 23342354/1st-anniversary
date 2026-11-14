@@ -96,7 +96,7 @@ const CONTENT = {
   p3StampRing: "WUTHERING HEIGHTS · FIRST ANNIVERSARY · ",  // 도장 둘레 글자
   p3StampTop:  "11",                  // 도장 안 위아래 숫자
   p3StampBot:  "15",
-  p3Ribbon:    "느리게, 그러나 오래",      // 도장 아래 리본
+  p3Ribbon:    "당신이 돌아올 자리를 품에 남겨 두고",      // 도장 아래 리본
   p3Credit:    "illust. @mum_nyam @woojoo_2nd",    // 3페이지 그림 그려준 분들
 
   backLabel: "◂ BACK"
