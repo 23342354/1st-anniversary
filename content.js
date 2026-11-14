@@ -79,8 +79,8 @@ const CONTENT = {
 
   p3Side:      "ANNIVERSARY",         // 티켓 왼쪽에 세로로 선 글자
   p3DateLabel: "Date",
-  p3DateValue: "2025.11.15",
-  p3DateSuf:   "SAT.",
+  p3DateValue: "2026.11.15",
+  p3DateSuf:   "SUN.",
   p3RowLabel1: "Place",
   p3RowValue1: "WUTHERING HEIGHTS",
   p3RowLabel2: "Time",

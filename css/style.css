@@ -179,14 +179,18 @@ body{
    아래 띠(30px) 바로 위 오른쪽 끝. 띠 안의 BACK 버튼과 오른쪽 선을
    맞췄습니다. 편지가 다 드러나면 js 가 body 에 letter-done 을 붙이고,
    그때 떠오릅니다. 일러스트 위로 겹쳐 그려집니다(z-index 9). */
-.p2next{
-  position:absolute;right:18px;bottom:38px;z-index:9;
+.p2next,.p3next{
+  position:absolute;right:18px;z-index:9;
   font-family:var(--mono);font-size:12px;letter-spacing:.26em;
   color:var(--ink);text-decoration:none;background:var(--paper);
   border:1.5px solid var(--ink);padding:7px 16px;
-  opacity:0;pointer-events:none;
   transition:background .18s,color .18s;
 }
+.p2next{bottom:38px;opacity:0;pointer-events:none}
+/* 3페이지는 기다릴 편지가 없으니 들어오고 조금 뒤에 바로 뜹니다.
+   아래 체크무늬(30+28) 위로 올립니다. */
+.p3next{bottom:70px;animation:p2nextIn .9s var(--easeOut) 2.5s both}
+.p3next:hover{background:var(--ink);color:var(--paper)}
 .letter-done .p2next{
   pointer-events:auto;
   animation:p2nextIn .9s var(--easeOut) both,
@@ -379,6 +383,52 @@ body{
   from{opacity:0;transform:scale(.86) rotate(-6deg)}
   to  {opacity:1;transform:scale(1) rotate(0)}
 }
+
+/* =========================================================
+   네 번째 페이지 — 후기
+   긴 글이라 칸 안에서 스크롤됩니다. 2페이지처럼 기호가 흩날리는
+   연출은 넣지 않습니다. 차분히 읽히는 글이라서요.
+   ========================================================= */
+.p4{
+  position:absolute;left:50%;translate:-50% 0;top:30px;bottom:30px;
+  width:52%;z-index:4;
+  overflow-y:auto;overscroll-behavior:contain;
+  /* 위아래 끝에서 글이 띠에 부딪히지 않고 스르륵 사라지게 */
+  mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 94%,transparent 100%);
+  scrollbar-width:thin;scrollbar-color:var(--blue) transparent;
+}
+.p4__inner{padding:54px 26px 70px}
+
+.p4__head{text-align:center;margin-bottom:54px}
+.p4__kicker{
+  display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.38em;
+  color:var(--sage-deep);
+}
+.p4__title{
+  margin:14px 0 0;font-family:var(--kr);font-weight:700;
+  font-size:34px;letter-spacing:-.02em;color:var(--ink);
+}
+.p4__rule{display:block;width:44px;height:2px;margin:26px auto 0;background:var(--blue-deep)}
+
+.p4 p{
+  margin:0 0 1.55em;color:var(--ink);
+  font-family:var(--kr);font-weight:300;
+  font-size:14px;line-height:2.05;letter-spacing:-.01em;
+  word-break:keep-all;
+  /* 올라오면서 하나씩 떠오릅니다 (js 가 is-in 을 붙입니다) */
+  opacity:0;transform:translateY(14px);
+  transition:opacity .75s var(--easeOut),transform .75s var(--easeOut);
+}
+.p4 p.is-in{opacity:1;transform:none}
+.p4 strong{font-weight:700}
+.p4 .p4work{font-family:var(--serif);font-style:italic;font-weight:700;font-size:1.08em}
+
+.p4__sign{
+  margin-top:64px;padding-top:26px;border-top:1.5px solid var(--ink);
+  display:flex;align-items:baseline;justify-content:space-between;
+}
+.p4__date{font-family:var(--mono);font-size:11px;letter-spacing:.24em;opacity:.62}
+.p4__name{font-family:var(--kr);font-weight:700;font-size:15px;letter-spacing:.02em}
 
 /* ---------- 배경 음악 조작부 ----------
    아래 띠 안의 한 칸으로 들어갑니다. 띠가 원래 flex 라서,
@@ -864,6 +914,7 @@ body{
   .anim{opacity:1}
   .letter-done .p2next{animation:none;opacity:1}   /* 깜빡임 없이 그냥 보이게 */
   .music-opening *{animation:none}                /* 여는 화면도 바로 보이게 */
+  .p4 p{opacity:1;transform:none;transition:none} /* 후기도 바로 보이게 */
   .music-opening__band{transform:none}
   .fig--center{opacity:1}
   .fig--head,.fig--left{display:none}

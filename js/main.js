@@ -500,6 +500,44 @@
     return;
   }
 
+  /* ---------- 네 번째 페이지 (후기) ----------
+     글이 칸 안에서 스크롤되므로, 올라오는 문단을 하나씩 띄웁니다. */
+  if (document.body.classList.contains('page-four')) {
+    fitWidth();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWidth);
+    window.addEventListener('resize', fitWidth);
+
+    var box = document.getElementById('p4');
+    var paras = box ? [].slice.call(box.querySelectorAll('p')) : [];
+    if (!box || !window.IntersectionObserver ||
+        (window.matchMedia &&
+         window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      paras.forEach(function (el) { el.classList.add('is-in'); });
+      return;
+    }
+    /* 어떤 문단이 보이면 그 앞 문단들도 전부 띄웁니다.
+       한 번에 아래로 건너뛰면 지나친 문단이 영영 안 보인 채 남거든요. */
+    function showUpTo(idx) {
+      for (var k = 0; k <= idx; k++) {
+        if (!paras[k].classList.contains('is-in')) {
+          paras[k].classList.add('is-in');
+          io.unobserve(paras[k]);
+        }
+      }
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) showUpTo(paras.indexOf(e.target));
+      });
+    }, { root: box, rootMargin: '0px 0px -8% 0px', threshold: .12 });
+    paras.forEach(function (el) { io.observe(el); });
+    /* 끝까지 내려 더 보일 것이 없을 때도 남김없이 */
+    box.addEventListener('scroll', function () {
+      if (box.scrollTop + box.clientHeight >= box.scrollHeight - 4) showUpTo(paras.length - 1);
+    });
+    return;
+  }
+
   /* ---------- 세 번째 페이지 ---------- */
   if (document.body.classList.contains('page-three')) {
     /* 종이 콜라주는 600px 높이를 전제로 짜여 있습니다.
