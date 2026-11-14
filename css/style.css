@@ -534,11 +534,11 @@ body{
 .p4spark--l{left:462px;top:33%;width:9px;--o:0.4;--d:3.3s}
 
 /* ---------- 배경 음악 조작부 ----------
-   위 띠 한가운데에 종이색 라벨 한 장을 붙여 놓은 모양입니다.
-   띠에서 자리를 차지하지 않고 가운데에 얹히므로 양옆 글자를 밀지 않습니다.
+   위 띠 오른쪽 끝, ARCHIVE 글자 바로 옆에 붙인 종이색 라벨 한 장입니다.
+   margin-left:auto 가 왼쪽 빈 자리를 다 먹어서 오른쪽으로 밀어붙입니다.
    크기를 바꾸려면 .bgm 의 height, .bgm__bar 의 width 만 고치면 됩니다. */
 .bgm{
-  position:absolute;left:50%;translate:-50% 0;
+  flex:none;margin-left:auto;
   display:flex;align-items:center;gap:9px;
   height:22px;padding:0 9px 0 3px;
   background:var(--paper);
