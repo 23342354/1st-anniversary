@@ -241,7 +241,7 @@ body{
 }
 .p3ticket__side span{
   rotate:-90deg;white-space:nowrap;
-  font-family:var(--mono);font-weight:500;font-size:25px;letter-spacing:.22em;
+  font-family:var(--mono);font-weight:500;font-size:20px;letter-spacing:.22em;
 }
 .p3ticket__body{position:absolute;left:124px;right:34px;top:34px;bottom:28px}
 
