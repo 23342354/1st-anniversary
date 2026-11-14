@@ -50,6 +50,7 @@ const CONTENT = {
   credit: "WUTHERING HEIGHTS",
 
   /* --- 1페이지 그림을 그려준 분 (맨 아래 띠에 표시) --- */
+  logoCredit:   "logo. @yeongeun111",          // 로고 그려준 분 (네 페이지 공통)
   illustCredit: "illust. @N2NULL",
   musicCredit:  "music. @5minutejamms",       // 노래 만들어준 분
 
