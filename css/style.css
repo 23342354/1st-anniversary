@@ -174,23 +174,27 @@ body{
 }
 .replay{text-decoration:none;display:inline-block}
 .replay:hover{background:var(--ink);color:var(--paper)}
+.replay--home{margin-right:7px}
 
 /* ---------- 편지가 끝나면 나타나는 다음 장 버튼 ----------
    아래 띠(30px) 바로 위 오른쪽 끝. 띠 안의 BACK 버튼과 오른쪽 선을
    맞췄습니다. 편지가 다 드러나면 js 가 body 에 letter-done 을 붙이고,
    그때 떠오릅니다. 일러스트 위로 겹쳐 그려집니다(z-index 9). */
 .p2next,.p3next{
-  position:absolute;right:18px;z-index:9;
-  font-family:var(--mono);font-size:12px;letter-spacing:.26em;
-  color:var(--ink);text-decoration:none;background:var(--paper);
-  border:1.5px solid var(--ink);padding:7px 16px;
-  transition:background .18s,color .18s;
+  position:absolute;z-index:9;translate:-50% 0;
+  font-family:var(--mono);font-size:13px;letter-spacing:.26em;
+  color:#fff;text-decoration:none;background:var(--blue-deep);
+  border:1.5px solid var(--blue-deep);padding:10px 26px;
+  box-shadow:0 7px 18px rgba(95,134,178,.32);
+  transition:background .18s,color .18s,border-color .18s;
 }
-.p2next{bottom:38px;opacity:0;pointer-events:none}
+/* 2페이지는 편지 칸 한가운데 아래, 3페이지는 포스터 한가운데 아래 */
+/* 제목 아래 띠와 같은 줄 — 7% 는 .p2head 의 top, 207px 은 그 안의 띠까지 */
+.p2next{left:51%;top:calc(7% + 207px);translate:none;opacity:0;pointer-events:none}
 /* 3페이지는 기다릴 편지가 없으니 들어오고 조금 뒤에 바로 뜹니다.
    아래 체크무늬(30+28) 위로 올립니다. */
-.p3next{bottom:70px;animation:p2nextIn .9s var(--easeOut) 2.5s both}
-.p3next:hover{background:var(--ink);color:var(--paper)}
+.p3next{left:50%;bottom:76px;animation:p2nextIn .9s var(--easeOut) 2.5s both}
+.p2next:hover,.p3next:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
 .letter-done .p2next{
   pointer-events:auto;
   animation:p2nextIn .9s var(--easeOut) both,
@@ -418,8 +422,8 @@ body{
 
 .p4 p{
   margin:0 0 1.55em;color:var(--ink);
-  font-family:var(--kr);font-weight:300;
-  font-size:14px;line-height:2.05;letter-spacing:-.01em;
+  font-family:var(--kr);font-weight:400;
+  font-size:14px;line-height:2.03;letter-spacing:-.01em;
   word-break:keep-all;
   /* 올라오면서 하나씩 떠오릅니다 (js 가 is-in 을 붙입니다) */
   opacity:0;transform:translateY(14px);
@@ -866,7 +870,7 @@ body{
 }
 /* ---- 본문 글 (칸보다 길면 스크롤) ---- */
 .p2letter{
-  position:absolute;left:22%;top:calc(44% - 50px);width:48%;bottom:8.5%;z-index:5;
+  position:absolute;left:22%;top:max(calc(44% - 50px),300px);width:48%;bottom:8.5%;z-index:5;
   overflow-y:auto;padding-right:20px;
   font-size:12.5px;line-height:2;word-break:keep-all;color:var(--ink);
   /* 아래쪽을 살짝 흐리게 해서 "더 있다"는 걸 알립니다 */

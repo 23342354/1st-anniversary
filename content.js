@@ -99,5 +99,6 @@ const CONTENT = {
   p3Ribbon:    "돌아올 자리를 품에 남겨 두고",      // 도장 아래 리본
   p3Credit:    "illust. @mum_nyam @woojoo_2nd",    // 3페이지 그림 그려준 분들
 
-  backLabel: "◂ BACK"
+  backLabel: "◂ BACK",
+  homeLabel: "◂◂ 처음으로"
 };
