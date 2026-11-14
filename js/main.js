@@ -509,7 +509,7 @@
       var el = document.getElementById('p4right');
       if (!el || !stage) return;
       var h = parseFloat(stage.style.height) || 900;
-      el.style.scale = Math.min(0.82, (h - 96) / 688);
+      el.style.scale = Math.min(1, (h - 96) / 688);
     }
     function relayout4() { fitWidth(); fitRight(); }
     relayout4();
