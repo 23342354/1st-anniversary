@@ -454,7 +454,7 @@ body{
 /* 왼쪽 — 뒷모습 전신 */
 .p4back{
   position:absolute;left:30px;top:50%;translate:0 -50%;
-  height:76%;max-height:650px;width:auto;
+  height:87%;max-height:745px;width:auto;
   filter:drop-shadow(0 20px 30px rgba(30,40,44,.14));
 }
 
@@ -499,8 +499,8 @@ body{
 /* 반짝이 — 네 꼭짓점 별 */
 .p4spark{position:absolute;display:block;color:var(--blue-deep);opacity:.75}
 .p4spark svg{display:block;width:100%;height:auto}
-.p4spark--a{left:392px;top:16%;width:26px}
-.p4spark--b{left:408px;top:72%;width:15px;opacity:.55}
+.p4spark--a{left:440px;top:15%;width:20px}
+.p4spark--b{left:446px;top:74%;width:12px;opacity:.55}
 .p4spark--c{left:1146px;top:24%;width:17px;color:var(--sage-deep);opacity:.6}
 .p4spark--d{right:112px;top:8%;width:22px}
 .p4spark--e{right:150px;top:90%;width:14px;opacity:.5}
