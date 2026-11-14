@@ -458,7 +458,7 @@ body{
    - 자르는 높이  : aspect-ratio 의 790 을 줄이면 더 위에서 잘림
    - 옅어지는 구간: mask-image 의 72%(시작) 84%(완전히 사라짐) */
 .p4back{
-  position:absolute;left:-40px;bottom:-5%;
+  position:absolute;left:-130px;bottom:-5%;
   height:min(94%, 790px);aspect-ratio:700 / 790;width:auto;
   overflow:hidden;
   mask-image:linear-gradient(90deg,#000 0 72%, transparent 84%);
