@@ -189,8 +189,14 @@ body{
   transition:background .18s,color .18s,border-color .18s;
 }
 /* 2페이지는 편지 칸 한가운데 아래, 3페이지는 포스터 한가운데 아래 */
-/* 제목 아래 띠와 같은 줄 — 7% 는 .p2head 의 top, 207px 은 그 안의 띠까지 */
-.p2next{left:51%;top:calc(7% + 207px);translate:none;opacity:0;pointer-events:none}
+/* 제목 아래 띠와 같은 줄 — 7% 는 .p2head 의 top, 210px 은 그 안의 띠까지.
+   오른쪽으로 더 밀거나 당기려면 left 의 % 만 고치면 됩니다. */
+.p2next{
+  left:57.5%;top:calc(7% + 210px);translate:none;
+  font-size:11px;letter-spacing:.22em;padding:7px 17px;
+  box-shadow:0 5px 13px rgba(95,134,178,.28);
+  opacity:0;pointer-events:none;
+}
 /* 3페이지는 기다릴 편지가 없으니 들어오고 조금 뒤에 바로 뜹니다.
    아래 체크무늬(30+28) 위로 올립니다. */
 .p3next{left:50%;bottom:76px;animation:p2nextIn .9s var(--easeOut) 2.5s both}
