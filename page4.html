@@ -54,37 +54,23 @@
 
     <!-- ============ 장식 ============
          글 양옆 빈 자리에만 놓습니다. 스크롤과 같이 움직이지 않습니다.
-         위치는 css 의 .p4back / .p4wall / .p4spark 숫자로 고칩니다. -->
+         위치는 css 의 .p4back / .p4front / .p4spark 숫자로 고칩니다. -->
     <div class="p4deco" aria-hidden="true">
 
       <!-- 왼쪽 : 뒷모습 전신 -->
       <img class="p4back" src="images/p4-pair-back.webp" alt="">
 
-      <!-- 오른쪽 : 사진 두 장과 그 아래 전신 -->
-      <div class="p4right" id="p4right">
-      <div class="p4wall">
-        <figure class="p4photo p4photo--1">
-          <i class="p4tape"></i>
-          <img src="images/p3-heart-2.webp" alt="">
-          <figcaption class="p4photo__cap">&#9825;</figcaption>
-        </figure>
-        <figure class="p4photo p4photo--2">
-          <i class="p4tape"></i>
-          <img src="images/p3-heart-1.webp" alt="">
-          <figcaption class="p4photo__cap">&#9825;</figcaption>
-        </figure>
-      </div>
-        <img class="p4front" src="images/p3-pair.webp" alt="">
-      </div>
+      <!-- 왼쪽·오른쪽 전신 두 장.
+           하트 두상 두 장은 3페이지에 이미 있어서 여기서는 뺐습니다.
+           되살리려면 3페이지의 .p3heart 처럼 img 한 줄만 넣으면 됩니다. -->
+      <img class="p4front" src="images/p3-pair.webp" alt="">
+
 
 
       <i class="p4spark p4spark--a"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0Z"/></svg></i>
       <i class="p4spark p4spark--b"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0Z"/></svg></i>
       <i class="p4spark p4spark--c"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0Z"/></svg></i>
       <i class="p4spark p4spark--d"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0Z"/></svg></i>
-      <i class="p4spark p4spark--e"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0Z"/></svg></i>
-      <i class="p4spark p4spark--f"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0Z"/></svg></i>
-      <i class="p4spark p4spark--g"><svg viewBox="0 0 100 100" aria-hidden="true"><path fill="currentColor" d="M50 0C54 30 70 46 100 50 70 54 54 70 50 100 46 70 30 54 0 50 30 46 46 30 50 0Z"/></svg></i>
     </div>
 
     <!-- ============ 위·아래 띠 ============ -->
