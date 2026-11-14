@@ -453,15 +453,13 @@ body{
 
 /* 왼쪽 — 뒷모습 전신.
    상자가 그림을 허벅지 높이에서 자르고, 잘린 선은 아래 띠 뒤에 숨습니다.
-   오른쪽 끝은 글에 닿기 전에 서서히 옅어져 사라집니다.
    - 더 크게      : height 의 790px 과 aspect-ratio 의 700 을 같이 키우기
    - 자르는 높이  : aspect-ratio 의 790 을 줄이면 더 위에서 잘림
-   - 옅어지는 구간: mask-image 의 72%(시작) 84%(완전히 사라짐) */
+   - 좌우 위치    : left 숫자 */
 .p4back{
-  position:absolute;left:-130px;bottom:-5%;
+  position:absolute;left:-168px;bottom:-5%;
   height:min(94%, 790px);aspect-ratio:700 / 790;width:auto;
   overflow:hidden;
-  mask-image:linear-gradient(90deg,#000 0 72%, transparent 84%);
 }
 .p4back img{
   display:block;width:100%;height:auto;
