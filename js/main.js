@@ -503,9 +503,18 @@
   /* ---------- 네 번째 페이지 (후기) ----------
      글이 칸 안에서 스크롤되므로, 올라오는 문단을 하나씩 띄웁니다. */
   if (document.body.classList.contains('page-four')) {
-    fitWidth();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitWidth);
-    window.addEventListener('resize', fitWidth);
+    /* 오른쪽 장식은 688px 높이를 전제로 짜여 있습니다.
+       창이 낮으면 덩어리째 줄여 띠를 물지 않게 합니다. */
+    function fitRight() {
+      var el = document.getElementById('p4right');
+      if (!el || !stage) return;
+      var h = parseFloat(stage.style.height) || 900;
+      el.style.scale = Math.min(1, (h - 96) / 688);
+    }
+    function relayout4() { fitWidth(); fitRight(); }
+    relayout4();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(relayout4);
+    window.addEventListener('resize', relayout4);
 
     var box = document.getElementById('p4');
     var paras = box ? [].slice.call(box.querySelectorAll('p')) : [];
