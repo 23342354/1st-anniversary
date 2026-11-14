@@ -863,15 +863,16 @@ body{
    1115 와 세로 이름 사이가 벌어집니다. */
 .p2side__stack{
   --gap:46px;
-  --badge-w:60%;        /* 1115 원형의 너비 */
+  --badge-w:72%;        /* 맨 위 로고의 너비 (세로 이름도 이 너비에 맞춰 정렬) */
   display:flex;flex-direction:column;align-items:center;
   width:100%;flex:1;
 }
-.p2side__badge{
-  width:var(--badge-w);padding:10px 0;
-  border:1.6px solid var(--paper);border-radius:50%;
-  text-align:center;color:var(--paper);
-  font-family:var(--mono);font-size:15px;letter-spacing:.08em;
+/* 초록 띠 위에서는 그림이 탁해져서, 종이색 라벨을 깔고 그 위에 올립니다 */
+.p2side__logo{
+  display:block;width:var(--badge-w);height:auto;
+  box-sizing:border-box;padding:11px 13px;
+  background:var(--paper);
+  box-shadow:0 8px 18px rgba(30,40,44,.16);
 }
 /* 세로 이름과 One year 의 왼쪽 끝을 1115 원형의 왼쪽 끝과 같은 x 에 맞춥니다
    (원형이 가운데 있으므로 양옆 여백은 (100% - 너비) / 2) */
