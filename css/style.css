@@ -390,14 +390,20 @@ body{
    연출은 넣지 않습니다. 차분히 읽히는 글이라서요.
    ========================================================= */
 .p4{
-  position:absolute;left:50%;translate:-50% 0;top:30px;bottom:30px;
-  width:52%;z-index:4;
+  /* 창 전체를 덮는 스크롤 칸 — 그래서 스크롤바가 오른쪽 끝에 붙습니다 */
+  position:absolute;left:0;right:0;top:30px;bottom:30px;
+  z-index:4;
   overflow-y:auto;overscroll-behavior:contain;
   /* 위아래 끝에서 글이 띠에 부딪히지 않고 스르륵 사라지게 */
-  mask-image:linear-gradient(180deg,transparent 0,#000 5%,#000 94%,transparent 100%);
+  mask-image:linear-gradient(180deg,transparent 0,#000 4%,#000 95%,transparent 100%);
   scrollbar-width:thin;scrollbar-color:var(--blue) transparent;
 }
-.p4__inner{padding:54px 26px 70px}
+.p4::-webkit-scrollbar{width:9px}
+.p4::-webkit-scrollbar-track{background:transparent}
+.p4::-webkit-scrollbar-thumb{background:var(--blue);border-radius:9px}
+
+/* 글줄은 가운데 한 칸으로 모읍니다 (스크롤바는 바깥 끝) */
+.p4__inner{width:640px;margin:0 auto;padding:58px 0 86px}
 
 .p4__head{text-align:center;margin-bottom:54px}
 .p4__kicker{
@@ -429,6 +435,65 @@ body{
 }
 .p4__date{font-family:var(--mono);font-size:11px;letter-spacing:.24em;opacity:.62}
 .p4__name{font-family:var(--kr);font-weight:700;font-size:15px;letter-spacing:.02em}
+
+/* ---------- 후기 장식 ----------
+   글 양옆 빈 자리에만 놓습니다. 스크롤과 같이 움직이지 않습니다.
+   위치를 옮기려면 left / right / top 숫자만 고치면 됩니다. ---------- */
+.p4deco{position:absolute;left:0;right:0;top:30px;bottom:30px;z-index:3;pointer-events:none}
+
+/* 왼쪽 — 뒷모습 전신 */
+.p4back{
+  position:absolute;left:30px;top:50%;translate:0 -50%;
+  height:76%;max-height:650px;width:auto;
+  filter:drop-shadow(0 20px 30px rgba(30,40,44,.14));
+}
+
+/* 오른쪽 — 사진 두 장을 겹쳐 붙인 자리 */
+.p4wall{position:absolute;right:52px;top:50%;translate:0 -50%;width:350px;height:440px}
+.p4photo{
+  position:absolute;background:#fff;
+  border:1px solid rgba(30,40,44,.13);
+  box-shadow:0 14px 26px rgba(30,40,44,.15);
+  padding:12px 12px 36px;
+}
+.p4photo img{display:block;width:100%;height:auto}
+.p4photo__cap{
+  position:absolute;left:0;right:0;bottom:12px;text-align:center;
+  font-family:var(--kr);font-size:13px;letter-spacing:.2em;
+  color:var(--blue-deep);opacity:.75;
+}
+.p4photo--1{left:0;top:0;width:214px;rotate:-4deg}
+.p4photo--2{right:0;top:176px;width:214px;rotate:5deg}
+
+/* 사진 위에 붙인 테이프 */
+.p4tape{
+  position:absolute;width:74px;height:21px;
+  background:var(--blue);opacity:.42;
+  box-shadow:0 1px 3px rgba(30,40,44,.12);
+}
+.p4photo--1 .p4tape{left:-16px;top:-9px;rotate:-24deg}
+.p4photo--2 .p4tape{right:-14px;top:-10px;rotate:21deg}
+
+/* 오른쪽 끝 세로 글자 — 칸을 먼저 잡고 그 안에서 돌립니다 */
+.p4vert{
+  position:absolute;right:10px;top:50%;translate:0 -50%;
+  width:16px;height:260px;
+}
+.p4vert span{
+  position:absolute;left:50%;top:50%;
+  translate:-50% -50%;rotate:90deg;white-space:nowrap;
+  font-family:var(--mono);font-size:10px;letter-spacing:.42em;
+  color:var(--sage-deep);opacity:.75;
+}
+
+/* 반짝이 — 네 꼭짓점 별 */
+.p4spark{position:absolute;display:block;color:var(--blue-deep);opacity:.75}
+.p4spark svg{display:block;width:100%;height:auto}
+.p4spark--a{left:392px;top:16%;width:26px}
+.p4spark--b{left:408px;top:72%;width:15px;opacity:.55}
+.p4spark--c{left:1146px;top:24%;width:17px;color:var(--sage-deep);opacity:.6}
+.p4spark--d{right:112px;top:8%;width:22px}
+.p4spark--e{right:150px;top:90%;width:14px;opacity:.5}
 
 /* ---------- 배경 음악 조작부 ----------
    아래 띠 안의 한 칸으로 들어갑니다. 띠가 원래 flex 라서,
