@@ -454,7 +454,7 @@ body{
 /* 왼쪽 — 뒷모습 전신 */
 .p4back{
   position:absolute;left:30px;top:50%;translate:0 -50%;
-  height:87%;max-height:745px;width:auto;
+  height:93%;max-height:800px;width:auto;
   filter:drop-shadow(0 20px 30px rgba(30,40,44,.14));
 }
 
