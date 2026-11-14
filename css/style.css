@@ -534,11 +534,12 @@ body{
 .p4spark--l{left:462px;top:33%;width:9px;--o:0.4;--d:3.3s}
 
 /* ---------- 배경 음악 조작부 ----------
-   아래 띠 안에 종이색 라벨 한 장을 붙여 놓은 모양입니다.
-   띠가 flex 라서 자리를 비집는 게 아니라 흐르는 글자가 그만큼 줄어듭니다.
+   위 띠 한가운데에 종이색 라벨 한 장을 붙여 놓은 모양입니다.
+   띠에서 자리를 차지하지 않고 가운데에 얹히므로 양옆 글자를 밀지 않습니다.
    크기를 바꾸려면 .bgm 의 height, .bgm__bar 의 width 만 고치면 됩니다. */
 .bgm{
-  flex:none;display:flex;align-items:center;gap:9px;
+  position:absolute;left:50%;translate:-50% 0;
+  display:flex;align-items:center;gap:9px;
   height:22px;padding:0 9px 0 3px;
   background:var(--paper);
   border:1.5px solid var(--ink);
