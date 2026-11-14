@@ -451,10 +451,12 @@ body{
    위치를 옮기려면 left / right / top 숫자만 고치면 됩니다. ---------- */
 .p4deco{position:absolute;left:0;right:0;top:30px;bottom:30px;z-index:3;pointer-events:none}
 
-/* 왼쪽 — 뒷모습 전신 */
+/* 왼쪽 — 뒷모습 전신.
+   높이를 오른쪽 덩어리(688px)와 똑같이 맞췄습니다. 창이 낮아져 오른쪽이
+   줄어들면 왼쪽도 같은 값으로 같이 줄어듭니다. */
 .p4back{
   position:absolute;left:30px;top:50%;translate:0 -50%;
-  height:93%;max-height:800px;width:auto;
+  height:min(688px, calc(100% - 36px));width:auto;
   filter:drop-shadow(0 20px 30px rgba(30,40,44,.14));
 }
 
