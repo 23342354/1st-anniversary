@@ -534,58 +534,92 @@ body{
 .p4spark--l{left:462px;top:33%;width:9px;--o:0.4;--d:3.3s}
 
 /* ---------- 배경 음악 조작부 ----------
-   아래 띠 안의 한 칸으로 들어갑니다. 띠가 원래 flex 라서,
-   자리를 비집고 들어가는 게 아니라 흐르는 글자 영역이 그만큼 줄어듭니다.
-   그래서 다른 요소를 가리거나 밀어내지 않습니다. */
+   아래 띠 안에 종이색 라벨 한 장을 붙여 놓은 모양입니다.
+   띠가 flex 라서 자리를 비집는 게 아니라 흐르는 글자가 그만큼 줄어듭니다.
+   크기를 바꾸려면 .bgm 의 height, .bgm__bar 의 width 만 고치면 됩니다. */
 .bgm{
-  flex:none;display:flex;align-items:center;gap:8px;
+  flex:none;display:flex;align-items:center;gap:9px;
+  height:22px;padding:0 9px 0 3px;
+  background:var(--paper);
+  border:1.5px solid var(--ink);
   color:var(--ink);
 }
+
+/* ▶ / ‖ — 가득 찬 동그라미 (서체에 기호가 없어도 똑같이 보이게 도형으로) */
 .bgm__btn{
-  flex:none;width:17px;height:17px;padding:0;cursor:pointer;
-  border:1.5px solid var(--ink);border-radius:50%;background:transparent;
-  position:relative;transition:background .18s;
+  flex:none;padding:0;cursor:pointer;border:0;background:transparent;
+  position:relative;color:inherit;
 }
-.bgm__btn:hover{background:rgba(30,40,44,.14)}
-/* ▶ / ‖ 를 글자 대신 도형으로 그립니다 (서체에 기호가 없어도 똑같이 보이게) */
+.bgm__play{
+  width:16px;height:16px;border-radius:50%;background:var(--ink);
+  transition:scale .16s;
+}
+.bgm__play:hover{scale:1.1}
 .bgm__play::before{
-  content:"";position:absolute;left:50%;top:50%;
-  translate:-40% -50%;
-  border-left:6px solid var(--ink);
-  border-top:4px solid transparent;border-bottom:4px solid transparent;
+  content:"";position:absolute;left:50%;top:50%;translate:-32% -50%;
+  border-left:5px solid var(--paper);
+  border-top:3.5px solid transparent;border-bottom:3.5px solid transparent;
 }
 .bgm.is-playing .bgm__play::before{
-  translate:-50% -50%;
-  border:0;width:5px;height:8px;
-  border-left:2px solid var(--ink);border-right:2px solid var(--ink);
+  translate:-50% -50%;border:0;width:4px;height:7px;
+  border-left:1.5px solid var(--paper);border-right:1.5px solid var(--paper);
 }
-.bgm__mute::before{                       /* 소리 켜짐: 작은 원 */
-  content:"";position:absolute;left:50%;top:50%;translate:-50% -50%;
-  width:5px;height:5px;border-radius:50%;background:var(--ink);
-}
-.bgm.is-muted .bgm__mute::before{         /* 음소거: 가로줄 */
-  width:8px;height:0;border-radius:0;
-  border-top:2px solid var(--ink);background:transparent;
-}
+
+/* 재생 중 표시 — 작은 막대 세 개가 들썩입니다 */
+.bgm__eq{flex:none;display:flex;align-items:flex-end;gap:1.5px;height:9px;opacity:.28}
+.bgm__eq i{display:block;width:2px;height:3px;background:var(--ink)}
+.bgm.is-playing .bgm__eq{opacity:.8}
+.bgm.is-playing .bgm__eq i{animation:bgmEq .92s ease-in-out infinite}
+.bgm.is-playing .bgm__eq i:nth-child(2){animation-duration:.66s;animation-delay:.14s}
+.bgm.is-playing .bgm__eq i:nth-child(3){animation-duration:1.14s;animation-delay:.28s}
+@keyframes bgmEq{0%,100%{height:3px}50%{height:9px}}
+
 .bgm__time{
-  flex:none;font-size:9px;letter-spacing:.12em;opacity:.72;
+  flex:none;font-size:9px;letter-spacing:.1em;opacity:.66;
   font-variant-numeric:tabular-nums;white-space:nowrap;
 }
+
+/* 스피커 그림 — 음소거하면 물결이 빗금으로 바뀝니다 */
+.bgm__mute{width:15px;height:15px;opacity:.72;transition:opacity .16s}
+.bgm__mute:hover{opacity:1}
+.bgm__mute svg{display:block;width:15px;height:15px}
+.bgm__mute .bgm__x{display:none}
+.bgm.is-muted .bgm__mute .bgm__wave{display:none}
+.bgm.is-muted .bgm__mute .bgm__x{display:block}
+
 /* 두 막대 모두 '채워진 만큼' 을 --p 로 받아 배경 그라데이션으로 그립니다 */
 .bgm__bar,.bgm__vol{
   -webkit-appearance:none;appearance:none;
-  flex:none;height:3px;border-radius:2px;cursor:pointer;
+  flex:none;border-radius:4px;cursor:pointer;
+  transition:height .16s;
+}
+.bgm__bar{
+  width:112px;height:4px;
   background:linear-gradient(to right,
-             var(--ink) var(--p,0%), rgba(30,40,44,.28) var(--p,0%));
+             var(--ink) var(--p,0%), rgba(30,40,44,.19) var(--p,0%));
 }
-.bgm__bar{width:104px}
-.bgm__vol{width:48px}
-.bgm__bar::-webkit-slider-thumb,.bgm__vol::-webkit-slider-thumb{
-  -webkit-appearance:none;width:9px;height:9px;border-radius:50%;
-  background:var(--ink);border:0;cursor:pointer;
+.bgm__vol{
+  width:40px;height:3px;
+  background:linear-gradient(to right,
+             var(--sage-deep) var(--p,0%), rgba(30,40,44,.17) var(--p,0%));
 }
-.bgm__bar::-moz-range-thumb,.bgm__vol::-moz-range-thumb{
-  width:9px;height:9px;border-radius:50%;background:var(--ink);border:0;cursor:pointer;
+.bgm__bar:hover{height:6px}
+.bgm__vol:hover{height:5px}
+
+.bgm__bar::-webkit-slider-thumb{
+  -webkit-appearance:none;width:10px;height:10px;border-radius:50%;
+  background:var(--ink);border:1.5px solid var(--paper);cursor:pointer;
+}
+.bgm__bar::-moz-range-thumb{
+  width:10px;height:10px;border-radius:50%;
+  background:var(--ink);border:1.5px solid var(--paper);cursor:pointer;
+}
+.bgm__vol::-webkit-slider-thumb{
+  -webkit-appearance:none;width:8px;height:8px;border-radius:50%;
+  background:var(--sage-deep);border:0;cursor:pointer;
+}
+.bgm__vol::-moz-range-thumb{
+  width:8px;height:8px;border-radius:50%;background:var(--sage-deep);border:0;cursor:pointer;
 }
 .bgm__bar:focus-visible,.bgm__vol:focus-visible,.bgm__btn:focus-visible{
   outline:2px solid var(--ink);outline-offset:2px;
@@ -1023,6 +1057,7 @@ body{
   .fig--center{opacity:1}
   .fig--head,.fig--left{display:none}
   .marquee__inner{animation:none}
+  .bgm.is-playing .bgm__eq i{animation:none}
   .p2script__pen path{stroke-dashoffset:0}
   .is-playing .p2side,.is-playing .p2title,.is-playing .p2side__badge,
   .is-playing .p2side__names,.is-playing .p2side__note,.is-playing .p2art,
