@@ -549,14 +549,14 @@
 
   /* ---------- 세 번째 페이지 ---------- */
   if (document.body.classList.contains('page-three')) {
-    /* 종이 콜라주는 600px 높이를 전제로 짜여 있습니다.
-       창이 낮아 자리가 모자라면 덩어리째 줄여서 아래 체크무늬를
-       물지 않게 합니다. (아래 띠 30 + 체크무늬 28 + 여유 = 116) */
+    /* 종이 콜라주는 720px 높이를 전제로 짜여 있습니다.
+       창이 낮아 자리가 모자라면 덩어리째 줄여서 아래 체크무늬와
+       NEXT 버튼을 물지 않게 합니다. (띠 30 + 체크무늬 28 + 버튼 37 + 여유) */
     function fitPoster() {
       var el = document.querySelector('.p3');
       if (!el || !stage) return;
       var h = parseFloat(stage.style.height) || 900;
-      el.style.scale = Math.min(1, (h - 140) / 600);
+      el.style.scale = Math.min(1, (h - 250) / 720);
     }
     function relayout3() { fitWidth(); fitPoster(); }
     relayout3();
