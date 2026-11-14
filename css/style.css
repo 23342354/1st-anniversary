@@ -96,14 +96,15 @@ body{
   color:var(--sage-deep);
   animation:fadeIn .9s var(--easeOut) .25s both;
 }
+/* 손글씨 로고. 그림 비율이 가로:세로 = 1 : .722 이라서
+   세로가 창 높이를 넘지 않도록 가로를 47vh 로도 묶었습니다.
+   크기를 바꾸려면 440px 만 고치면 됩니다. */
 .music-opening__title{
-  margin:clamp(.9rem,3vw,1.5rem) 0 0;
-  font-family:var(--serif);font-style:italic;font-weight:700;
-  /* 낮은 창에서도 넘치지 않도록 세로 길이도 함께 봅니다 */
-  font-size:clamp(2.4rem,min(10vw,13vh),5.4rem);
-  line-height:.96;letter-spacing:.01em;
+  margin:clamp(.7rem,2.6vw,1.2rem) 0 0;
+  width:min(78vw, 440px, 47vh);
   animation:rise 1s var(--easeOut) .45s both;
 }
+.music-opening__title img{display:block;width:100%;height:auto}
 .music-opening__rule{
   width:46px;height:2px;background:var(--blue-deep);
   margin:clamp(1rem,3.4vw,1.7rem) 0;
